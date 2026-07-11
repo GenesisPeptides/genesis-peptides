@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Creador de Protocolo — Génesis Peptides</title>
+  <title>Génesis Peptides — Tu Protocolo Personalizado</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
   <style>
   :root {
@@ -28,241 +28,378 @@
     --radius: 8px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background-color:#f3f4f6;}
-  .wrap{padding:1.5rem;max-width:680px;font-family:var(--font-sans);color:var(--text-primary);margin:0 auto;}
-  .logo{font-size:24px;font-weight:700;letter-spacing:-.5px;margin-bottom:3px;text-transform:uppercase;}
-  .logo span{color:var(--text-accent)}
-  .sub{font-size:13px;color:var(--text-secondary);margin-bottom:1.5rem}
-  .step-bar{display:flex;margin-bottom:1.5rem;border:0.5px solid var(--border);border-radius:var(--radius);overflow:hidden}
-  .step-pill{flex:1;padding:10px 2px;font-size:11px;text-align:center;color:var(--text-muted);background:var(--surface-1)}
-  .step-pill.active{background:#dbeafe;color:#1e40af;font-weight:600}
-  .step-pill.done{background:var(--bg-success);color:var(--text-success);font-weight:500}
+  body{background-color:#f3f4f6;font-family:var(--font-sans);color:var(--text-primary);}
+  .wrap{padding:1.5rem;max-width:680px;margin:0 auto;}
+
+  /* ── HOME ── */
+  .home-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;text-align:center;}
+  .home-logo{width:160px;height:160px;object-fit:contain;margin-bottom:1.5rem;}
+  .home-title{font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;}
+  .home-sub{font-size:14px;color:var(--text-secondary);margin-bottom:2.5rem;line-height:1.6;max-width:420px;}
+  .home-btn-primary{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:380px;padding:15px 20px;background:var(--fill-accent);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--font-sans);margin-bottom:12px;transition:background .15s;}
+  .home-btn-primary:hover{background:#0d645d}
+  .home-btn-secondary{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:380px;padding:15px 20px;background:var(--surface-2);color:var(--text-accent);border:1.5px solid var(--border-accent);border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font-sans);margin-bottom:8px;transition:all .15s;}
+  .home-btn-secondary:hover{background:var(--bg-accent)}
+  .home-helper{font-size:11px;color:var(--text-muted);max-width:380px;line-height:1.5;margin-top:4px;}
+  .home-badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:2rem;}
+  .badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--text-secondary);background:var(--surface-2);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-weight:500;}
+
+  /* ── SHARED ── */
+  .page-header{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;padding-top:.5rem;}
+  .page-header img{width:40px;height:40px;object-fit:contain;}
+  .page-header-text{font-size:16px;font-weight:700;color:var(--text-primary)}
+  .page-header-sub{font-size:12px;color:var(--text-secondary)}
+  .back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text-secondary);cursor:pointer;margin-bottom:1rem;background:none;border:none;font-family:var(--font-sans);padding:0;}
+  .back-btn:hover{color:var(--text-accent)}
   .card{background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1rem;box-shadow:0 1px 3px rgba(0,0,0,0.05);}
   .sec-title{font-size:16px;font-weight:600;margin-bottom:14px;color:var(--text-primary)}
-  .lbl{font-size:12px;color:var(--text-secondary);margin-bottom:5px;margin-top:10px;font-weight:500}
-  .lbl:first-child{margin-top:0}
-  input[type=number],select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface-2);color:var(--text-primary);font-size:13px;font-family:var(--font-sans);outline:none}
-  input[type=number]:focus,select:focus{border-color:var(--border-accent)}
-  .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
-  .goal-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .gb{padding:14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface-2);cursor:pointer;transition:all .15s}
-  .gb:hover{border-color:var(--border-strong);background:var(--surface-1)}
-  .gb.sel{border-color:#2563eb;background:#f8fafc;box-shadow:0 0 0 1px #2563eb;}
-  .gb.sel .gb-t{color:#1e40af}
-  .gb-ic{font-size:20px;margin-bottom:6px;color:var(--text-secondary)}
-  .gb.sel .gb-ic{color:#2563eb}
-  .gb-t{font-size:13px;font-weight:600;margin-bottom:4px}
-  .gb-d{font-size:11px;color:var(--text-secondary);line-height:1.4}
-  .cat-label{font-size:11px;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.5px;margin:20px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--border)}
-  .cat-label:first-child{margin-top:0}
-  .rec-section{background:var(--bg-accent);border:1px solid #99f6e4;border-radius:10px;padding:12px;margin-bottom:14px}
-  .rec-section .cat-label{margin-top:0;color:var(--text-accent);border-bottom-color:#99f6e4}
-  .otros-label{font-size:12px;font-weight:600;color:var(--text-muted);margin:18px 0 10px;padding:8px 0 6px;border-top:1px solid var(--border);text-transform:uppercase;letter-spacing:.5px}
-  .pep-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .pc{border:1px solid var(--border);border-radius:var(--radius);padding:12px;background:var(--surface-2);cursor:pointer;transition:all .15s;position:relative}
-  .pc:hover{border-color:var(--border-strong)}
-  .pc.sel{border-color:var(--border-accent);background:var(--bg-accent)}
-  .pc.sel .pc-name{color:var(--text-accent)}
-  .pc.rec::before{content:"★ Recomendado";position:absolute;top:10px;right:10px;font-size:9px;background:var(--bg-success);color:var(--text-success);padding:2px 6px;border-radius:3px;font-weight:500}
-  .pc-name{font-size:13px;font-weight:600;margin-bottom:2px;padding-right:75px}
-  .pc-cat{font-size:10px;color:var(--text-muted);margin-bottom:6px}
-  .pc-desc{font-size:11px;color:var(--text-secondary);line-height:1.4;margin-bottom:8px}
-  .pc-price{font-size:13px;font-weight:600;color:var(--text-accent)}
-  .pc-usd{font-size:11px;color:var(--text-muted)}
-  .pc-freq{font-size:11px;color:var(--text-secondary);margin-top:6px;display:flex;align-items:center;gap:4px}
-  .chk{width:16px;height:16px;border:1px solid var(--border);border-radius:4px;display:inline-flex;align-items:center;justify-content:center;float:right;margin-left:4px;flex-shrink:0}
-  .pc.sel .chk{background:var(--fill-accent);border-color:var(--fill-accent)}
-  .glp-q{margin-bottom:14px}
-  .glp-q p{font-size:12px;color:var(--text-secondary);margin-bottom:6px;font-weight:500}
-  .glp-opts{display:flex;gap:8px;flex-wrap:wrap}
-  .glp-o{padding:6px 14px;border:1px solid var(--border);border-radius:20px;font-size:12px;cursor:pointer;background:var(--surface-2);transition:all .15s}
-  .glp-o:hover{border-color:var(--border-strong)}
-  .glp-o.sel{background:var(--bg-accent);border-color:var(--border-accent);color:var(--text-accent);font-weight:500}
-  .syn{border:1px solid #bbf7d0;background:var(--bg-success);border-radius:var(--radius);padding:12px;margin-top:12px}
-  .syn p{font-size:12px;color:var(--text-success);line-height:1.5}
-  .pkg-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:8px}
-  .pkg{border:1px solid #bbf7d0;border-radius:var(--radius);padding:12px;background:var(--surface-2);cursor:pointer;transition:all .15s;position:relative}
-  .pkg:hover{border-color:var(--border-accent);background:var(--bg-accent)}
-  .pkg.sel{border-color:var(--border-accent);background:var(--bg-accent)}
-  .pkg.sel .pkg-name{color:var(--text-accent)}
-  .pkg-badge{display:inline-block;background:var(--bg-success);color:var(--text-success);font-size:9px;padding:2px 6px;border-radius:3px;margin-bottom:6px;font-weight:600}
-  .pkg-name{font-size:13px;font-weight:600;margin-bottom:4px}
-  .pkg-items{font-size:11px;color:var(--text-secondary);margin-bottom:6px;line-height:1.4}
-  .pkg-orig{font-size:10px;color:var(--text-muted);text-decoration:line-through}
-  .pkg-price{font-size:14px;font-weight:600;color:var(--text-success)}
-  .pkg-usd{font-size:11px;color:var(--text-muted)}
-  .pkg-desc{font-size:10px;color:var(--text-secondary);margin-top:6px;line-height:1.3;border-top:1px solid var(--border);padding-top:6px}
-  .pkg-chk{position:absolute;top:12px;right:12px;width:16px;height:16px;border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center}
-  .pkg.sel .pkg-chk{background:var(--fill-accent);border-color:var(--fill-accent)}
-  .btn-row{display:flex;gap:10px;margin-top:1.5rem;justify-content:flex-end}
-  button.primary{padding:10px 22px;background:var(--fill-accent);color:var(--on-accent);border:none;border-radius:var(--radius);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-sans);transition:background .15s}
-  button.primary:hover{background:#0d645d}
-  button.secondary{padding:10px 18px;background:transparent;color:var(--text-secondary);border:1px solid var(--border-strong);border-radius:var(--radius);font-size:13px;cursor:pointer;font-family:var(--font-sans);font-weight:500}
-  .sum-row{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border)}
-  .sum-row:last-of-type{border:none}
-  .sr-name{font-size:13px;font-weight:600}
-  .sr-det{font-size:11px;color:var(--text-secondary);margin-top:2px;line-height:1.4}
-  .sr-pr{text-align:right;flex-shrink:0;margin-left:12px}
-  .sr-orig{font-size:11px;color:var(--text-muted);text-decoration:line-through}
-  .sr-final{font-size:14px;font-weight:600;color:var(--text-accent)}
-  .sr-usd{font-size:11px;color:var(--text-muted)}
-  .tot-box{background:#f0fdfa;border:1px solid #99f6e4;border-radius:var(--radius);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;margin-top:12px}
-  .tot-lbl{font-size:14px;color:var(--text-accent);font-weight:600}
-  .tot-val{font-size:22px;font-weight:700;color:var(--text-accent)}
-  .disc-badge{display:inline-block;background:var(--bg-success);color:var(--text-success);font-size:11px;padding:3px 10px;border-radius:4px;margin-top:4px;font-weight:600}
-  .wa-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;background:#25D366;color:#fff;border:none;border-radius:var(--radius);font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font-sans);margin-top:12px;transition:background .15s}
-  .wa-btn:hover{background:#20ba5a}
-  .coa-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--text-accent);text-decoration:none;margin-top:10px;padding:8px 12px;border:1px solid var(--border-accent);border-radius:var(--radius);font-weight:500;background:#ffffff}
-  .info-ban{background:var(--bg-warning);border:1px solid var(--border-warning);border-radius:var(--radius);padding:12px;font-size:11px;color:var(--text-warning);margin-top:12px;line-height:1.5}
   .hidden{display:none}
-  .chip{display:inline-block;background:#e0f2fe;color:#0369a1;font-size:11px;padding:4px 10px;border-radius:20px;margin:3px;font-weight:500}
-  .ctr{font-size:12px;color:var(--text-secondary);margin-top:10px}
-  .disc-info{background:#f0fdfa;border:1px solid #99f6e4;border-radius:var(--radius);padding:12px;font-size:12px;color:var(--text-accent);margin-bottom:12px;line-height:1.4}
-  .prot-item{margin-bottom:10px;padding:12px;background:var(--surface-1);border-radius:var(--radius);border:1px solid var(--border)}
-  .usd-toggle{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-  .toggle-btn{padding:5px 14px;border:1px solid var(--border);border-radius:20px;font-size:12px;cursor:pointer;background:var(--surface-2);color:var(--text-secondary);transition:all .15s}
-  .toggle-btn.act{background:var(--bg-accent);border-color:var(--border-accent);color:var(--text-accent);font-weight:500}
+
+  /* ── CATÁLOGO ── */
+  .filter-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+  .ftab{padding:7px 14px;border:1px solid var(--border);border-radius:20px;font-size:12px;cursor:pointer;background:var(--surface-2);color:var(--text-secondary);font-family:var(--font-sans);font-weight:500;transition:all .15s;}
+  .ftab:hover{border-color:var(--border-accent);color:var(--text-accent)}
+  .ftab.act{background:var(--fill-accent);border-color:var(--fill-accent);color:#fff;}
+  .usd-toggle{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+  .toggle-btn{padding:5px 14px;border:1px solid var(--border);border-radius:20px;font-size:12px;cursor:pointer;background:var(--surface-2);color:var(--text-secondary);font-family:var(--font-sans);transition:all .15s;}
+  .toggle-btn.act{background:var(--bg-accent);border-color:var(--border-accent);color:var(--text-accent);font-weight:500;}
+  .cat-section{margin-bottom:20px;}
+  .cat-section-title{font-size:11px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid var(--border);}
+  .pep-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .pc{border:1px solid var(--border);border-radius:var(--radius);padding:12px;background:var(--surface-2);cursor:pointer;transition:all .15s;position:relative;}
+  .pc:hover{border-color:var(--border-strong);}
+  .pc.sel{border-color:var(--border-accent);background:var(--bg-accent);}
+  .pc.sel .pc-name{color:var(--text-accent);}
+  .pc-name{font-size:13px;font-weight:600;margin-bottom:2px;}
+  .pc-cat{font-size:10px;color:var(--text-muted);margin-bottom:6px;}
+  .pc-desc{font-size:11px;color:var(--text-secondary);line-height:1.4;margin-bottom:8px;}
+  .pc-price{font-size:13px;font-weight:600;color:var(--text-accent);}
+  .pc-usd{font-size:11px;color:var(--text-muted);}
+  .pc-freq{font-size:11px;color:var(--text-secondary);margin-top:6px;}
+  .chk{width:16px;height:16px;border:1px solid var(--border);border-radius:4px;display:inline-flex;align-items:center;justify-content:center;float:right;margin-left:4px;flex-shrink:0;}
+  .pc.sel .chk{background:var(--fill-accent);border-color:var(--fill-accent);}
+  .cart-bar{position:sticky;bottom:0;background:var(--surface-2);border-top:1px solid var(--border);padding:12px 0;margin-top:1rem;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+  .cart-info{font-size:13px;color:var(--text-secondary);}
+  .cart-info strong{color:var(--text-accent);}
+  .disc-tag{display:inline-block;background:var(--bg-success);color:var(--text-success);font-size:11px;padding:2px 8px;border-radius:4px;font-weight:600;margin-left:6px;}
+  .cart-btn{padding:10px 20px;background:var(--fill-accent);color:#fff;border:none;border-radius:var(--radius);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-sans);white-space:nowrap;}
+  .cart-btn:disabled{background:var(--border-strong);cursor:default;}
+  .cat-empty{font-size:13px;color:var(--text-muted);text-align:center;padding:20px 0;}
+
+  /* ── GUIADO ── */
+  .step-bar{display:flex;margin-bottom:1.5rem;border:0.5px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+  .step-pill{flex:1;padding:10px 2px;font-size:11px;text-align:center;color:var(--text-muted);background:var(--surface-1);}
+  .step-pill.active{background:#dbeafe;color:#1e40af;font-weight:600;}
+  .step-pill.done{background:var(--bg-success);color:var(--text-success);font-weight:500;}
+  .lbl{font-size:12px;color:var(--text-secondary);margin-bottom:5px;margin-top:10px;font-weight:500;}
+  .lbl:first-child{margin-top:0;}
+  input[type=number],select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface-2);color:var(--text-primary);font-size:13px;font-family:var(--font-sans);outline:none;}
+  input[type=number]:focus,select:focus{border-color:var(--border-accent);}
+  .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;}
+  .goal-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .gb{padding:14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface-2);cursor:pointer;transition:all .15s;}
+  .gb:hover{border-color:var(--border-strong);background:var(--surface-1);}
+  .gb.sel{border-color:#2563eb;background:#f8fafc;box-shadow:0 0 0 1px #2563eb;}
+  .gb.sel .gb-t{color:#1e40af;}
+  .gb-ic{font-size:20px;margin-bottom:6px;color:var(--text-secondary);}
+  .gb.sel .gb-ic{color:#2563eb;}
+  .gb-t{font-size:13px;font-weight:600;margin-bottom:4px;}
+  .gb-d{font-size:11px;color:var(--text-secondary);line-height:1.4;}
+  .rec-section{background:var(--bg-accent);border:1px solid #99f6e4;border-radius:10px;padding:12px;margin-bottom:14px;}
+  .rec-section .rcat-label{margin-top:0;color:var(--text-accent);border-bottom-color:#99f6e4;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding-bottom:5px;border-bottom:1px solid #99f6e4;margin-bottom:10px;}
+  .otros-label{font-size:12px;font-weight:600;color:var(--text-muted);margin:18px 0 10px;padding:8px 0 6px;border-top:1px solid var(--border);text-transform:uppercase;letter-spacing:.5px;}
+  .pc.rec::before{content:"★ Recomendado";position:absolute;top:10px;right:10px;font-size:9px;background:var(--bg-success);color:var(--text-success);padding:2px 6px;border-radius:3px;font-weight:500;}
+  .pc-name-guided{font-size:13px;font-weight:600;margin-bottom:2px;padding-right:75px;}
+  .glp-q{margin-bottom:14px;}
+  .glp-q p{font-size:12px;color:var(--text-secondary);margin-bottom:6px;font-weight:500;}
+  .glp-opts{display:flex;gap:8px;flex-wrap:wrap;}
+  .glp-o{padding:6px 14px;border:1px solid var(--border);border-radius:20px;font-size:12px;cursor:pointer;background:var(--surface-2);transition:all .15s;}
+  .glp-o:hover{border-color:var(--border-strong);}
+  .glp-o.sel{background:var(--bg-accent);border-color:var(--border-accent);color:var(--text-accent);font-weight:500;}
+  .syn{border:1px solid #bbf7d0;background:var(--bg-success);border-radius:var(--radius);padding:12px;margin-top:12px;}
+  .syn p{font-size:12px;color:var(--text-success);line-height:1.5;}
+  .disc-info{background:#f0fdfa;border:1px solid #99f6e4;border-radius:var(--radius);padding:12px;font-size:12px;color:var(--text-accent);margin-bottom:12px;line-height:1.4;}
+  .ctr{font-size:12px;color:var(--text-secondary);margin-top:10px;}
+  .pkg-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:8px;}
+  .pkg{border:1px solid #bbf7d0;border-radius:var(--radius);padding:12px;background:var(--surface-2);cursor:pointer;transition:all .15s;position:relative;}
+  .pkg:hover{border-color:var(--border-accent);background:var(--bg-accent);}
+  .pkg.sel{border-color:var(--border-accent);background:var(--bg-accent);}
+  .pkg.sel .pkg-name{color:var(--text-accent);}
+  .pkg-badge{display:inline-block;background:var(--bg-success);color:var(--text-success);font-size:9px;padding:2px 6px;border-radius:3px;margin-bottom:6px;font-weight:600;}
+  .pkg-name{font-size:13px;font-weight:600;margin-bottom:4px;}
+  .pkg-items{font-size:11px;color:var(--text-secondary);margin-bottom:6px;line-height:1.4;}
+  .pkg-orig{font-size:10px;color:var(--text-muted);text-decoration:line-through;}
+  .pkg-price{font-size:14px;font-weight:600;color:var(--text-success);}
+  .pkg-usd{font-size:11px;color:var(--text-muted);}
+  .pkg-desc{font-size:10px;color:var(--text-secondary);margin-top:6px;line-height:1.3;border-top:1px solid var(--border);padding-top:6px;}
+  .pkg-chk{position:absolute;top:12px;right:12px;width:16px;height:16px;border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;}
+  .pkg.sel .pkg-chk{background:var(--fill-accent);border-color:var(--fill-accent);}
+
+  /* ── RESUMEN ── */
+  .btn-row{display:flex;gap:10px;margin-top:1.5rem;justify-content:flex-end;}
+  button.primary{padding:10px 22px;background:var(--fill-accent);color:var(--on-accent);border:none;border-radius:var(--radius);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-sans);transition:background .15s;}
+  button.primary:hover{background:#0d645d;}
+  button.secondary{padding:10px 18px;background:transparent;color:var(--text-secondary);border:1px solid var(--border-strong);border-radius:var(--radius);font-size:13px;cursor:pointer;font-family:var(--font-sans);font-weight:500;}
+  .sum-row{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);}
+  .sum-row:last-of-type{border:none;}
+  .sr-name{font-size:13px;font-weight:600;}
+  .sr-det{font-size:11px;color:var(--text-secondary);margin-top:2px;line-height:1.4;}
+  .sr-pr{text-align:right;flex-shrink:0;margin-left:12px;}
+  .sr-orig{font-size:11px;color:var(--text-muted);text-decoration:line-through;}
+  .sr-final{font-size:14px;font-weight:600;color:var(--text-accent);}
+  .sr-usd{font-size:11px;color:var(--text-muted);}
+  .tot-box{background:#f0fdfa;border:1px solid #99f6e4;border-radius:var(--radius);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;margin-top:12px;}
+  .tot-lbl{font-size:14px;color:var(--text-accent);font-weight:600;}
+  .tot-val{font-size:22px;font-weight:700;color:var(--text-accent);}
+  .disc-badge{display:inline-block;background:var(--bg-success);color:var(--text-success);font-size:11px;padding:3px 10px;border-radius:4px;margin-top:4px;font-weight:600;}
+  .prot-item{margin-bottom:10px;padding:12px;background:var(--surface-1);border-radius:var(--radius);border:1px solid var(--border);}
+  .wa-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;background:#25D366;color:#fff;border:none;border-radius:var(--radius);font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font-sans);margin-top:12px;transition:background .15s;}
+  .wa-btn:hover{background:#20ba5a;}
+  .coa-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--text-accent);text-decoration:none;margin-top:10px;padding:8px 12px;border:1px solid var(--border-accent);border-radius:var(--radius);font-weight:500;background:#ffffff;}
+  .info-ban{background:var(--bg-warning);border:1px solid var(--border-warning);border-radius:var(--radius);padding:12px;font-size:11px;color:var(--text-warning);margin-top:12px;line-height:1.5;}
+  .chip{display:inline-block;background:#e0f2fe;color:#0369a1;font-size:11px;padding:4px 10px;border-radius:20px;margin:3px;font-weight:500;}
+
+  @media(max-width:480px){
+    .row3{grid-template-columns:1fr 1fr;}.row3>div:last-child{grid-column:span 2;}
+    .pep-grid{grid-template-columns:1fr;}
+    .pkg-grid{grid-template-columns:1fr;}
+    .goal-grid{grid-template-columns:1fr 1fr;}
+    .filter-tabs{gap:5px;}
+    .ftab{font-size:11px;padding:6px 10px;}
+  }
   </style>
 </head>
 <body>
-<div class="wrap">
-<div class="logo">GENES<span>IS</span> peptides</div>
-<p class="sub">Diseña tu protocolo · Envío gratis + guía de aplicación incluida</p>
 
-<div class="step-bar">
-  <div class="step-pill active" id="sp1">1. Tu perfil</div>
-  <div class="step-pill" id="sp2">2. Objetivo</div>
-  <div class="step-pill" id="sp3">3. Péptidos</div>
-  <div class="step-pill" id="sp4">4. Tu plan</div>
+<!-- ════════════════ HOME ════════════════ -->
+<div id="view-home" class="home-wrap">
+  <img src="logo.png" alt="Génesis Peptides" class="home-logo">
+  <p class="home-title">Biología Molecular · Péptidos de Alta Precisión</p>
+  <p class="home-sub">Explora nuestro catálogo o deja que te ayudemos a armar el protocolo ideal para tus objetivos.</p>
+  <div class="home-badges">
+    <span class="badge"><i class="ti ti-truck" aria-hidden="true"></i> Envío gratis</span>
+    <span class="badge"><i class="ti ti-tag" aria-hidden="true"></i> Hasta 20% OFF</span>
+    <span class="badge"><i class="ti ti-certificate" aria-hidden="true"></i> COAs verificados</span>
+  </div>
+  <button class="home-btn-primary" onclick="showView('view-catalog')">
+    <i class="ti ti-layout-grid" aria-hidden="true"></i> Ver catálogo completo
+  </button>
+  <button class="home-btn-secondary" onclick="showView('view-guided')">
+    <i class="ti ti-clipboard-list" aria-hidden="true"></i> Armar mi protocolo personalizado
+  </button>
+  <p class="home-helper">¿No sabes por dónde empezar? Te hacemos preguntas y te recomendamos el protocolo ideal según tus objetivos.</p>
 </div>
 
-<!-- STEP 1 -->
-<div id="step1">
-  <div class="card">
-    <p class="sec-title">Cuéntanos sobre ti</p>
-    <div class="row3">
-      <div><p class="lbl">Edad</p><input type="number" id="age" placeholder="Ej: 35" min="18" max="80"></div>
-      <div><p class="lbl">Peso (kg)</p><input type="number" id="weight" placeholder="Ej: 80" min="40" max="200"></div>
-      <div><p class="lbl">Altura (cm)</p><input type="number" id="height" placeholder="Ej: 175" min="140" max="220"></div>
+<!-- ════════════════ CATÁLOGO ════════════════ -->
+<div id="view-catalog" class="hidden">
+  <div class="wrap">
+    <button class="back-btn" onclick="showView('view-home')"><i class="ti ti-arrow-left" aria-hidden="true"></i> Inicio</button>
+    <div class="page-header">
+      <img src="logo.png" alt="Génesis Peptides">
+      <div><div class="page-header-text">Catálogo de Péptidos</div><div class="page-header-sub">Selecciona uno o más y obtén tu descuento automático</div></div>
     </div>
-    <div class="row2">
-      <div><p class="lbl">Sexo biológico</p>
-        <select id="sex"><option value="">Selecciona</option><option value="H">Hombre</option><option value="M">Mujer</option></select>
+
+    <div class="card">
+      <div class="disc-info"><i class="ti ti-tag" aria-hidden="true"></i> <strong>Descuentos automáticos:</strong> 1 vial → 10% OFF &nbsp;·&nbsp; 2 viales → 15% OFF &nbsp;·&nbsp; 3+ viales → 20% OFF &nbsp;·&nbsp; <i class="ti ti-truck" aria-hidden="true"></i> Envío gratis</div>
+      <div class="usd-toggle">
+        <span style="font-size:11px;color:var(--text-secondary);">Ver precios en:</span>
+        <div class="toggle-btn act" id="cat-btn-mxn" onclick="catSetCur('MXN')">MXN $</div>
+        <div class="toggle-btn" id="cat-btn-usd" onclick="catSetCur('USD')">USD $</div>
       </div>
-      <div><p class="lbl">Nivel de actividad</p>
-        <select id="activity"><option value="">Selecciona</option><option value="sedentario">Sedentario</option><option value="moderado">Moderado (1-3x/sem)</option><option value="activo">Activo (4-5x/sem)</option><option value="muy_activo">Muy activo / Atleta</option></select>
-      </div>
+      <div class="filter-tabs" id="filter-tabs"></div>
+      <div id="cat-pep-container"></div>
     </div>
-  </div>
-  <div class="btn-row"><button class="primary" onclick="goStep(2)">Continuar <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>
-</div>
 
-<!-- STEP 2 -->
-<div id="step2" class="hidden">
-  <div class="card">
-    <p class="sec-title">¿Cuál es tu objetivo principal?</p>
-    <div class="goal-grid">
-      <div class="gb" data-goal="peso" onclick="selGoal(this)"><div class="gb-ic"><i class="ti ti-scale" aria-hidden="true"></i></div><div class="gb-t">Pérdida de peso y metabolismo</div><div class="gb-d">Reducir grasa corporal, controlar apetito, composición corporal</div></div>
-      <div class="gb" data-goal="musculo" onclick="selGoal(this)"><div class="gb-ic"><i class="ti ti-barbell" aria-hidden="true"></i></div><div class="gb-t">Masa muscular y rendimiento</div><div class="gb-d">Aumentar músculo, fuerza, rendimiento deportivo</div></div>
-      <div class="gb" data-goal="longevidad" onclick="selGoal(this)"><div class="gb-ic"><i class="ti ti-dna" aria-hidden="true"></i></div><div class="gb-t">Antienvejecimiento y longevidad</div><div class="gb-d">Protección celular, telómeros, energía y vitalidad</div></div>
-      <div class="gb" data-goal="recuperacion" onclick="selGoal(this)"><div class="gb-ic"><i class="ti ti-activity" aria-hidden="true"></i></div><div class="gb-t">Recuperación y reparación</div><div class="gb-d">Tejidos, tendones, post-lesión o post-cirugía</div></div>
-      <div class="gb" data-goal="estetica" onclick="selGoal(this)"><div class="gb-ic"><i class="ti ti-sparkles" aria-hidden="true"></i></div><div class="gb-t">Estética y piel</div><div class="gb-d">Colágeno, luminosidad, arrugas, piel firme</div></div>
-      <div class="gb" data-goal="sueno" onclick="selGoal(this)"><div class="gb-ic"><i class="ti ti-moon" aria-hidden="true"></i></div><div class="gb-t">Sueño y bienestar mental</div><div class="gb-d">Descanso profundo, estrés, ansiedad, ritmo circadiano</div></div>
-      <div class="gb" data-goal="cognitivo" onclick="selGoal(this)"><div class="gb-ic"><i class="ti ti-brain" aria-hidden="true"></i></div><div class="gb-t">Cognición y neuroprotección</div><div class="gb-d">Memoria, enfoque, concentración, claridad mental</div></div>
-      <div class="gb" data-goal="libido" onclick="selGoal(this)"><div class="gb-ic"><i class="ti ti-heart" aria-hidden="true"></i></div><div class="gb-t">Función sexual y vitalidad</div><div class="gb-d">Libido, desempeño, bienestar hormonal</div></div>
+    <div class="card" id="cat-pkg-card">
+      <p class="sec-title">Paquetes con 20% ya aplicado</p>
+      <p style="font-size:12px;color:var(--text-secondary);margin-bottom:10px;">Opciones prearmadas con el mayor ahorro disponible.</p>
+      <div class="pkg-grid" id="cat-pkg-grid"></div>
     </div>
-  </div>
-  <div id="glp-qs" class="card hidden">
-    <p class="sec-title">Un poco más sobre tu objetivo de peso</p>
-    <div class="glp-q"><p>¿Has intentado dietas o tratamientos previos sin éxito sostenido?</p>
-      <div class="glp-opts"><div class="glp-o" data-q="dieta" data-v="si" onclick="selGlp(this)">Sí, varias veces</div><div class="glp-o" data-q="dieta" data-v="no" onclick="selGlp(this)">Es mi primera vez</div></div></div>
-    <div class="glp-q"><p>¿Cuánto peso aproximado buscas perder?</p>
-      <div class="glp-opts"><div class="glp-o" data-q="meta" data-v="menos10" onclick="selGlp(this)">Menos de 10 kg</div><div class="glp-o" data-q="meta" data-v="10_20" onclick="selGlp(this)">10 a 20 kg</div><div class="glp-o" data-q="meta" data-v="mas20" onclick="selGlp(this)">Más de 20 kg</div></div></div>
-    <div class="glp-q"><p>¿Qué describe mejor tu situación?</p>
-      <div class="glp-opts"><div class="glp-o" data-q="perfil" data-v="ansiedad" onclick="selGlp(this)">Ansiedad por comer / snacking</div><div class="glp-o" data-q="perfil" data-v="meta" onclick="selGlp(this)">Metabolismo lento</div><div class="glp-o" data-q="perfil" data-v="todo" onclick="selGlp(this)">Los dos anteriores</div></div></div>
-    <div id="glp-rec" class="syn hidden"><p id="glp-rec-txt"></p></div>
-  </div>
-  <div class="btn-row">
-    <button class="secondary" onclick="goStep(1)"><i class="ti ti-arrow-left" aria-hidden="true"></i> Atrás</button>
-    <button class="primary" onclick="goStep(3)">Ver péptidos recomendados <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+
+    <div class="cart-bar">
+      <div class="cart-info">
+        <span id="cat-sel-count">0</span> viales seleccionados
+        <span class="disc-tag" id="cat-disc-tag" style="display:none"></span>
+      </div>
+      <button class="cart-btn" id="cat-cotizar-btn" onclick="catGoCotizar()" disabled>Ver cotización →</button>
+    </div>
   </div>
 </div>
 
-<!-- STEP 3 -->
-<div id="step3" class="hidden">
-  <div class="card">
-    <p class="sec-title">Arma tu protocolo</p>
-    <p style="font-size:12px;color:var(--text-secondary);margin-bottom:10px">Los péptidos recomendados para tu objetivo aparecen primero. Combínalos para potenciar resultados.</p>
-    <div class="disc-info">
-      <i class="ti ti-tag" aria-hidden="true"></i> <strong>Descuentos automáticos:</strong> 1 vial → 10% OFF &nbsp;·&nbsp; 2 viales → 15% OFF &nbsp;·&nbsp; 3+ viales → 20% OFF &nbsp;·&nbsp; <i class="ti ti-truck" aria-hidden="true"></i> Envío gratis
+<!-- CATÁLOGO: COTIZACIÓN -->
+<div id="view-cat-quote" class="hidden">
+  <div class="wrap">
+    <button class="back-btn" onclick="showView('view-catalog')"><i class="ti ti-arrow-left" aria-hidden="true"></i> Catálogo</button>
+    <div class="page-header">
+      <img src="logo.png" alt="Génesis Peptides">
+      <div><div class="page-header-text">Tu cotización</div><div class="page-header-sub">Resumen de tu selección</div></div>
     </div>
-    <div class="usd-toggle">
-      <span style="font-size:11px;color:var(--text-secondary)">Ver precios en:</span>
-      <div class="toggle-btn act" id="btn-mxn" onclick="setCur('MXN')">MXN $</div>
-      <div class="toggle-btn" id="btn-usd" onclick="setCur('USD')">USD $</div>
+    <div class="card">
+      <p class="sec-title">Tu selección</p>
+      <div id="cat-sum-items"></div>
+      <div class="tot-box">
+        <div><div class="tot-lbl">Total con descuento</div><div id="cat-disc-b" style="margin-top:4px;"></div></div>
+        <div style="text-align:right;"><div class="tot-val" id="cat-tot-mxn"></div><div style="font-size:11px;color:var(--text-accent);" id="cat-tot-usd"></div></div>
+      </div>
+      <p style="font-size:11px;color:var(--text-muted);text-align:center;margin-top:6px;"><i class="ti ti-truck" aria-hidden="true"></i> Envío gratis + guía de aplicación incluida</p>
     </div>
-    <div id="pep-container"></div>
-    <div id="syn-box" class="syn hidden" style="margin-top:10px">
-      <p style="font-size:11px;font-weight:500;color:var(--text-success);margin-bottom:3px"><i class="ti ti-sparkles" aria-hidden="true"></i> Sinergia recomendada</p>
-      <p id="syn-txt" style="font-size:11px;color:var(--text-success)"></p>
+    <div class="card">
+      <p class="sec-title" style="margin-bottom:10px;">Detalle del protocolo</p>
+      <div id="cat-prot-detail"></div>
+      <a href="https://drive.google.com/drive/folders/1qtMDUrRN36uMjkS61sISSwlgRHaXZvy5?usp=sharing" target="_blank" class="coa-link">
+        <i class="ti ti-certificate" aria-hidden="true"></i> Ver certificados de análisis (COAs)
+      </a>
     </div>
-    <p class="ctr">Seleccionados: <strong id="sel-count">0</strong> viales &nbsp;·&nbsp; Descuento activo: <strong id="disc-pct">—</strong></p>
-  </div>
-  <div id="pkg-section" class="card">
-    <p class="sec-title">O elige un paquete con 20% ya aplicado</p>
-    <p style="font-size:12px;color:var(--text-secondary);margin-bottom:10px">Opciones prearmadas con el mayor ahorro disponible.</p>
-    <div class="pkg-grid" id="pkg-grid"></div>
-  </div>
-  <div class="btn-row">
-    <button class="secondary" onclick="goStep(2)"><i class="ti ti-arrow-left" aria-hidden="true"></i> Atrás</button>
-    <button class="primary" onclick="goStep(4)">Ver mi cotización <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+    <div class="info-ban"><i class="ti ti-info-circle" aria-hidden="true"></i> <strong>Aviso:</strong> Uso experimental / investigacional. Todo protocolo debe ser revisado y supervisado por un médico especialista.</div>
+    <div class="card" style="margin-top:12px;">
+      <p class="sec-title">¿Listo para comenzar?</p>
+      <p style="font-size:12px;color:var(--text-secondary);margin-bottom:10px;">Tu cotización está lista. Escríbenos y un asesor confirma tu pedido.</p>
+      <button class="wa-btn" onclick="catSendWA()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Quiero este protocolo — Escribir ahora
+      </button>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:.75rem;">
+      <button class="secondary" style="flex:1;" onclick="showView('view-catalog')"><i class="ti ti-arrow-left" aria-hidden="true"></i> Modificar selección</button>
+      <button class="secondary" style="flex:1;" onclick="showView('view-home')"><i class="ti ti-home" aria-hidden="true"></i> Inicio</button>
+    </div>
   </div>
 </div>
 
-<!-- STEP 4 -->
-<div id="step4" class="hidden">
-  <div class="card">
-    <p class="sec-title">Tu plan personalizado</p>
-    <div id="prof-chips" style="margin-bottom:12px"></div>
-    <div id="sum-items"></div>
-    <div class="tot-box">
-      <div>
-        <div class="tot-lbl">Total con descuento</div>
-        <div id="disc-b" style="margin-top:4px"></div>
+<!-- ════════════════ FLUJO GUIADO ════════════════ -->
+<div id="view-guided" class="hidden">
+  <div class="wrap">
+    <button class="back-btn" onclick="showView('view-home')"><i class="ti ti-arrow-left" aria-hidden="true"></i> Inicio</button>
+    <div class="page-header">
+      <img src="logo.png" alt="Génesis Peptides">
+      <div><div class="page-header-text">Protocolo personalizado</div><div class="page-header-sub">Te ayudamos a elegir lo ideal para ti</div></div>
+    </div>
+    <div class="step-bar">
+      <div class="step-pill active" id="sp1">1. Tu perfil</div>
+      <div class="step-pill" id="sp2">2. Objetivo</div>
+      <div class="step-pill" id="sp3">3. Péptidos</div>
+      <div class="step-pill" id="sp4">4. Tu plan</div>
+    </div>
+
+    <!-- paso 1 -->
+    <div id="step1">
+      <div class="card">
+        <p class="sec-title">Cuéntanos sobre ti</p>
+        <div class="row3">
+          <div><p class="lbl">Edad</p><input type="number" id="age" placeholder="Ej: 35" min="18" max="80"></div>
+          <div><p class="lbl">Peso (kg)</p><input type="number" id="weight" placeholder="Ej: 80" min="40" max="200"></div>
+          <div><p class="lbl">Altura (cm)</p><input type="number" id="height" placeholder="Ej: 175" min="140" max="220"></div>
+        </div>
+        <div class="row2">
+          <div><p class="lbl">Sexo biológico</p>
+            <select id="sex"><option value="">Selecciona</option><option value="H">Hombre</option><option value="M">Mujer</option></select>
+          </div>
+          <div><p class="lbl">Nivel de actividad</p>
+            <select id="activity"><option value="">Selecciona</option><option value="sedentario">Sedentario</option><option value="moderado">Moderado (1-3x/sem)</option><option value="activo">Activo (4-5x/sem)</option><option value="muy_activo">Muy activo / Atleta</option></select>
+          </div>
+        </div>
       </div>
-      <div style="text-align:right">
-        <div class="tot-val" id="tot-mxn"></div>
-        <div style="font-size:11px;color:var(--text-accent)" id="tot-usd"></div>
+      <div class="btn-row"><button class="primary" onclick="goStep(2)">Continuar <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>
+    </div>
+
+    <!-- paso 2 -->
+    <div id="step2" class="hidden">
+      <div class="card">
+        <p class="sec-title">¿Cuál es tu objetivo principal?</p>
+        <div class="goal-grid">
+          <div class="gb" data-goal="peso" onclick="selGoal(this)"><div class="gb-ic"><i class="ti ti-scale" aria-hidden="true"></i></div><div class="gb-t">Pérdida de peso y metabolismo</div><div class="gb-d">Reducir grasa corporal, controlar apetito, composición corporal</div></div>
+          <div class="gb" data-goal="musculo" onclick="selGoal(this)"><div class="gb-ic"><i class="ti ti-barbell" aria-hidden="true"></i></div><div class="gb-t">Masa muscular y rendimiento</div><div class="gb-d">Aumentar músculo, fuerza, rendimiento deportivo</div></div>
+          <div class="gb" data-goal="longevidad" onclick="selGoal(this)"><div class="gb-ic"><i class="ti ti-dna" aria-hidden="true"></i></div><div class="gb-t">Antienvejecimiento y longevidad</div><div class="gb-d">Protección celular, telómeros, energía y vitalidad</div></div>
+          <div class="gb" data-goal="recuperacion" onclick="selGoal(this)"><div class="gb-ic"><i class="ti ti-activity" aria-hidden="true"></i></div><div class="gb-t">Recuperación y reparación</div><div class="gb-d">Tejidos, tendones, post-lesión o post-cirugía</div></div>
+          <div class="gb" data-goal="estetica" onclick="selGoal(this)"><div class="gb-ic"><i class="ti ti-sparkles" aria-hidden="true"></i></div><div class="gb-t">Estética y piel</div><div class="gb-d">Colágeno, luminosidad, arrugas, piel firme</div></div>
+          <div class="gb" data-goal="sueno" onclick="selGoal(this)"><div class="gb-ic"><i class="ti ti-moon" aria-hidden="true"></i></div><div class="gb-t">Sueño y bienestar mental</div><div class="gb-d">Descanso profundo, estrés, ansiedad, ritmo circadiano</div></div>
+          <div class="gb" data-goal="cognitivo" onclick="selGoal(this)"><div class="gb-ic"><i class="ti ti-brain" aria-hidden="true"></i></div><div class="gb-t">Cognición y neuroprotección</div><div class="gb-d">Memoria, enfoque, concentración, claridad mental</div></div>
+          <div class="gb" data-goal="libido" onclick="selGoal(this)"><div class="gb-ic"><i class="ti ti-heart" aria-hidden="true"></i></div><div class="gb-t">Función sexual y vitalidad</div><div class="gb-d">Libido, desempeño, bienestar hormonal</div></div>
+        </div>
+      </div>
+      <div id="glp-qs" class="card hidden">
+        <p class="sec-title">Un poco más sobre tu objetivo de peso</p>
+        <div class="glp-q"><p>¿Has intentado dietas o tratamientos previos sin éxito sostenido?</p>
+          <div class="glp-opts"><div class="glp-o" data-q="dieta" data-v="si" onclick="selGlp(this)">Sí, varias veces</div><div class="glp-o" data-q="dieta" data-v="no" onclick="selGlp(this)">Es mi primera vez</div></div></div>
+        <div class="glp-q"><p>¿Cuánto peso aproximado buscas perder?</p>
+          <div class="glp-opts"><div class="glp-o" data-q="meta" data-v="menos10" onclick="selGlp(this)">Menos de 10 kg</div><div class="glp-o" data-q="meta" data-v="10_20" onclick="selGlp(this)">10 a 20 kg</div><div class="glp-o" data-q="meta" data-v="mas20" onclick="selGlp(this)">Más de 20 kg</div></div></div>
+        <div class="glp-q"><p>¿Qué describe mejor tu situación?</p>
+          <div class="glp-opts"><div class="glp-o" data-q="perfil" data-v="ansiedad" onclick="selGlp(this)">Ansiedad por comer / snacking</div><div class="glp-o" data-q="perfil" data-v="meta" onclick="selGlp(this)">Metabolismo lento</div><div class="glp-o" data-q="perfil" data-v="todo" onclick="selGlp(this)">Los dos anteriores</div></div></div>
+        <div id="glp-rec" class="syn hidden"><p id="glp-rec-txt"></p></div>
+      </div>
+      <div class="btn-row">
+        <button class="secondary" onclick="goStep(1)"><i class="ti ti-arrow-left" aria-hidden="true"></i> Atrás</button>
+        <button class="primary" onclick="goStep(3)">Ver péptidos recomendados <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
       </div>
     </div>
-    <p style="font-size:11px;color:var(--text-muted);text-align:center;margin-top:6px"><i class="ti ti-truck" aria-hidden="true"></i> Envío gratis + guía de aplicación personalizada incluida</p>
+
+    <!-- paso 3 -->
+    <div id="step3" class="hidden">
+      <div class="card">
+        <p class="sec-title">Arma tu protocolo</p>
+        <p style="font-size:12px;color:var(--text-secondary);margin-bottom:10px;">Los péptidos recomendados para tu objetivo aparecen primero. Combínalos para potenciar resultados.</p>
+        <div class="disc-info"><i class="ti ti-tag" aria-hidden="true"></i> <strong>Descuentos automáticos:</strong> 1 vial → 10% OFF &nbsp;·&nbsp; 2 viales → 15% OFF &nbsp;·&nbsp; 3+ viales → 20% OFF &nbsp;·&nbsp; <i class="ti ti-truck" aria-hidden="true"></i> Envío gratis</div>
+        <div class="usd-toggle">
+          <span style="font-size:11px;color:var(--text-secondary);">Ver precios en:</span>
+          <div class="toggle-btn act" id="btn-mxn" onclick="setCur('MXN')">MXN $</div>
+          <div class="toggle-btn" id="btn-usd" onclick="setCur('USD')">USD $</div>
+        </div>
+        <div id="pep-container"></div>
+        <div id="syn-box" class="syn hidden" style="margin-top:10px;">
+          <p style="font-size:11px;font-weight:500;color:var(--text-success);margin-bottom:3px;"><i class="ti ti-sparkles" aria-hidden="true"></i> Sinergia recomendada</p>
+          <p id="syn-txt" style="font-size:11px;color:var(--text-success);"></p>
+        </div>
+        <p class="ctr">Seleccionados: <strong id="sel-count">0</strong> viales &nbsp;·&nbsp; Descuento activo: <strong id="disc-pct">—</strong></p>
+      </div>
+      <div class="card">
+        <p class="sec-title">O elige un paquete con 20% ya aplicado</p>
+        <p style="font-size:12px;color:var(--text-secondary);margin-bottom:10px;">Opciones prearmadas con el mayor ahorro disponible.</p>
+        <div class="pkg-grid" id="pkg-grid"></div>
+      </div>
+      <div class="btn-row">
+        <button class="secondary" onclick="goStep(2)"><i class="ti ti-arrow-left" aria-hidden="true"></i> Atrás</button>
+        <button class="primary" onclick="goStep(4)">Ver mi cotización <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+      </div>
+    </div>
+
+    <!-- paso 4 -->
+    <div id="step4" class="hidden">
+      <div class="card">
+        <p class="sec-title">Tu plan personalizado</p>
+        <div id="prof-chips" style="margin-bottom:12px;"></div>
+        <div id="sum-items"></div>
+        <div class="tot-box">
+          <div><div class="tot-lbl">Total con descuento</div><div id="disc-b" style="margin-top:4px;"></div></div>
+          <div style="text-align:right;"><div class="tot-val" id="tot-mxn"></div><div style="font-size:11px;color:var(--text-accent);" id="tot-usd"></div></div>
+        </div>
+        <p style="font-size:11px;color:var(--text-muted);text-align:center;margin-top:6px;"><i class="ti ti-truck" aria-hidden="true"></i> Envío gratis + guía de aplicación personalizada incluida</p>
+      </div>
+      <div class="card">
+        <p class="sec-title" style="margin-bottom:10px;">Protocolo sugerido</p>
+        <div id="prot-detail"></div>
+        <a href="https://drive.google.com/drive/folders/1qtMDUrRN36uMjkS61sISSwlgRHaXZvy5?usp=sharing" target="_blank" class="coa-link">
+          <i class="ti ti-certificate" aria-hidden="true"></i> Ver certificados de análisis (COAs) — verificación de pureza
+        </a>
+      </div>
+      <div class="info-ban"><i class="ti ti-info-circle" aria-hidden="true"></i> <strong>Aviso:</strong> Uso experimental / investigacional. Todo protocolo debe ser revisado y supervisado por un médico especialista antes de su aplicación.</div>
+      <div class="card" style="margin-top:10px;">
+        <p class="sec-title">¿Listo para comenzar?</p>
+        <p style="font-size:12px;color:var(--text-secondary);margin-bottom:10px;">Tu cotización está lista. Escríbenos y un asesor confirma tu pedido.</p>
+        <button class="wa-btn" onclick="sendWA()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Quiero este protocolo — Escribir ahora
+        </button>
+      </div>
+      <div class="btn-row" style="justify-content:flex-start;margin-top:.5rem;">
+        <button class="secondary" onclick="goStep(3)"><i class="ti ti-arrow-left" aria-hidden="true"></i> Modificar selección</button>
+      </div>
+    </div>
   </div>
-  <div class="card">
-    <p class="sec-title" style="margin-bottom:10px">Protocolo sugerido</p>
-    <div id="prot-detail"></div>
-    <a href="https://drive.google.com/drive/folders/1qtMDUrRN36uMjkS61sISSwlgRHaXZvy5?usp=sharing" target="_blank" class="coa-link">
-      <i class="ti ti-certificate" aria-hidden="true"></i> Ver certificados de análisis (COAs) — verificación de pureza
-    </a>
-  </div>
-  <div class="info-ban">
-    <i class="ti ti-info-circle" aria-hidden="true"></i> <strong>Aviso:</strong> Uso experimental / investigacional. Todo protocolo debe ser revisado y supervisado por un médico especialista antes de su aplicación.
-  </div>
-  <div class="card" style="margin-top:10px">
-    <p class="sec-title">¿Listo para comenzar?</p>
-    <p style="font-size:12px;color:var(--text-secondary);margin-bottom:10px">Tu cotización está lista. Escríbenos y un asesor confirma tu pedido.</p>
-    <button class="wa-btn" onclick="sendWA()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-      Quiero este protocolo — Escribir ahora
-    </button>
-  </div>
-  <div class="btn-row" style="justify-content:flex-start;margin-top:.5rem">
-    <button class="secondary" onclick="goStep(3)"><i class="ti ti-arrow-left" aria-hidden="true"></i> Modificar selección</button>
-  </div>
-</div>
 </div>
 
 <script>
+/* ─── DATOS ─── */
 const P={
   tirz30:{name:"Tirzepatide 30mg",cat:"Optimización Metabólica (GLP)",mxn:3900,usd:200,goals:["peso"],desc:"Doble agonista GIP/GLP-1. Controla apetito y optimiza metabolismo de glucosa y energía.",cycle:"Ciclo continuo bajo supervisión médica",freq:"1 aplicación semanal",rec:["peso"]},
   tirz40:{name:"Tirzepatide 40mg",cat:"Optimización Metabólica (GLP)",mxn:5000,usd:260,goals:["peso"],desc:"Dosis avanzada de Tirzepatide para mayor eficiencia metabólica en objetivos ambiciosos.",cycle:"Ciclo continuo bajo supervisión médica",freq:"1 aplicación semanal",rec:["peso"]},
@@ -286,58 +423,233 @@ const P={
   mt2:{name:"Melanotan II 10mg",cat:"Bienestar Íntimo",mxn:2300,usd:110,goals:["estetica","libido"],desc:"Aumenta pigmentación natural, fotoprotección biológica y puede mejorar libido.",cycle:"Carga 5-7 días + mantenimiento según necesidad",freq:"2-4 veces/semana en mantenimiento",rec:["estetica","libido"]},
 };
 const PKGS={
-  control:{name:"Control Metabólico",items:["reta","motsc","muscle"],orig:13700,precio:11200,usd:610,desc:"Control de apetito, sensibilidad a insulina, preservación de masa muscular y activación metabólica",goals:["peso","musculo"]},
-  wolverine:{name:"Wolverine Pro",items:["ghkcu","bpc","tb500"],orig:7300,precio:6000,usd:290,desc:"Regeneración de tejidos, reducción de inflamación, colágeno, articulaciones y recuperación celular",goals:["recuperacion","estetica","longevidad"]},
-  performance:{name:"Performance",items:["muscle","motsc","tesa"],orig:10900,precio:8720,usd:470,desc:"Optimización de GH, energía celular, mejora de rendimiento físico y desarrollo de masa muscular",goals:["musculo","peso"]},
+  control:{name:"Control Metabólico",items:["reta","motsc","muscle"],orig:13700,precio:11200,usd:610,desc:"Control de apetito, sensibilidad a insulina, preservación de masa muscular y activación metabólica"},
+  wolverine:{name:"Wolverine Pro",items:["ghkcu","bpc","tb500"],orig:7300,precio:6000,usd:290,desc:"Regeneración de tejidos, reducción de inflamación, colágeno, articulaciones y recuperación celular"},
+  performance:{name:"Performance",items:["muscle","motsc","tesa"],orig:10900,precio:8720,usd:470,desc:"Optimización de GH, energía celular, mejora de rendimiento físico y desarrollo de masa muscular"},
 };
+const CATS_ORDER=["Optimización Metabólica (GLP)","Masa Muscular y Rendimiento","Bioreparación y Colágeno","Longevidad","Cognición y Neuroprotección","Sueño y Bienestar","Bienestar Íntimo"];
+const CAT_LABELS={"Optimización Metabólica (GLP)":"Metabolismo","Masa Muscular y Rendimiento":"Músculo","Bioreparación y Colágeno":"Reparación","Longevidad":"Longevidad","Cognición y Neuroprotección":"Cognición","Sueño y Bienestar":"Sueño","Bienestar Íntimo":"Íntimo"};
 const SYNS={
   peso:"Tirzepatide y Retatrutide combinan muy bien con MOTS-C (preserva músculo durante la pérdida de peso) y GHK-Cu o GLOW (mantiene la piel firme mientras bajas de peso).",
-  musculo:"Muscle Stack (Ipa+CJC) con MOTS-C es la dupla más potente para GH + energía mitocondrial. Agrega IGF-1 LR3 para anabolismo máximo.",
-  longevidad:"Epithalon + Sermorelin: reparas telómeros mientras estimulas GH de forma natural. NAD+ complementa la energía celular para máxima longevidad.",
-  recuperacion:"BPC-157 + TB-500 es la combinación clásica de recuperación. GLOW ya las incluye con GHK-Cu para regeneración completa en un solo vial.",
+  musculo:"Muscle Stack con MOTS-C es la dupla más potente para GH + energía mitocondrial. Agrega IGF-1 LR3 para anabolismo máximo.",
+  longevidad:"Epithalon + Sermorelin: reparas telómeros mientras estimulas GH de forma natural. NAD+ complementa la energía celular.",
+  recuperacion:"BPC-157 + TB-500 es la combinación clásica. GLOW ya las incluye con GHK-Cu para regeneración completa en un solo vial.",
   estetica:"GLOW Blend + Melanotan II: colágeno, reparación dérmica y pigmentación natural. La combinación más completa para estética.",
   sueno:"DSIP + Sermorelin o Muscle Stack: sueño delta profundo mientras se libera GH de forma natural durante la noche.",
   cognitivo:"Selank + Semax se complementan: ansiolítico + potenciador cognitivo. NAD+ apoya la función mitocondrial cerebral.",
   libido:"PT-141 actúa neurológicamente. Puede combinarse con Melanotan II para un efecto sinérgico de libido y pigmentación.",
 };
 const GLP_REC={
-  freno:{l:"Tirzepatide 30mg — El Freno Suave",t:"Perfecto para comenzar. Controla el apetito y mejora el manejo de glucosa. Combínalo con MOTS-C para mantener la energía alta durante la pérdida de peso."},
-  doble:{l:"Tirzepatide 40mg — El Doble Power",t:"Tu perfil necesita mayor potencia. La dosis avanzada de Tirzepatide optimiza metabolismo y gestión de energía. Ideal acompañado de GHK-Cu para cuidar la piel."},
-  maxima:{l:"Retatrutide — La Máxima Potencia",t:"Para metas ambiciosas, el Retatrutide (triple agonista GLP-1/GIP/Glucagón) es el soporte más completo. Maximiza quema de grasa y eficiencia metabólica."},
+  freno:{l:"Tirzepatide 30mg — El Freno Suave",t:"Perfecto para comenzar. Controla el apetito y mejora el manejo de glucosa. Combínalo con MOTS-C para mantener la energía alta."},
+  doble:{l:"Tirzepatide 40mg — El Doble Power",t:"Tu perfil necesita mayor potencia. La dosis avanzada optimiza metabolismo y gestión de energía. Ideal con GHK-Cu para cuidar la piel."},
+  maxima:{l:"Retatrutide — La Máxima Potencia",t:"Para metas ambiciosas, el Retatrutide (triple agonista GLP-1/GIP/Glucagón) es el soporte más completo."},
 };
-let step=1,goal="",selPeps=new Set(),selPkg=null,glpA={},cur="MXN";
+
+/* ─── ESTADO ─── */
+let curView='view-home';
+let catCur='MXN', catFilter='Todos', catSelPeps=new Set(), catSelPkg=null;
+let guidedCur='MXN', goal='', selPeps=new Set(), selPkg=null, glpA={};
+
+/* ─── NAVEGACIÓN ─── */
+function showView(v){
+  document.querySelectorAll('[id^="view-"]').forEach(el=>el.classList.add('hidden'));
+  document.getElementById(v).classList.remove('hidden');
+  curView=v;
+  window.scrollTo(0,0);
+  if(v==='view-catalog')buildCatalog();
+}
+
+/* ─── CATÁLOGO ─── */
+function getDisc(n){if(n>=3)return 0.20;if(n===2)return 0.15;if(n===1)return 0.10;return 0;}
+
+function buildCatalog(){
+  buildFilterTabs();
+  renderCatPeps();
+  buildCatPkgs();
+  updateCatCart();
+}
+
+function buildFilterTabs(){
+  let tabs=document.getElementById('filter-tabs');
+  if(tabs.children.length>0)return;
+  let all=document.createElement('div');
+  all.className='ftab act';all.textContent='Todos';all.dataset.cat='Todos';
+  all.onclick=()=>catSetFilter('Todos',all);tabs.appendChild(all);
+  CATS_ORDER.forEach(cat=>{
+    let t=document.createElement('div');
+    t.className='ftab';t.textContent=CAT_LABELS[cat]||cat;t.dataset.cat=cat;
+    t.onclick=()=>catSetFilter(cat,t);tabs.appendChild(t);
+  });
+}
+
+function catSetFilter(cat,el){
+  catFilter=cat;
+  document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('act'));
+  el.classList.add('act');
+  renderCatPeps();
+}
+
+function catSetCur(c){
+  catCur=c;
+  document.getElementById('cat-btn-mxn').classList.toggle('act',c==='MXN');
+  document.getElementById('cat-btn-usd').classList.toggle('act',c==='USD');
+  renderCatPeps();
+  buildCatPkgs();
+}
+
+function renderCatPeps(){
+  let con=document.getElementById('cat-pep-container');con.innerHTML='';
+  let cats=catFilter==='Todos'?CATS_ORDER:[catFilter];
+  cats.forEach(cat=>{
+    let items=Object.entries(P).filter(([k,p])=>p.cat===cat);
+    if(items.length===0)return;
+    let sec=document.createElement('div');sec.className='cat-section';
+    let lbl=document.createElement('p');lbl.className='cat-section-title';lbl.textContent=cat;
+    sec.appendChild(lbl);
+    let grid=document.createElement('div');grid.className='pep-grid';
+    items.forEach(([key,p])=>{
+      let isSel=catSelPeps.has(key);
+      let main=catCur==='MXN'?'$'+p.mxn.toLocaleString()+' MXN':'$'+p.usd+' USD';
+      let alt=catCur==='MXN'?'$'+p.usd+' USD':'$'+p.mxn.toLocaleString()+' MXN';
+      let div=document.createElement('div');
+      div.className='pc'+(isSel?' sel':'');
+      div.onclick=()=>catTogglePep(key,div);
+      div.innerHTML='<span class="chk">'+(isSel?'<i class="ti ti-check" style="font-size:10px;color:white" aria-hidden="true"></i>':'')+'</span>'
+        +'<div class="pc-name">'+p.name+'</div>'
+        +'<div class="pc-cat">'+p.cat+'</div>'
+        +'<div class="pc-desc">'+p.desc+'</div>'
+        +'<div class="pc-price">'+main+'</div>'
+        +'<div class="pc-usd">'+alt+'</div>'
+        +'<div class="pc-freq"><i class="ti ti-calendar" aria-hidden="true"></i> '+p.freq+'</div>';
+      grid.appendChild(div);
+    });
+    sec.appendChild(grid);con.appendChild(sec);
+  });
+}
+
+function catTogglePep(key,el){
+  catSelPkg=null;
+  document.querySelectorAll('#cat-pkg-grid .pkg').forEach(p=>{p.classList.remove('sel');p.querySelector('.pkg-chk').innerHTML='';});
+  if(catSelPeps.has(key)){catSelPeps.delete(key);el.classList.remove('sel');el.querySelector('.chk').innerHTML='';}
+  else{catSelPeps.add(key);el.classList.add('sel');el.querySelector('.chk').innerHTML='<i class="ti ti-check" style="font-size:10px;color:white" aria-hidden="true"></i>';}
+  updateCatCart();
+}
+
+function buildCatPkgs(){
+  let grid=document.getElementById('cat-pkg-grid');grid.innerHTML='';
+  Object.entries(PKGS).forEach(([key,pkg])=>{
+    let isSel=catSelPkg===key;
+    let main=catCur==='MXN'?'$'+pkg.precio.toLocaleString()+' MXN':'$'+pkg.usd+' USD';
+    let alt=catCur==='MXN'?'$'+pkg.usd+' USD':'$'+pkg.precio.toLocaleString()+' MXN';
+    let orig=catCur==='MXN'?'$'+pkg.orig.toLocaleString()+' MXN':'';
+    let div=document.createElement('div');div.className='pkg'+(isSel?' sel':'');div.onclick=()=>catTogglePkg(key,div);
+    div.innerHTML='<span class="pkg-chk">'+(isSel?'<i class="ti ti-check" style="font-size:10px;color:white" aria-hidden="true"></i>':'')+'</span>'
+      +'<div class="pkg-badge">20% OFF aplicado</div>'
+      +'<div class="pkg-name">'+pkg.name+'</div>'
+      +'<div class="pkg-items">'+pkg.items.map(pid=>P[pid]?P[pid].name.split(' ')[0]:'').join(' + ')+'</div>'
+      +'<div class="pkg-orig">'+orig+'</div>'
+      +'<div class="pkg-price">'+main+'</div>'
+      +'<div class="pkg-usd">'+alt+'</div>'
+      +'<div class="pkg-desc">'+pkg.desc+'</div>';
+    grid.appendChild(div);
+  });
+}
+
+function catTogglePkg(key,el){
+  if(catSelPkg===key){catSelPkg=null;el.classList.remove('sel');el.querySelector('.pkg-chk').innerHTML='';}
+  else{
+    catSelPkg=key;catSelPeps.clear();
+    document.querySelectorAll('#cat-pep-container .pc').forEach(p=>{p.classList.remove('sel');let c=p.querySelector('.chk');if(c)c.innerHTML='';});
+    document.querySelectorAll('#cat-pkg-grid .pkg').forEach(p=>{p.classList.remove('sel');p.querySelector('.pkg-chk').innerHTML='';});
+    el.classList.add('sel');el.querySelector('.pkg-chk').innerHTML='<i class="ti ti-check" style="font-size:10px;color:white" aria-hidden="true"></i>';
+  }
+  updateCatCart();
+}
+
+function updateCatCart(){
+  let n=catSelPeps.size;
+  let hasSelection=n>0||catSelPkg!==null;
+  document.getElementById('cat-sel-count').textContent=catSelPkg?'Paquete':n;
+  let disc=getDisc(n);
+  let tag=document.getElementById('cat-disc-tag');
+  if(catSelPkg){tag.textContent='20% OFF';tag.style.display='inline-block';}
+  else if(disc>0){tag.textContent=Math.round(disc*100)+'% OFF';tag.style.display='inline-block';}
+  else{tag.style.display='none';}
+  document.getElementById('cat-cotizar-btn').disabled=!hasSelection;
+}
+
+function catGoCotizar(){
+  let items=document.getElementById('cat-sum-items');items.innerHTML='';
+  let prot=document.getElementById('cat-prot-detail');prot.innerHTML='';
+  let totMXN=0,totUSD=0;
+  if(catSelPkg){
+    let pkg=PKGS[catSelPkg];totMXN=pkg.precio;totUSD=pkg.usd;
+    items.innerHTML='<div class="sum-row"><div><div class="sr-name">Paquete '+pkg.name+'</div><div class="sr-det">'+pkg.items.map(pid=>P[pid]?P[pid].name:'').join(' + ')+'<br>'+pkg.desc+'</div></div><div class="sr-pr"><div class="sr-orig">$'+pkg.orig.toLocaleString()+' MXN</div><div class="sr-final">$'+pkg.precio.toLocaleString()+' MXN</div><div class="sr-usd">$'+pkg.usd+' USD</div></div></div>';
+    pkg.items.forEach(pid=>{if(P[pid]){let p=P[pid];prot.innerHTML+='<div class="prot-item"><p style="font-size:12px;font-weight:600;">'+p.name+'</p><p style="font-size:11px;color:var(--text-secondary);margin-top:3px;">'+p.desc+'</p><p style="font-size:10px;color:var(--text-muted);margin-top:4px;"><i class="ti ti-clock" aria-hidden="true"></i> '+p.freq+' · <i class="ti ti-calendar" aria-hidden="true"></i> '+p.cycle+'</p></div>';}});
+    document.getElementById('cat-disc-b').innerHTML='<span class="disc-badge">20% de descuento ya aplicado</span>';
+  } else {
+    let disc=getDisc(catSelPeps.size);
+    catSelPeps.forEach(key=>{
+      let p=P[key];let fMXN=Math.round(p.mxn*(1-disc));let fUSD=Math.round(p.usd*(1-disc));
+      totMXN+=fMXN;totUSD+=fUSD;
+      items.innerHTML+='<div class="sum-row"><div><div class="sr-name">'+p.name+'</div><div class="sr-det">'+p.freq+' · '+p.cycle+'</div></div><div class="sr-pr"><div class="sr-orig">$'+p.mxn.toLocaleString()+' MXN</div><div class="sr-final">$'+fMXN.toLocaleString()+' MXN</div><div class="sr-usd">$'+fUSD+' USD</div></div></div>';
+      prot.innerHTML+='<div class="prot-item"><p style="font-size:12px;font-weight:600;">'+p.name+'</p><p style="font-size:11px;color:var(--text-secondary);margin-top:3px;">'+p.desc+'</p><p style="font-size:10px;color:var(--text-muted);margin-top:4px;"><i class="ti ti-clock" aria-hidden="true"></i> '+p.freq+' · <i class="ti ti-calendar" aria-hidden="true"></i> '+p.cycle+'</p></div>';
+    });
+    let dp=Math.round(disc*100);
+    document.getElementById('cat-disc-b').innerHTML=dp>0?'<span class="disc-badge">'+dp+'% de descuento aplicado</span>':'';
+  }
+  document.getElementById('cat-tot-mxn').textContent='$'+totMXN.toLocaleString()+' MXN';
+  document.getElementById('cat-tot-usd').textContent='$'+totUSD+' USD';
+  showView('view-cat-quote');
+}
+
+function catSendWA(){
+  let disc=getDisc(catSelPeps.size),totMXN=0,totUSD=0,pepList='';
+  if(catSelPkg){
+    let pkg=PKGS[catSelPkg];totMXN=pkg.precio;totUSD=pkg.usd;
+    pepList='• Paquete '+pkg.name+' (20% OFF ya aplicado) — $'+pkg.precio.toLocaleString()+' MXN / $'+pkg.usd+' USD';
+  } else {
+    catSelPeps.forEach(key=>{let p=P[key];let fMXN=Math.round(p.mxn*(1-disc));let fUSD=Math.round(p.usd*(1-disc));totMXN+=fMXN;totUSD+=fUSD;pepList+='• '+p.name+' — $'+fMXN.toLocaleString()+' MXN ($'+fUSD+' USD)\n';});
+  }
+  let discTxt=catSelPkg?'Paquete con 20% OFF':(Math.round(disc*100)+'% de descuento aplicado');
+  let msg='¡Hola! Acabo de armar mi pedido en Génesis Peptides 🧬\n\n*Mi selección:*\n'+pepList+'\n*'+discTxt+'*\n*Total: $'+totMXN.toLocaleString()+' MXN / $'+totUSD+' USD*\n\n¡Quiero confirmar mi pedido y recibir mi guía de aplicación! 🙌';
+  window.open('https://wa.me/529983028826?text='+encodeURIComponent(msg),'_blank');
+}
+
+/* ─── FLUJO GUIADO ─── */
 function goStep(n){
   if(n===2&&!val1())return;
   if(n===3&&!goal){alert("Por favor selecciona un objetivo");return;}
   if(n===4&&selPeps.size===0&&!selPkg){alert("Selecciona al menos un péptido o paquete");return;}
   [1,2,3,4].forEach(i=>{
     document.getElementById('step'+i).classList.add('hidden');
-    let s=document.getElementById('sp'+i);
-    s.classList.remove('active','done');
-    if(i<n)s.classList.add('done');
-    else if(i===n)s.classList.add('active');
+    let s=document.getElementById('sp'+i);s.classList.remove('active','done');
+    if(i<n)s.classList.add('done');else if(i===n)s.classList.add('active');
   });
   document.getElementById('step'+n).classList.remove('hidden');
   window.scrollTo(0,0);
-  step=n;
   if(n===3)buildPeps();
   if(n===4)buildSummary();
 }
+
 function val1(){
   if(!document.getElementById('age').value||!document.getElementById('weight').value||!document.getElementById('height').value||!document.getElementById('sex').value||!document.getElementById('activity').value){alert("Por favor completa todos los campos");return false;}
   return true;
 }
+
 function selGoal(el){
   document.querySelectorAll('.gb').forEach(b=>b.classList.remove('sel'));
   el.classList.add('sel');goal=el.dataset.goal;selPeps.clear();selPkg=null;
   document.getElementById('glp-qs').classList.toggle('hidden',goal!=='peso');
 }
+
 function selGlp(el){
   let q=el.dataset.q;
   document.querySelectorAll('.glp-o[data-q="'+q+'"]').forEach(b=>b.classList.remove('sel'));
   el.classList.add('sel');glpA[q]=el.dataset.v;
   if(glpA.dieta&&glpA.meta&&glpA.perfil)showGlpRec();
 }
+
 function showGlpRec(){
   let r;
   if(glpA.meta==='mas20'||glpA.perfil==='todo')r=GLP_REC.maxima;
@@ -346,22 +658,23 @@ function showGlpRec(){
   document.getElementById('glp-rec-txt').innerHTML='<strong>'+r.l+'</strong><br>'+r.t;
   document.getElementById('glp-rec').classList.remove('hidden');
 }
+
 function setCur(c){
-  cur=c;
+  guidedCur=c;
   document.getElementById('btn-mxn').classList.toggle('act',c==='MXN');
   document.getElementById('btn-usd').classList.toggle('act',c==='USD');
   buildPeps();
 }
-function getDisc(n){if(n>=3)return 0.20;if(n===2)return 0.15;if(n===1)return 0.10;return 0;}
+
 function makePepCard(key,p,isRec){
   let isSel=selPeps.has(key);
-  let main=cur==='MXN'?'$'+p.mxn.toLocaleString()+' MXN':'$'+p.usd+' USD';
-  let alt=cur==='MXN'?'$'+p.usd+' USD':'$'+p.mxn.toLocaleString()+' MXN';
+  let main=guidedCur==='MXN'?'$'+p.mxn.toLocaleString()+' MXN':'$'+p.usd+' USD';
+  let alt=guidedCur==='MXN'?'$'+p.usd+' USD':'$'+p.mxn.toLocaleString()+' MXN';
   let div=document.createElement('div');
   div.className='pc'+(isRec?' rec':'')+(isSel?' sel':'');
   div.onclick=()=>togglePep(key,div);
   div.innerHTML='<span class="chk">'+(isSel?'<i class="ti ti-check" style="font-size:10px;color:white" aria-hidden="true"></i>':'')+'</span>'
-    +'<div class="pc-name">'+p.name+'</div>'
+    +'<div class="pc-name'+(isRec?'-guided':'')+'">'+p.name+'</div>'
     +'<div class="pc-cat">'+p.cat+'</div>'
     +'<div class="pc-desc">'+p.desc+'</div>'
     +'<div class="pc-price">'+main+'</div>'
@@ -369,84 +682,86 @@ function makePepCard(key,p,isRec){
     +'<div class="pc-freq"><i class="ti ti-calendar" aria-hidden="true"></i> '+p.freq+'</div>';
   return div;
 }
+
 function buildPeps(){
   let con=document.getElementById('pep-container');con.innerHTML='';
-  let recEntries=Object.entries(P).filter(([k,p])=>p.rec.includes(goal));
-  let otherEntries=Object.entries(P).filter(([k,p])=>!p.rec.includes(goal)&&p.goals.includes(goal));
-  let restEntries=Object.entries(P).filter(([k,p])=>!p.rec.includes(goal)&&!p.goals.includes(goal));
-  if(recEntries.length>0){
-    let secRec=document.createElement('div');secRec.className='rec-section';
-    let recLbl=document.createElement('p');recLbl.className='cat-label';
-    recLbl.innerHTML='<i class="ti ti-star" aria-hidden="true"></i> Recomendados para tu objetivo';
-    secRec.appendChild(recLbl);
-    let recGrid=document.createElement('div');recGrid.className='pep-grid';
-    recEntries.forEach(([key,p])=>recGrid.appendChild(makePepCard(key,p,true)));
-    secRec.appendChild(recGrid);con.appendChild(secRec);
+  let recE=Object.entries(P).filter(([k,p])=>p.rec.includes(goal));
+  let otherE=Object.entries(P).filter(([k,p])=>!p.rec.includes(goal)&&p.goals.includes(goal));
+  let restE=Object.entries(P).filter(([k,p])=>!p.rec.includes(goal)&&!p.goals.includes(goal));
+  if(recE.length>0){
+    let sec=document.createElement('div');sec.className='rec-section';
+    let lbl=document.createElement('p');lbl.className='rcat-label';lbl.innerHTML='<i class="ti ti-star" aria-hidden="true"></i> Recomendados para tu objetivo';
+    sec.appendChild(lbl);
+    let g=document.createElement('div');g.className='pep-grid';
+    recE.forEach(([k,p])=>g.appendChild(makePepCard(k,p,true)));
+    sec.appendChild(g);con.appendChild(sec);
   }
-  if(otherEntries.length>0){
+  if(otherE.length>0){
     let ol=document.createElement('p');ol.className='otros-label';ol.textContent='Complementarios para tu objetivo';con.appendChild(ol);
     let og=document.createElement('div');og.className='pep-grid';
-    otherEntries.forEach(([key,p])=>og.appendChild(makePepCard(key,p,false)));
-    con.appendChild(og);
+    otherE.forEach(([k,p])=>og.appendChild(makePepCard(k,p,false)));con.appendChild(og);
   }
-  if(restEntries.length>0){
+  if(restE.length>0){
     let rl=document.createElement('p');rl.className='otros-label';rl.textContent='Catálogo completo';con.appendChild(rl);
-    let cats={};
-    restEntries.forEach(([k,p])=>{if(!cats[p.cat])cats[p.cat]=[];cats[p.cat].push([k,p]);});
+    let cats={};restE.forEach(([k,p])=>{if(!cats[p.cat])cats[p.cat]=[];cats[p.cat].push([k,p]);});
     Object.entries(cats).forEach(([cat,items])=>{
-      let cl=document.createElement('p');cl.className='cat-label';cl.textContent=cat;con.appendChild(cl);
+      let cl=document.createElement('p');cl.style.cssText='font-size:11px;font-weight:600;color:var(--text-muted);margin:12px 0 8px;';cl.textContent=cat;con.appendChild(cl);
       let cg=document.createElement('div');cg.className='pep-grid';
-      items.forEach(([key,p])=>cg.appendChild(makePepCard(key,p,false)));
-      con.appendChild(cg);
+      items.forEach(([k,p])=>cg.appendChild(makePepCard(k,p,false)));con.appendChild(cg);
     });
   }
   updateCounter();buildPkgs();
 }
+
 function togglePep(key,el){
   selPkg=null;
-  document.querySelectorAll('.pkg').forEach(p=>{p.classList.remove('sel');p.querySelector('.pkg-chk').innerHTML='';});
+  document.querySelectorAll('#pkg-grid .pkg').forEach(p=>{p.classList.remove('sel');p.querySelector('.pkg-chk').innerHTML='';});
   if(selPeps.has(key)){selPeps.delete(key);el.classList.remove('sel');el.querySelector('.chk').innerHTML='';}
   else{selPeps.add(key);el.classList.add('sel');el.querySelector('.chk').innerHTML='<i class="ti ti-check" style="font-size:10px;color:white" aria-hidden="true"></i>';}
   updateCounter();updateSyn();
 }
+
 function updateCounter(){
-  let n=selPeps.size;document.getElementById('sel-count').textContent=n;
+  let n=selPeps.size;
+  document.getElementById('sel-count').textContent=n;
   let d=getDisc(n);document.getElementById('disc-pct').textContent=d>0?(Math.round(d*100)+'% OFF'):'—';
 }
+
 function updateSyn(){
   let box=document.getElementById('syn-box');
   if(selPeps.size>=1&&SYNS[goal]){box.classList.remove('hidden');document.getElementById('syn-txt').textContent=SYNS[goal];}
   else box.classList.add('hidden');
 }
+
 function buildPkgs(){
   let grid=document.getElementById('pkg-grid');grid.innerHTML='';
   Object.entries(PKGS).forEach(([key,pkg])=>{
     let isSel=selPkg===key;
-    let prMain=cur==='MXN'?'$'+pkg.precio.toLocaleString()+' MXN':'$'+pkg.usd+' USD';
-    let prAlt=cur==='MXN'?'$'+pkg.usd+' USD':'$'+pkg.precio.toLocaleString()+' MXN';
-    let origShow=cur==='MXN'?'$'+pkg.orig.toLocaleString()+' MXN':'';
+    let main=guidedCur==='MXN'?'$'+pkg.precio.toLocaleString()+' MXN':'$'+pkg.usd+' USD';
+    let alt=guidedCur==='MXN'?'$'+pkg.usd+' USD':'$'+pkg.precio.toLocaleString()+' MXN';
+    let orig=guidedCur==='MXN'?'$'+pkg.orig.toLocaleString()+' MXN':'';
     let div=document.createElement('div');div.className='pkg'+(isSel?' sel':'');div.onclick=()=>togglePkg(key,div);
     div.innerHTML='<span class="pkg-chk">'+(isSel?'<i class="ti ti-check" style="font-size:10px;color:white" aria-hidden="true"></i>':'')+'</span>'
       +'<div class="pkg-badge">20% OFF aplicado</div>'
       +'<div class="pkg-name">'+pkg.name+'</div>'
       +'<div class="pkg-items">'+pkg.items.map(pid=>P[pid]?P[pid].name.split(' ')[0]:'').join(' + ')+'</div>'
-      +'<div class="pkg-orig">'+origShow+'</div>'
-      +'<div class="pkg-price">'+prMain+'</div>'
-      +'<div class="pkg-usd">'+prAlt+'</div>'
-      +'<div class="pkg-desc">'+pkg.desc+'</div>';
+      +'<div class="pkg-orig">'+orig+'</div><div class="pkg-price">'+main+'</div>'
+      +'<div class="pkg-usd">'+alt+'</div><div class="pkg-desc">'+pkg.desc+'</div>';
     grid.appendChild(div);
   });
 }
+
 function togglePkg(key,el){
   if(selPkg===key){selPkg=null;el.classList.remove('sel');el.querySelector('.pkg-chk').innerHTML='';}
   else{
     selPkg=key;selPeps.clear();
-    document.querySelectorAll('.pc').forEach(p=>{p.classList.remove('sel');let c=p.querySelector('.chk');if(c)c.innerHTML='';});
-    document.querySelectorAll('.pkg').forEach(p=>{p.classList.remove('sel');p.querySelector('.pkg-chk').innerHTML='';});
+    document.querySelectorAll('#pep-container .pc').forEach(p=>{p.classList.remove('sel');let c=p.querySelector('.chk');if(c)c.innerHTML='';});
+    document.querySelectorAll('#pkg-grid .pkg').forEach(p=>{p.classList.remove('sel');p.querySelector('.pkg-chk').innerHTML='';});
     el.classList.add('sel');el.querySelector('.pkg-chk').innerHTML='<i class="ti ti-check" style="font-size:10px;color:white" aria-hidden="true"></i>';
     updateCounter();document.getElementById('syn-box').classList.add('hidden');
   }
 }
+
 function buildSummary(){
   let age=document.getElementById('age').value,w=document.getElementById('weight').value,h=document.getElementById('height').value,sx=document.getElementById('sex').value,ac=document.getElementById('activity').value;
   let bmi=(w/((h/100)**2)).toFixed(1);
@@ -459,7 +774,7 @@ function buildSummary(){
   if(selPkg){
     let pkg=PKGS[selPkg];totMXN=pkg.precio;totUSD=pkg.usd;
     items.innerHTML='<div class="sum-row"><div><div class="sr-name">Paquete '+pkg.name+'</div><div class="sr-det">'+pkg.items.map(pid=>P[pid]?P[pid].name:'').join(' + ')+'<br>'+pkg.desc+'</div></div><div class="sr-pr"><div class="sr-orig">$'+pkg.orig.toLocaleString()+' MXN</div><div class="sr-final">$'+pkg.precio.toLocaleString()+' MXN</div><div class="sr-usd">$'+pkg.usd+' USD</div></div></div>';
-    pkg.items.forEach(pid=>{if(P[pid]){let p=P[pid];prot.innerHTML+='<div class="prot-item"><p style="font-size:12px;font-weight:500">'+p.name+'</p><p style="font-size:11px;color:var(--text-secondary);margin-top:3px">'+p.desc+'</p><p style="font-size:10px;color:var(--text-muted);margin-top:4px"><i class="ti ti-clock" aria-hidden="true"></i> '+p.freq+' · <i class="ti ti-calendar" aria-hidden="true"></i> '+p.cycle+'</p></div>';}});
+    pkg.items.forEach(pid=>{if(P[pid]){let p=P[pid];prot.innerHTML+='<div class="prot-item"><p style="font-size:12px;font-weight:500;">'+p.name+'</p><p style="font-size:11px;color:var(--text-secondary);margin-top:3px;">'+p.desc+'</p><p style="font-size:10px;color:var(--text-muted);margin-top:4px;"><i class="ti ti-clock" aria-hidden="true"></i> '+p.freq+' · <i class="ti ti-calendar" aria-hidden="true"></i> '+p.cycle+'</p></div>';}});
     document.getElementById('disc-b').innerHTML='<span class="disc-badge">20% de descuento ya aplicado</span>';
   } else {
     let disc=getDisc(selPeps.size);
@@ -467,7 +782,7 @@ function buildSummary(){
       let p=P[key];let fMXN=Math.round(p.mxn*(1-disc));let fUSD=Math.round(p.usd*(1-disc));
       totMXN+=fMXN;totUSD+=fUSD;
       items.innerHTML+='<div class="sum-row"><div><div class="sr-name">'+p.name+'</div><div class="sr-det">'+p.freq+' · '+p.cycle+'</div></div><div class="sr-pr"><div class="sr-orig">$'+p.mxn.toLocaleString()+' MXN</div><div class="sr-final">$'+fMXN.toLocaleString()+' MXN</div><div class="sr-usd">$'+fUSD+' USD</div></div></div>';
-      prot.innerHTML+='<div class="prot-item"><p style="font-size:12px;font-weight:500">'+p.name+'</p><p style="font-size:11px;color:var(--text-secondary);margin-top:3px">'+p.desc+'</p><p style="font-size:10px;color:var(--text-muted);margin-top:4px"><i class="ti ti-clock" aria-hidden="true"></i> '+p.freq+' · <i class="ti ti-calendar" aria-hidden="true"></i> '+p.cycle+'</p></div>';
+      prot.innerHTML+='<div class="prot-item"><p style="font-size:12px;font-weight:500;">'+p.name+'</p><p style="font-size:11px;color:var(--text-secondary);margin-top:3px;">'+p.desc+'</p><p style="font-size:10px;color:var(--text-muted);margin-top:4px;"><i class="ti ti-clock" aria-hidden="true"></i> '+p.freq+' · <i class="ti ti-calendar" aria-hidden="true"></i> '+p.cycle+'</p></div>';
     });
     let dp=Math.round(disc*100);
     document.getElementById('disc-b').innerHTML=dp>0?'<span class="disc-badge">'+dp+'% de descuento aplicado</span>':'';
@@ -475,6 +790,7 @@ function buildSummary(){
   document.getElementById('tot-mxn').textContent='$'+totMXN.toLocaleString()+' MXN';
   document.getElementById('tot-usd').textContent='$'+totUSD+' USD';
 }
+
 function sendWA(){
   let age=document.getElementById('age').value,w=document.getElementById('weight').value,h=document.getElementById('height').value,sx=document.getElementById('sex').value,ac=document.getElementById('activity').value;
   const GL={peso:"Pérdida de peso",musculo:"Masa muscular y rendimiento",longevidad:"Antienvejecimiento y longevidad",recuperacion:"Recuperación y reparación",estetica:"Estética y piel",sueno:"Sueño y bienestar",cognitivo:"Cognición y neuroprotección",libido:"Función sexual"};
@@ -483,10 +799,7 @@ function sendWA(){
     let pkg=PKGS[selPkg];totMXN=pkg.precio;totUSD=pkg.usd;
     pepList='• Paquete '+pkg.name+' (20% OFF ya aplicado) — $'+pkg.precio.toLocaleString()+' MXN / $'+pkg.usd+' USD';
   } else {
-    selPeps.forEach(key=>{
-      let p=P[key];let fMXN=Math.round(p.mxn*(1-disc));let fUSD=Math.round(p.usd*(1-disc));
-      totMXN+=fMXN;totUSD+=fUSD;pepList+='• '+p.name+' — $'+fMXN.toLocaleString()+' MXN ($'+fUSD+' USD)\n';
-    });
+    selPeps.forEach(key=>{let p=P[key];let fMXN=Math.round(p.mxn*(1-disc));let fUSD=Math.round(p.usd*(1-disc));totMXN+=fMXN;totUSD+=fUSD;pepList+='• '+p.name+' — $'+fMXN.toLocaleString()+' MXN ($'+fUSD+' USD)\n';});
   }
   let discTxt=selPkg?'Paquete con 20% OFF':(Math.round(disc*100)+'% de descuento aplicado');
   let msg='¡Hola! Acabo de armar mi protocolo personalizado en Génesis Peptides 🧬\n\n*Mi perfil:*\n'+(sx==='H'?'Hombre':'Mujer')+' · '+age+' años · '+w+'kg · '+h+'cm\nObjetivo: '+(GL[goal]||goal)+'\n\n*Mi selección:*\n'+pepList+'\n*'+discTxt+'*\n*Total: $'+totMXN.toLocaleString()+' MXN / $'+totUSD+' USD*\n\n¡Quiero confirmar mi pedido y recibir mi guía de aplicación! 🙌';
