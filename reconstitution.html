@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Reconstitución — Génesis Peptides</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+:root{
+  --accent:#0f766e;--al:#f0fdfa;--ab:#99f6e4;
+  --pur:#7c3aed;--pl:#fdf4ff;--pb:#e9d5ff;
+  --sg:#166534;--sb:#f0fdf4;--sbd:#bbf7d0;
+  --wb:#fff7ed;--wbd:#fed7aa;--wt:#9a3412;
+  --bd:#e5e7eb;--bg:#f3f4f6;--tx:#111827;--tx2:#4b5563;--tx3:#9ca3af;
+  --r:10px;--f:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);font-family:var(--f);color:var(--tx);min-height:100vh;}
+.pg{max-width:700px;margin:0 auto;padding:1.5rem 1rem 4rem;}
+.langbar{position:fixed;top:12px;right:12px;z-index:999;display:flex;gap:4px;background:#fff;border:1px solid var(--bd);border-radius:20px;padding:3px;}
+.langbar button{padding:4px 12px;border:none;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--f);background:transparent;color:var(--tx3);}
+.langbar button.act{background:var(--accent);color:#fff;}
+.hd{text-align:center;margin-bottom:2rem;padding-top:2rem;}
+.hd img{width:80px;height:80px;object-fit:contain;margin-bottom:1rem;}
+.hd h1{font-size:20px;font-weight:700;margin-bottom:6px;}
+.hd p{font-size:13px;color:var(--tx2);line-height:1.5;max-width:520px;margin:0 auto;}
+.card{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:1.5rem;margin-bottom:1rem;box-shadow:0 1px 3px rgba(0,0,0,.05);}
+.sec-title{font-size:15px;font-weight:600;margin-bottom:14px;}
+.lbl{font-size:12px;color:var(--tx2);margin-bottom:5px;margin-top:14px;font-weight:500;}
+.lbl:first-child{margin-top:0;}
+select,input[type=number]{width:100%;padding:10px 12px;border:1.5px solid var(--bd);border-radius:var(--r);background:#fff;color:var(--tx);font-size:13px;font-family:var(--f);outline:none;transition:border-color .15s;}
+select:focus,input[type=number]:focus{border-color:var(--accent);}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+.ibox{background:var(--al);border:1px solid var(--ab);border-radius:var(--r);padding:12px;font-size:12px;color:var(--accent);line-height:1.7;margin-top:10px;white-space:pre-line;font-weight:500;}
+.proto-note{background:var(--sb);border:1px solid var(--sbd);border-radius:var(--r);padding:11px 13px;font-size:12px;color:var(--sg);margin-top:8px;line-height:1.5;display:flex;gap:8px;}
+.wbox{background:var(--wb);border:1px solid var(--wbd);border-radius:var(--r);padding:12px;font-size:11px;color:var(--wt);line-height:1.5;margin-top:12px;}
+.calc-btn{width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:var(--r);font-size:14px;font-weight:600;cursor:pointer;font-family:var(--f);margin-top:16px;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .15s;}
+.calc-btn:hover{background:#0d645d;}
+
+/* RESULTADO */
+.rs{background:linear-gradient(135deg,var(--al),var(--pl));border:1px solid var(--ab);border-radius:14px;padding:1.5rem;margin-top:1rem;}
+.rs h2{font-size:16px;font-weight:700;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.rr{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #d1fae5;}
+.rr:last-child{border:none;}
+.rl{font-size:12px;color:var(--tx2);}
+.rv{font-size:15px;font-weight:700;color:var(--accent);}
+.rv.big{font-size:26px;color:var(--pur);}
+
+/* JERINGA */
+.sw{background:#fff;border:1px solid var(--pb);border-radius:14px;padding:1.5rem;margin-top:1rem;text-align:center;}
+.sw h3{font-size:14px;font-weight:700;color:var(--pur);margin-bottom:16px;}
+.ubadge{display:inline-block;font-size:32px;font-weight:700;padding:12px 36px;border-radius:30px;margin:14px 0 4px;color:#fff;background:var(--accent);transition:background .3s;}
+.usub{font-size:12px;color:var(--tx3);margin-bottom:4px;}
+.umg{font-size:13px;font-weight:600;color:var(--pur);margin-bottom:14px;}
+
+/* RECOMENDACIÓN JERINGA */
+.syringe-rec{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:var(--r);margin-top:14px;font-size:12px;line-height:1.5;}
+.syringe-rec.green{background:var(--sb);border:1px solid var(--sbd);color:var(--sg);}
+.syringe-rec.blue{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;}
+.syringe-rec.purple{background:var(--pl);border:1px solid var(--pb);color:var(--pur);}
+.syringe-rec.yellow{background:#fef9c3;border:1px solid #fde047;color:#854d0e;}
+.syringe-rec i{font-size:18px;flex-shrink:0;margin-top:1px;}
+
+/* PILLS */
+.dpills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px;}
+.dp{padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--bd);background:#fff;color:var(--tx2);font-family:var(--f);transition:all .15s;}
+.dp:hover{border-color:var(--accent);color:var(--accent);}
+.dp.act{background:var(--pur);border-color:var(--pur);color:#fff;}
+
+/* TABLA */
+.et{width:100%;margin-top:14px;border-collapse:collapse;font-size:12px;}
+.et th{background:var(--pur);color:#fff;padding:9px 10px;text-align:left;font-weight:600;}
+.et td{padding:9px 10px;border-bottom:1px solid var(--pb);color:var(--tx2);}
+.et tr.hl td{background:var(--pl);font-weight:700;color:var(--pur);}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--tx2);text-decoration:none;margin-bottom:1rem;padding:8px 0;}
+.back:hover{color:var(--accent);}
+.hidden{display:none!important;}
+.bac-opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+.bac-btn{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--bd);background:#fff;color:var(--tx2);font-family:var(--f);transition:all .15s;}
+.bac-btn:hover{border-color:var(--accent);color:var(--accent);}
+.bac-btn.act{background:var(--accent);border-color:var(--accent);color:#fff;}
+.divider{display:flex;align-items:center;gap:10px;margin:14px 0 6px;}
+.divider span{font-size:11px;color:var(--tx3);white-space:nowrap;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--bd);}
+@media(max-width:500px){.row2,.row3{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="langbar">
+  <button class="act" id="bes" onclick="setLang('es')">ES</button>
+  <button id="ben" onclick="setLang('en')">EN</button>
+</div>
+
+<div class="pg">
+  <a class="back" href="index.html"><i class="ti ti-arrow-left"></i> <span id="t-back">Volver al inicio</span></a>
+
+  <div class="hd">
+    <img src="logo.png" alt="Génesis Peptides">
+    <h1 id="t-title">💉 Calculadora de Reconstitución</h1>
+    <p id="t-sub">Ingresa los datos de tu vial y tu dosis — te decimos exactamente cuántas unidades jalarte en la jeringa.</p>
+  </div>
+
+  <!-- PASO 1: DATOS DEL VIAL -->
+  <div class="card">
+    <p class="sec-title" id="t-s1">Paso 1 — Datos de tu vial</p>
+
+    <p class="lbl" id="t-lbl-pep">¿Tienes un péptido Génesis? (opcional — autocompleta los datos)</p>
+    <select id="ps" onchange="onPep()">
+      <option value="">— Selecciona para autocompletar, o llena manual —</option>
+      <optgroup label="Optimización Metabólica (GLP)">
+        <option value="tirz30">Tirzepatide 30mg</option>
+        <option value="tirz40">Tirzepatide 40mg</option>
+        <option value="reta20">Retatrutide 20mg</option>
+      </optgroup>
+      <optgroup label="Masa Muscular y Rendimiento">
+        <option value="muscle">Muscle Stack (CJC+Ipa) 10mg</option>
+        <option value="sermo">Sermorelin 10mg</option>
+        <option value="tesa25">Tesamorelin 25mg</option>
+        <option value="motsc">MOTS-C 40mg</option>
+        <option value="igf1">IGF-1 LR3 1mg</option>
+      </optgroup>
+      <optgroup label="Bioreparación y Colágeno">
+        <option value="ghkcu">GHK-Cu 50mg</option>
+        <option value="bpc157">BPC-157 10mg</option>
+        <option value="tb500">TB-500 10mg</option>
+        <option value="glow">GLOW Blend 70mg</option>
+        <option value="kpv">KPV 3mg</option>
+      </optgroup>
+      <optgroup label="Longevidad">
+        <option value="epi50">Epithalon 50mg</option>
+        <option value="nad">NAD+ 500mg</option>
+      </optgroup>
+      <optgroup label="Sueño · Cognición · Bienestar">
+        <option value="dsip">DSIP 5mg</option>
+        <option value="selank">Selank 10mg</option>
+        <option value="semax">Semax 10mg</option>
+      </optgroup>
+      <optgroup label="Bienestar Íntimo">
+        <option value="pt141">PT-141 10mg</option>
+        <option value="mt2">Melanotan II 10mg</option>
+      </optgroup>
+    </select>
+
+    <div id="pep-info" class="hidden">
+      <div class="ibox" id="pep-hint"></div>
+      <div class="proto-note">
+        <i class="ti ti-info-circle" style="flex-shrink:0;"></i>
+        <span id="t-proto-note">Revisa la dosis sugerida en tu protocolo Génesis para confirmar la cantidad según tu fase de tratamiento.</span>
+      </div>
+    </div>
+
+    <div class="divider"><span id="t-divider">Confirma o ajusta los datos de tu vial</span></div>
+
+    <div class="row2">
+      <div>
+        <p class="lbl" id="t-lbl-mg">Total mg en el vial</p>
+        <input type="number" id="v-mg" placeholder="Ej: 30" step="0.1" min="0.1" oninput="onManualChange()">
+      </div>
+      <div>
+        <p class="lbl" id="t-lbl-bac">Agua bacteriostática (mL)</p>
+        <input type="number" id="v-bac" placeholder="Ej: 2" step="0.1" min="0.1" oninput="onManualChange()">
+        <div class="bac-opts" id="bac-presets" style="margin-top:8px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PASO 2: DOSIS -->
+  <div class="card">
+    <p class="sec-title" id="t-s2">Paso 2 — ¿Qué dosis vas a aplicarte?</p>
+    <p style="font-size:12px;color:var(--tx3);margin-bottom:10px;" id="t-dose-sub">Selecciona una dosis común o escribe la tuya</p>
+    <div id="dose-pills" class="dpills"></div>
+    <div style="display:flex;align-items:center;gap:8px;margin-top:12px;">
+      <input type="number" id="v-dose" step="0.001" min="0.001" oninput="calcAndRender()" style="flex:1;" placeholder="Ej: 2.5">
+      <span style="font-size:13px;color:var(--tx3);font-weight:500;" id="t-dose-unit">mg</span>
+    </div>
+    <p style="font-size:11px;color:var(--tx3);margin-top:6px;display:none;" id="igf-note"></p>
+    <button class="calc-btn" onclick="calcAndRender()">
+      <i class="ti ti-calculator"></i> <span id="t-calc-btn">Calcular</span>
+    </button>
+  </div>
+
+  <!-- RESULTADO -->
+  <div id="ra" class="hidden">
+    <div class="rs">
+      <h2><i class="ti ti-calculator"></i> <span id="t-res-title">Tu resultado</span></h2>
+      <div class="rr"><span class="rl" id="t-rc">Concentración del vial</span><span class="rv" id="rc">—</span></div>
+      <div class="rr"><span class="rl" id="t-rd">Dosis seleccionada</span><span class="rv" id="rdm">—</span></div>
+      <div class="rr"><span class="rl" id="t-rv">Volumen a extraer</span><span class="rv" id="rvl">—</span></div>
+      <div class="rr"><span class="rl" style="font-weight:700;" id="t-ru">⭐ Unidades en jeringa (100UI)</span><span class="rv big" id="ru">—</span></div>
+    </div>
+
+    <!-- JERINGA REALISTA SVG -->
+    <div class="sw">
+      <h3 id="t-syringe-title">📍 Tu jeringa de insulina</h3>
+      <svg id="syringe-svg" width="100%" viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;display:block;margin:0 auto;">
+        <!-- FONDO SOMBRA SUAVE -->
+        <defs>
+          <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="40%" stop-color="#f0f4ff"/>
+            <stop offset="100%" stop-color="#dde4f0"/>
+          </linearGradient>
+          <linearGradient id="pistonGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#94a3b8"/>
+            <stop offset="100%" stop-color="#64748b"/>
+          </linearGradient>
+          <linearGradient id="needleGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#cbd5e1"/>
+            <stop offset="100%" stop-color="#94a3b8"/>
+          </linearGradient>
+          <linearGradient id="liquidGrad" x1="0" y1="0" x2="1" y2="0" id="liqG">
+            <stop offset="0%" stop-color="#0f766e" stop-opacity="0.6" id="liqC1"/>
+            <stop offset="100%" stop-color="#0d9488" stop-opacity="0.4" id="liqC2"/>
+          </linearGradient>
+          <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0002"/>
+          </filter>
+          <clipPath id="barrelClip">
+            <rect x="82" y="62" width="358" height="46" rx="5"/>
+          </clipPath>
+        </defs>
+
+        <!-- ═══ ÉMBOLO (piston) ═══ -->
+        <!-- Mango del émbolo -->
+        <rect x="18" y="88" width="8" height="50" rx="2" fill="url(#pistonGrad)"/>
+        <rect x="10" y="84" width="24" height="8" rx="2" fill="url(#pistonGrad)"/>
+        <rect x="10" y="134" width="24" height="8" rx="2" fill="url(#pistonGrad)"/>
+        <!-- Varilla del émbolo -->
+        <rect x="25" y="92" width="60" height="14" rx="3" fill="#94a3b8"/>
+        <!-- Cabeza del émbolo (sello de goma) -->
+        <rect x="78" y="64" width="14" height="42" rx="4" fill="#64748b" filter="url(#shadow)"/>
+        <rect x="80" y="68" width="10" height="34" rx="3" fill="#475569"/>
+        <!-- Líneas de textura sello -->
+        <line x1="80" y1="76" x2="90" y2="76" stroke="#334155" stroke-width="1" opacity="0.5"/>
+        <line x1="80" y1="82" x2="90" y2="82" stroke="#334155" stroke-width="1" opacity="0.5"/>
+        <line x1="80" y1="88" x2="90" y2="88" stroke="#334155" stroke-width="1" opacity="0.5"/>
+        <line x1="80" y1="94" x2="90" y2="94" stroke="#334155" stroke-width="1" opacity="0.5"/>
+
+        <!-- ═══ CUERPO DEL BARRIL ═══ -->
+        <rect x="82" y="60" width="362" height="50" rx="7" fill="url(#bodyGrad)" stroke="#cbd5e1" stroke-width="1.5" filter="url(#shadow)"/>
+        <!-- Reflejo superior (brillo) -->
+        <rect x="83" y="61" width="360" height="10" rx="5" fill="white" opacity="0.6"/>
+        <!-- Borde inferior más oscuro -->
+        <rect x="83" y="100" width="360" height="8" rx="3" fill="#c8d4e8" opacity="0.5"/>
+
+        <!-- ═══ LÍQUIDO ═══ -->
+        <rect id="lf" x="82" y="62" width="0" height="46" fill="url(#liquidGrad)" clip-path="url(#barrelClip)" opacity="0.85"/>
+        <!-- Brillo sobre el líquido -->
+        <rect id="lf-shine" x="82" y="62" width="0" height="10" fill="white" opacity="0.3" clip-path="url(#barrelClip)"/>
+
+        <!-- ═══ ESCALA: x=85(0UI)→x=435(100UI)=350px ═══ -->
+        <!-- Línea base de escala -->
+        <line x1="85" y1="58" x2="435" y2="58" stroke="#94a3b8" stroke-width="0.5" opacity="0.4"/>
+        <!-- Marcas cada 10UI -->
+        <g text-anchor="middle" font-family="Inter,system-ui,sans-serif">
+          <!-- 0 -->
+          <line x1="85" y1="60" x2="85" y2="46" stroke="#64748b" stroke-width="1.5"/>
+          <text x="85" y="43" font-size="9" fill="#64748b" font-weight="600">0</text>
+          <!-- 10 -->
+          <line x1="120" y1="60" x2="120" y2="50" stroke="#94a3b8" stroke-width="1"/>
+          <text x="120" y="47" font-size="8" fill="#94a3b8">10</text>
+          <!-- 20 -->
+          <line x1="155" y1="60" x2="155" y2="46" stroke="#64748b" stroke-width="1.5"/>
+          <text x="155" y="43" font-size="9" fill="#64748b" font-weight="600">20</text>
+          <!-- 30 -->
+          <line x1="190" y1="60" x2="190" y2="50" stroke="#94a3b8" stroke-width="1"/>
+          <text x="190" y="47" font-size="8" fill="#94a3b8">30</text>
+          <!-- 40 -->
+          <line x1="225" y1="60" x2="225" y2="46" stroke="#64748b" stroke-width="1.5"/>
+          <text x="225" y="43" font-size="9" fill="#64748b" font-weight="600">40</text>
+          <!-- 50 -->
+          <line x1="260" y1="60" x2="260" y2="44" stroke="#475569" stroke-width="2"/>
+          <text x="260" y="40" font-size="10" fill="#475569" font-weight="700">50</text>
+          <!-- 60 -->
+          <line x1="295" y1="60" x2="295" y2="46" stroke="#64748b" stroke-width="1.5"/>
+          <text x="295" y="43" font-size="9" fill="#64748b" font-weight="600">60</text>
+          <!-- 70 -->
+          <line x1="330" y1="60" x2="330" y2="50" stroke="#94a3b8" stroke-width="1"/>
+          <text x="330" y="47" font-size="8" fill="#94a3b8">70</text>
+          <!-- 80 -->
+          <line x1="365" y1="60" x2="365" y2="46" stroke="#64748b" stroke-width="1.5"/>
+          <text x="365" y="43" font-size="9" fill="#64748b" font-weight="600">80</text>
+          <!-- 90 -->
+          <line x1="400" y1="60" x2="400" y2="50" stroke="#94a3b8" stroke-width="1"/>
+          <text x="400" y="47" font-size="8" fill="#94a3b8">90</text>
+          <!-- 100 -->
+          <line x1="435" y1="60" x2="435" y2="46" stroke="#64748b" stroke-width="1.5"/>
+          <text x="435" y="43" font-size="9" fill="#64748b" font-weight="600">100</text>
+        </g>
+        <!-- Sub-marcas cada 5UI -->
+        <g stroke="#d1d5db" stroke-width="0.8">
+          <line x1="102.5" y1="60" x2="102.5" y2="54"/>
+          <line x1="137.5" y1="60" x2="137.5" y2="54"/>
+          <line x1="172.5" y1="60" x2="172.5" y2="54"/>
+          <line x1="207.5" y1="60" x2="207.5" y2="54"/>
+          <line x1="242.5" y1="60" x2="242.5" y2="54"/>
+          <line x1="277.5" y1="60" x2="277.5" y2="54"/>
+          <line x1="312.5" y1="60" x2="312.5" y2="54"/>
+          <line x1="347.5" y1="60" x2="347.5" y2="54"/>
+          <line x1="382.5" y1="60" x2="382.5" y2="54"/>
+          <line x1="417.5" y1="60" x2="417.5" y2="54"/>
+        </g>
+        <!-- Números inferiores de escala (mL) -->
+        <g text-anchor="middle" font-family="Inter,system-ui,sans-serif" fill="#9ca3af" font-size="7.5">
+          <text x="85" y="120">0</text>
+          <text x="155" y="120">0.2</text>
+          <text x="225" y="120">0.4</text>
+          <text x="295" y="120">0.6</text>
+          <text x="365" y="120">0.8</text>
+          <text x="435" y="120">1.0mL</text>
+        </g>
+        <g stroke="#e2e8f0" stroke-width="0.6">
+          <line x1="85" y1="110" x2="85" y2="116"/>
+          <line x1="155" y1="110" x2="155" y2="116"/>
+          <line x1="225" y1="110" x2="225" y2="116"/>
+          <line x1="295" y1="110" x2="295" y2="116"/>
+          <line x1="365" y1="110" x2="365" y2="116"/>
+          <line x1="435" y1="110" x2="435" y2="116"/>
+        </g>
+
+        <!-- ═══ CONECTOR LUER ═══ -->
+        <rect x="440" y="68" width="20" height="34" rx="3" fill="#b0bec5" stroke="#90a4ae" stroke-width="1"/>
+        <rect x="445" y="72" width="10" height="26" rx="2" fill="#90a4ae"/>
+
+        <!-- ═══ AGUJA ═══ -->
+        <rect x="460" y="78" width="70" height="14" rx="2" fill="url(#needleGrad)" stroke="#b0bec5" stroke-width="0.8"/>
+        <!-- Punta afilada -->
+        <polygon points="528,80 540,85 528,90" fill="#94a3b8"/>
+        <!-- Brillo aguja -->
+        <rect x="461" y="79" width="68" height="4" rx="1" fill="white" opacity="0.3"/>
+
+        <!-- ═══ ALETAS (finger grips) ═══ -->
+        <rect x="432" y="54" width="12" height="10" rx="2" fill="#94a3b8" stroke="#7c8fa0" stroke-width="0.8"/>
+        <rect x="432" y="106" width="12" height="10" rx="2" fill="#94a3b8" stroke="#7c8fa0" stroke-width="0.8"/>
+
+        <!-- ═══ MARCADOR DOSIS ═══ -->
+        <line id="dm" x1="85" y1="40" x2="85" y2="125" stroke="#7c3aed" stroke-width="2" stroke-dasharray="4,3" opacity="0"/>
+        <circle id="dd" cx="85" cy="85" r="5" fill="#7c3aed" opacity="0" filter="url(#shadow)"/>
+        <!-- Etiqueta dosis -->
+        <rect id="dlb" x="60" y="126" width="64" height="22" rx="6" fill="#7c3aed" opacity="0"/>
+        <text id="dlt" x="92" y="141" text-anchor="middle" font-size="11" font-weight="700" fill="white" opacity="0" font-family="Inter,system-ui,sans-serif">-- UI</text>
+
+        <!-- ZONA DE RESALTADO COLOR -->
+        <!-- Indicador de zona: 0-30UI verde, 30-70UI azul, 70-100UI naranja -->
+        <rect x="85" y="113" width="105" height="5" rx="2" fill="#0f766e" opacity="0.25"/>
+        <rect x="190" y="113" width="140" height="5" rx="2" fill="#2563eb" opacity="0.25"/>
+        <rect x="330" y="113" width="105" height="5" rx="2" fill="#d97706" opacity="0.25"/>
+        <!-- Etiquetas zona -->
+        <text x="137" y="132" text-anchor="middle" font-size="7.5" fill="#0f766e" font-family="Inter,system-ui,sans-serif" id="zone-lo">Dosis baja</text>
+        <text x="260" y="132" text-anchor="middle" font-size="7.5" fill="#2563eb" font-family="Inter,system-ui,sans-serif" id="zone-mid">Dosis media</text>
+        <text x="382" y="132" text-anchor="middle" font-size="7.5" fill="#d97706" font-family="Inter,system-ui,sans-serif" id="zone-hi">Dosis alta</text>
+      </svg>
+
+      <div class="ubadge" id="ubg">-- UI</div>
+      <div class="usub" id="t-us">Unidades en jeringa de insulina de 100UI</div>
+      <div class="umg" id="umg"></div>
+
+      <!-- RECOMENDACIÓN DE JERINGA -->
+      <div id="syringe-rec" class="syringe-rec green" style="text-align:left;">
+        <i class="ti ti-needle" id="rec-icon"></i>
+        <div>
+          <strong id="rec-title"></strong><br>
+          <span id="rec-body"></span>
+        </div>
+      </div>
+
+      <p style="font-size:12px;color:var(--tx3);margin-bottom:8px;margin-top:14px;" id="t-qd">Toca una dosis para actualizar:</p>
+      <div id="qp" class="dpills"></div>
+
+      <div style="margin-top:20px;overflow-x:auto;">
+        <p style="font-size:13px;font-weight:700;color:var(--pur);margin-bottom:10px;" id="t-et">Tabla de equivalencias</p>
+        <table class="et">
+          <thead><tr>
+            <th id="t-th1">Dosis (mg)</th>
+            <th id="t-th2">Volumen (mL)</th>
+            <th id="t-th3">Unidades (UI)</th>
+          </tr></thead>
+          <tbody id="etb"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="wbox">
+      ⚠️ <strong id="t-wt">Aviso:</strong>
+      <span id="t-wb"> Herramienta de referencia. Siempre verifica tu dosis con un médico especialista. Uso experimental / investigacional.</span>
+    </div>
+  </div>
+</div>
+
+<script>
+const TR={
+  es:{
+    back:"Volver al inicio",title:"💉 Calculadora de Reconstitución",
+    sub:"Ingresa los datos de tu vial y tu dosis — te decimos exactamente cuántas unidades jalarte en la jeringa.",
+    s1:"Paso 1 — Datos de tu vial",s2:"Paso 2 — ¿Qué dosis vas a aplicarte?",
+    lbl_pep:"¿Tienes un péptido Génesis? (opcional — autocompleta los datos)",
+    lbl_mg:"Total mg en el vial",lbl_bac:"Agua bacteriostática (mL)",
+    dose_sub:"Selecciona una dosis común o escribe la tuya",
+    dose_unit:"mg",calc_btn:"Calcular",
+    proto_note:"Revisa la dosis sugerida en tu protocolo Génesis para confirmar la cantidad según tu fase de tratamiento.",
+    divider:"Confirma o ajusta los datos de tu vial",
+    res_title:"Tu resultado",rc:"Concentración del vial",rd:"Dosis seleccionada",
+    rv:"Volumen a extraer",ru:"⭐ Unidades en jeringa (100UI)",
+    syringe_title:"📍 Tu jeringa de insulina",us:"Unidades en jeringa de insulina de 100UI",
+    qd:"Toca una dosis para actualizar:",et:"Tabla de equivalencias",
+    th1:"Dosis (mg)",th2:"Volumen (mL)",th3:"Unidades (UI)",
+    wt:"Aviso:",wb:" Herramienta de referencia. Siempre verifica tu dosis con un médico especialista. Uso experimental / investigacional.",
+    igf_note:"Dosis en mcg: 20mcg=0.02mg · 30mcg=0.03mg · 50mcg=0.05mg · 100mcg=0.1mg",
+    pui:"mg por UI",
+    zone_lo:"Dosis baja",zone_mid:"Dosis media",zone_hi:"Dosis alta",
+    rec:{
+      micro:{cls:"green",icon:"ti-needle",title:"✅ Jeringa recomendada: 0.3mL (30UI) con aguja 31G",body:"Para dosis de 1 a 15 UI, una jeringa de 30UI o 0.3mL te da la mayor precisión. Escala muy fácil de leer. Ideal para péptidos como IGF-1, BPC-157, TB-500, Selank, Semax y dosis pequeñas de GLP."},
+      low:{cls:"blue",icon:"ti-needle",title:"✅ Jeringa recomendada: 0.5mL (50UI) con aguja 31G",body:"Para dosis de 15 a 30 UI, la jeringa de 0.5mL (50UI) es ideal. Buena precisión, fácil de manejar, recomendada para Tirzepatide, Retatrutide en fases iniciales, Sermorelin, Tesamorelin y MOTS-C."},
+      mid:{cls:"blue",icon:"ti-needle",title:"✅ Jeringa recomendada: 1mL (100UI) con aguja 29-31G",body:"Para dosis de 30 a 70 UI, usa la jeringa estándar de 1mL/100UI. La más común y fácil de conseguir. Perfecta para GLP en dosis de mantenimiento, GHK-Cu, GLOW y NAD+."},
+      high:{cls:"yellow",icon:"ti-alert-triangle",title:"⚠️ Jeringa recomendada: 1mL (100UI) — considera dividir",body:"Con más de 70 UI en una sola aplicación, asegúrate de usar una jeringa de 1mL/100UI. Si la dosis supera 100UI, necesitas dividirla en dos aplicaciones o usar una concentración diferente."},
+      over:{cls:"purple",icon:"ti-alert-circle",title:"⚠️ La dosis excede 100UI — divide en 2 aplicaciones",body:"Tu dosis calculada supera las 100 unidades de una jeringa estándar. Necesitas dividirla en 2 aplicaciones o reconstituir con menos agua BAC para aumentar la concentración y reducir las unidades por aplicación."}
+    }
+  },
+  en:{
+    back:"Back to home",title:"💉 Reconstitution Calculator",
+    sub:"Enter your vial data and dose — we'll tell you exactly how many units to draw in your syringe.",
+    s1:"Step 1 — Your vial data",s2:"Step 2 — What dose are you going to use?",
+    lbl_pep:"Do you have a Génesis peptide? (optional — autofills the data)",
+    lbl_mg:"Total mg in vial",lbl_bac:"Bacteriostatic water (mL)",
+    dose_sub:"Select a common dose or enter your own",
+    dose_unit:"mg",calc_btn:"Calculate",
+    proto_note:"Check your Génesis protocol for the suggested dose according to your treatment phase.",
+    divider:"Confirm or adjust your vial data",
+    res_title:"Your result",rc:"Vial concentration",rd:"Selected dose",
+    rv:"Volume to draw",ru:"⭐ Insulin syringe units (100U)",
+    syringe_title:"📍 Your insulin syringe",us:"Units in 100U insulin syringe",
+    qd:"Tap a dose to update:",et:"Equivalence table",
+    th1:"Dose (mg)",th2:"Volume (mL)",th3:"Units (U)",
+    wt:"Notice:",wb:" Reference tool. Always verify your dose with a medical specialist. Experimental / investigational use.",
+    igf_note:"Dose in mcg: 20mcg=0.02mg · 30mcg=0.03mg · 50mcg=0.05mg · 100mcg=0.1mg",
+    pui:"mg per U",
+    zone_lo:"Low dose",zone_mid:"Medium dose",zone_hi:"High dose",
+    rec:{
+      micro:{cls:"green",icon:"ti-needle",title:"✅ Recommended syringe: 0.3mL (30U) with 31G needle",body:"For doses of 1 to 15 units, a 30U or 0.3mL syringe gives maximum precision. Easy to read scale. Ideal for IGF-1, BPC-157, TB-500, Selank, Semax and small GLP doses."},
+      low:{cls:"blue",icon:"ti-needle",title:"✅ Recommended syringe: 0.5mL (50U) with 31G needle",body:"For doses of 15 to 30 units, the 0.5mL (50U) syringe is ideal. Good precision, easy to handle. Recommended for Tirzepatide, Retatrutide in early phases, Sermorelin, Tesamorelin and MOTS-C."},
+      mid:{cls:"blue",icon:"ti-needle",title:"✅ Recommended syringe: 1mL (100U) with 29-31G needle",body:"For doses of 30 to 70 units, use the standard 1mL/100U syringe. Most common and easy to find. Perfect for GLP maintenance doses, GHK-Cu, GLOW and NAD+."},
+      high:{cls:"yellow",icon:"ti-alert-triangle",title:"⚠️ Recommended syringe: 1mL (100U) — consider splitting",body:"With more than 70 units in a single injection, use a 1mL/100U syringe. If the dose exceeds 100U, you need to split into two injections or use a different concentration."},
+      over:{cls:"purple",icon:"ti-alert-circle",title:"⚠️ Dose exceeds 100U — split into 2 injections",body:"Your calculated dose exceeds the 100 units of a standard syringe. You need to split into 2 injections or reconstitute with less BAC water to increase concentration and reduce units per injection."}
+    }
+  }
+};
+
+// PROTOCOLOS GÉNESIS — bac NO visible, solo para cálculo
+const P={
+  tirz30:{name:"Tirzepatide 30mg",mg:30,bac:3,
+    he:"Tirzepatide 30mg · Concentración: 10mg/mL\n→ 1 UI = 0.1mg | 10 UI = 1mg",
+    en:"Tirzepatide 30mg · Concentration: 10mg/mL\n→ 1 U = 0.1mg | 10 U = 1mg",
+    bacs:[2,2.5,3],doses:[1.5,2,2.5,3.5,5,7.5,10,12.5,15]},
+  tirz40:{name:"Tirzepatide 40mg",mg:40,bac:2.4,
+    he:"Tirzepatide 40mg · Concentración: 16.67mg/mL\n→ 1 UI = 0.167mg | 6 UI ≈ 1mg",
+    en:"Tirzepatide 40mg · Concentration: 16.67mg/mL\n→ 1 U = 0.167mg | 6 U ≈ 1mg",
+    bacs:[2,2.4,3],doses:[1.5,2.5,5,7.5,10,15,20]},
+  reta20:{name:"Retatrutide 20mg",mg:20,bac:2,
+    he:"Retatrutide 20mg · Concentración: 10mg/mL\n→ 1 UI = 0.1mg | 10 UI = 1mg",
+    en:"Retatrutide 20mg · Concentration: 10mg/mL\n→ 1 U = 0.1mg | 10 U = 1mg",
+    bacs:[1.5,2,3],doses:[0.5,1,2,3,4,6,8,10]},
+  muscle:{name:"Muscle Stack 10mg",mg:10,bac:2,
+    he:"Muscle Stack (CJC+Ipa) 10mg · Concentración: 5mg/mL\n→ 1 UI = 0.05mg | 20 UI = 1mg",
+    en:"Muscle Stack (CJC+Ipa) 10mg · Concentration: 5mg/mL\n→ 1 U = 0.05mg | 20 U = 1mg",
+    bacs:[1,2],doses:[0.1,0.2,0.3,0.5]},
+  sermo:{name:"Sermorelin 10mg",mg:10,bac:2,
+    he:"Sermorelin 10mg · Concentración: 5mg/mL\n→ 1 UI = 0.05mg | 20 UI = 1mg",
+    en:"Sermorelin 10mg · Concentration: 5mg/mL\n→ 1 U = 0.05mg | 20 U = 1mg",
+    bacs:[1,2],doses:[0.1,0.2,0.3,0.5]},
+  tesa25:{name:"Tesamorelin 25mg",mg:25,bac:2.5,
+    he:"Tesamorelin 25mg · Concentración: 10mg/mL\n→ 1 UI = 0.1mg | 5 UI = 0.5mg",
+    en:"Tesamorelin 25mg · Concentration: 10mg/mL\n→ 1 U = 0.1mg | 5 U = 0.5mg",
+    bacs:[2,2.5],doses:[0.5,1,1.5,2]},
+  motsc:{name:"MOTS-C 40mg",mg:40,bac:2,
+    he:"MOTS-C 40mg · Concentración: 20mg/mL\n→ 1 UI = 0.2mg | 5 UI = 1mg",
+    en:"MOTS-C 40mg · Concentration: 20mg/mL\n→ 1 U = 0.2mg | 5 U = 1mg",
+    bacs:[1,2],doses:[1,2,4,5,10]},
+  igf1:{name:"IGF-1 LR3 1mg",mg:1,bac:1,isIgf:true,
+    he:"IGF-1 LR3 1mg · Concentración: 1000mcg/mL\n→ 1 UI = 10mcg (0.01mg) | 10 UI = 100mcg",
+    en:"IGF-1 LR3 1mg · Concentration: 1000mcg/mL\n→ 1 U = 10mcg (0.01mg) | 10 U = 100mcg",
+    bacs:[0.5,1,2],doses:[0.02,0.03,0.04,0.05,0.07,0.1]},
+  ghkcu:{name:"GHK-Cu 50mg",mg:50,bac:3,
+    he:"GHK-Cu 50mg · Concentración: 16.67mg/mL\n→ 1 UI = 0.167mg | 6 UI ≈ 1mg",
+    en:"GHK-Cu 50mg · Concentration: 16.67mg/mL\n→ 1 U = 0.167mg | 6 U ≈ 1mg",
+    bacs:[2,3],doses:[1,2,3,5]},
+  bpc157:{name:"BPC-157 10mg",mg:10,bac:2,
+    he:"BPC-157 10mg · Concentración: 5mg/mL\n→ 1 UI = 0.05mg (500mcg) | 10 UI = 0.5mg",
+    en:"BPC-157 10mg · Concentration: 5mg/mL\n→ 1 U = 0.05mg (500mcg) | 10 U = 0.5mg",
+    bacs:[1,2],doses:[0.25,0.5,0.75,1]},
+  tb500:{name:"TB-500 10mg",mg:10,bac:2,
+    he:"TB-500 10mg · Concentración: 5mg/mL\n→ 10 UI = 0.5mg | 1 UI = 0.05mg",
+    en:"TB-500 10mg · Concentration: 5mg/mL\n→ 10 U = 0.5mg | 1 U = 0.05mg",
+    bacs:[1,2],doses:[0.5,1,2,2.5]},
+  glow:{name:"GLOW Blend 70mg",mg:70,bac:3,
+    he:"GLOW Blend 70mg · Concentración: 23.33mg/mL\n→ 1 UI ≈ 0.233mg",
+    en:"GLOW Blend 70mg · Concentration: 23.33mg/mL\n→ 1 U ≈ 0.233mg",
+    bacs:[2,3],doses:[1,2,3,5]},
+  kpv:{name:"KPV 3mg",mg:3,bac:2,
+    he:"KPV 3mg · Concentración: 1.5mg/mL\n→ 1 UI = 0.015mg",
+    en:"KPV 3mg · Concentration: 1.5mg/mL\n→ 1 U = 0.015mg",
+    bacs:[1,2],doses:[0.1,0.25,0.5]},
+  epi50:{name:"Epithalon 50mg",mg:50,bac:5,
+    he:"Epithalon 50mg · Concentración: 10mg/mL\n→ 1 UI = 0.1mg | 10 UI = 1mg",
+    en:"Epithalon 50mg · Concentration: 10mg/mL\n→ 1 U = 0.1mg | 10 U = 1mg",
+    bacs:[3,4,5],doses:[0.5,1,2]},
+  nad:{name:"NAD+ 500mg",mg:500,bac:2,
+    he:"NAD+ 500mg · Concentración: 250mg/mL\n→ 1 UI = 2.5mg",
+    en:"NAD+ 500mg · Concentration: 250mg/mL\n→ 1 U = 2.5mg",
+    bacs:[1,2],doses:[25,50,75,100]},
+  dsip:{name:"DSIP 5mg",mg:5,bac:2,
+    he:"DSIP 5mg · Concentración: 2.5mg/mL\n→ 1 UI = 0.025mg",
+    en:"DSIP 5mg · Concentration: 2.5mg/mL\n→ 1 U = 0.025mg",
+    bacs:[1,2],doses:[0.1,0.25,0.5]},
+  selank:{name:"Selank 10mg",mg:10,bac:2,
+    he:"Selank 10mg · Concentración: 5mg/mL\n→ 1 UI = 0.05mg | 5 UI = 0.25mg",
+    en:"Selank 10mg · Concentration: 5mg/mL\n→ 1 U = 0.05mg | 5 U = 0.25mg",
+    bacs:[1,2],doses:[0.25,0.5,0.75,1]},
+  semax:{name:"Semax 10mg",mg:10,bac:2,
+    he:"Semax 10mg · Concentración: 5mg/mL\n→ 1mg = 20 UI | 1 UI = 0.05mg",
+    en:"Semax 10mg · Concentration: 5mg/mL\n→ 1mg = 20 U | 1 U = 0.05mg",
+    bacs:[1,2],doses:[0.25,0.5,1]},
+  pt141:{name:"PT-141 10mg",mg:10,bac:2,
+    he:"PT-141 10mg · Concentración: 5mg/mL\n→ 1 UI = 0.05mg",
+    en:"PT-141 10mg · Concentration: 5mg/mL\n→ 1 U = 0.05mg",
+    bacs:[1,2],doses:[0.5,1,1.5,2]},
+  mt2:{name:"Melanotan II 10mg",mg:10,bac:2,
+    he:"Melanotan II 10mg · Concentración: 5mg/mL\n→ 1 UI = 0.05mg",
+    en:"Melanotan II 10mg · Concentration: 5mg/mL\n→ 1 U = 0.05mg",
+    bacs:[1,2],doses:[0.1,0.25,0.5,1]}
+};
+
+let lang='es', activePep=null, currentDoses=[];
+
+function t(k){return TR[lang]&&TR[lang][k]!==undefined?TR[lang][k]:TR.es[k]||k;}
+
+function setLang(l){
+  lang=l;
+  document.getElementById('bes').classList.toggle('act',l==='es');
+  document.getElementById('ben').classList.toggle('act',l==='en');
+  const ids={
+    back:'t-back',title:'t-title',sub:'t-sub',s1:'t-s1',s2:'t-s2',
+    lbl_pep:'t-lbl-pep',lbl_mg:'t-lbl-mg',lbl_bac:'t-lbl-bac',
+    dose_sub:'t-dose-sub',dose_unit:'t-dose-unit',calc_btn:'t-calc-btn',
+    proto_note:'t-proto-note',divider:'t-divider',
+    res_title:'t-res-title',rc:'t-rc',rd:'t-rd',rv:'t-rv',ru:'t-ru',
+    syringe_title:'t-syringe-title',us:'t-us',qd:'t-qd',et:'t-et',
+    th1:'t-th1',th2:'t-th2',th3:'t-th3',wt:'t-wt',wb:'t-wb',
+    zone_lo:'zone-lo',zone_mid:'zone-mid',zone_hi:'zone-hi'
+  };
+  Object.entries(ids).forEach(([k,id])=>{
+    let el=document.getElementById(id);if(el)el.textContent=t(k);
+  });
+  if(activePep)onPep();
+}
+
+function onPep(){
+  let sel=document.getElementById('ps').value;
+  if(!sel){
+    document.getElementById('pep-info').classList.add('hidden');
+    document.getElementById('bac-presets').innerHTML='';
+    activePep=null;return;
+  }
+  let p=P[sel];activePep=sel;
+  document.getElementById('pep-hint').style.whiteSpace='pre-line';
+  document.getElementById('pep-hint').textContent=lang==='es'?p.he:p.en;
+  document.getElementById('pep-info').classList.remove('hidden');
+
+  // Autocompletar mg
+  document.getElementById('v-mg').value=p.mg;
+  // Autocompletar BAC con el recomendado
+  document.getElementById('v-bac').value=p.bac;
+
+  // Botones BAC alternativos
+  let bp=document.getElementById('bac-presets');bp.innerHTML='';
+  p.bacs.forEach(b=>{
+    let btn=document.createElement('button');
+    btn.className='bac-btn'+(b===p.bac?' act':'');
+    btn.textContent=b+'mL';
+    btn.onclick=()=>{
+      document.querySelectorAll('.bac-btn').forEach(x=>x.classList.remove('act'));
+      btn.classList.add('act');
+      document.getElementById('v-bac').value=b;
+      calcAndRender();
+    };
+    bp.appendChild(btn);
+  });
+
+  // Pills de dosis
+  buildDosePills(p.doses,p.isIgf);
+
+  let igfNote=document.getElementById('igf-note');
+  if(p.isIgf){igfNote.textContent=t('igf_note');igfNote.style.display='block';}
+  else igfNote.style.display='none';
+
+  calcAndRender();
+}
+
+function onManualChange(){
+  // Si el usuario toca mg o bac manualmente, limpiar autoselect péptido
+  // pero NO limpiar — dejar que coexistan
+  // Solo rebuild dosis pills si no hay péptido activo
+  if(!activePep){
+    let mg=parseFloat(document.getElementById('v-mg').value);
+    if(mg>0){
+      // Generar dosis sugeridas genéricas
+      let step=mg<=1?0.01:mg<=5?0.05:mg<=15?0.25:mg<=30?0.5:mg<=60?1:2;
+      let doses=[];
+      for(let d=step;d<=mg&&doses.length<8;d=Math.round((d+step)*1000)/1000)doses.push(d);
+      buildDosePills(doses,false);
+    }
+  }
+  calcAndRender();
+}
+
+function buildDosePills(doses,isIgf){
+  currentDoses=doses;
+  let dp=document.getElementById('dose-pills');dp.innerHTML='';
+  doses.forEach(d=>{
+    let btn=document.createElement('button');
+    btn.className='dp';
+    btn.textContent=isIgf?Math.round(d*1000)+'mcg':d+'mg';
+    btn.onclick=()=>{
+      document.querySelectorAll('#dose-pills .dp').forEach(b=>b.classList.remove('act'));
+      btn.classList.add('act');
+      document.getElementById('v-dose').value=d;
+      calcAndRender();
+    };
+    dp.appendChild(btn);
+  });
+}
+
+function calcAndRender(){
+  let mg=parseFloat(document.getElementById('v-mg').value);
+  let bac=parseFloat(document.getElementById('v-bac').value);
+  let dose=parseFloat(document.getElementById('v-dose').value);
+  if(!mg||!bac||!dose||mg<=0||bac<=0||dose<=0){
+    document.getElementById('ra').classList.add('hidden');return;
+  }
+  let p=activePep?P[activePep]:null;
+  let isIgf=p&&p.isIgf;
+  let conc=mg/bac;
+  let mgPU=conc/100;
+  let vol=dose/conc;
+  let ui=vol*100;
+  let uLbl=lang==='es'?'UI':'U';
+
+  // Textos resultado
+  let concTxt=isIgf?(conc*1000+' mcg/mL  ·  '+Math.round(mgPU*1000)+' mcg/'+uLbl):(conc.toFixed(4)+' mg/mL  ·  '+mgPU.toFixed(5)+' mg/'+uLbl);
+  document.getElementById('rc').textContent=concTxt;
+  let doseTxt=isIgf?Math.round(dose*1000)+'mcg ('+dose.toFixed(3)+'mg)':dose.toFixed(dose<1?3:2)+' mg';
+  document.getElementById('rdm').textContent=doseTxt;
+  document.getElementById('rvl').textContent=vol.toFixed(4)+' mL';
+  document.getElementById('ru').textContent=Math.round(ui*10)/10+' '+uLbl;
+
+  // Jeringa
+  updateSyringe(ui,dose,mgPU,isIgf);
+
+  // Recomendación jeringa
+  updateSyringeRec(ui);
+
+  // Quick pills
+  let qp=document.getElementById('qp');qp.innerHTML='';
+  let doses=p?p.doses:currentDoses;
+  if(doses){
+    doses.forEach(d=>{
+      let du=(d/conc)*100;
+      let btn=document.createElement('button');
+      btn.className='dp'+(Math.abs(d-dose)<0.00001?' act':'');
+      let lbl=isIgf?Math.round(d*1000)+'mcg':d+'mg';
+      btn.textContent=lbl+' = '+Math.round(du*10)/10+' '+uLbl;
+      btn.onclick=()=>{
+        document.getElementById('v-dose').value=d;
+        document.querySelectorAll('#dose-pills .dp').forEach(b=>b.classList.remove('act'));
+        calcAndRender();
+      };
+      qp.appendChild(btn);
+    });
+  }
+
+  // Tabla
+  let tbody=document.getElementById('etb');tbody.innerHTML='';
+  genSteps(mg,conc,dose).forEach(m=>{
+    let v=m/conc,u=v*100;
+    let tr=document.createElement('tr');
+    if(Math.abs(m-dose)<0.00001)tr.className='hl';
+    let dlbl=isIgf?m.toFixed(4)+' mg ('+Math.round(m*1000)+'mcg)':m.toFixed(4)+' mg';
+    tr.innerHTML='<td>'+dlbl+'</td><td>'+v.toFixed(4)+' mL</td><td><strong>'+Math.round(u*10)/10+' '+uLbl+'</strong></td>';
+    tbody.appendChild(tr);
+  });
+
+  document.getElementById('ra').classList.remove('hidden');
+  setTimeout(()=>document.getElementById('ra').scrollIntoView({behavior:'smooth',block:'start'}),80);
+}
+
+function genSteps(totalMg,conc,selMg){
+  let set=new Set();
+  set.add(Math.round(selMg*100000)/100000);
+  let step=totalMg<=1?0.01:totalMg<=5?0.05:totalMg<=15?0.25:totalMg<=30?0.5:totalMg<=60?1:2;
+  let max=Math.min(totalMg,Math.max(selMg*3,step*12));
+  for(let m=step;m<=max+0.000001;m=Math.round((m+step)*100000)/100000)set.add(Math.round(m*100000)/100000);
+  return Array.from(set).filter(m=>m>0&&m<=totalMg).sort((a,b)=>a-b);
+}
+
+function updateSyringe(ui,doseMg,mgPU,isIgf){
+  let u=Math.min(120,Math.max(0,ui)); // allow visual overflow to show >100
+  let pct=Math.min(u,100)/100;
+  // x=85(0UI)→x=435(100UI)=350px
+  let x=85+pct*350;
+  let fw=Math.max(0,x-82);
+  let uLbl=lang==='es'?'UI':'U';
+  let color=u<=15?'#0f766e':u<=30?'#0284c7':u<=70?'#2563eb':u<=100?'#d97706':'#dc2626';
+
+  // Líquido
+  let lf=document.getElementById('lf');
+  lf.setAttribute('width',Math.min(fw,358));
+  lf.setAttribute('fill',color);
+  let ls=document.getElementById('lf-shine');
+  ls.setAttribute('width',Math.min(fw,358));
+
+  // Marcador
+  let xm=Math.min(x,435);
+  let dm=document.getElementById('dm');
+  dm.setAttribute('x1',xm);dm.setAttribute('x2',xm);dm.setAttribute('opacity','1');dm.setAttribute('stroke',color);
+
+  let dd=document.getElementById('dd');
+  dd.setAttribute('cx',xm);dd.setAttribute('opacity','1');dd.setAttribute('fill',color);
+
+  let lw=68,lx=Math.min(Math.max(xm-lw/2,84),438-lw);
+  let dlb=document.getElementById('dlb');
+  dlb.setAttribute('x',lx);dlb.setAttribute('opacity','1');dlb.setAttribute('fill',color);dlb.setAttribute('width',lw);
+
+  let dlt=document.getElementById('dlt');
+  dlt.setAttribute('x',lx+lw/2);dlt.setAttribute('opacity','1');
+  dlt.textContent=Math.round(ui*10)/10+' '+uLbl;
+
+  // Badge
+  document.getElementById('ubg').textContent=Math.round(ui*10)/10+' '+uLbl;
+  document.getElementById('ubg').style.background=color;
+  document.getElementById('t-us').textContent=t('us');
+  let dmg=isIgf?Math.round(doseMg*1000)+'mcg':doseMg.toFixed(doseMg<1?3:2)+'mg';
+  document.getElementById('umg').textContent='= '+dmg+'  ·  1 '+uLbl+' = '+(isIgf?Math.round(mgPU*1000)+'mcg':mgPU.toFixed(5)+' mg');
+}
+
+function updateSyringeRec(ui){
+  let rec;
+  let r=TR[lang].rec;
+  if(ui>100) rec=r.over;
+  else if(ui>70) rec=r.high;
+  else if(ui>30) rec=r.mid;
+  else if(ui>15) rec=r.low;
+  else rec=r.micro;
+
+  let el=document.getElementById('syringe-rec');
+  el.className='syringe-rec '+rec.cls;
+  document.getElementById('rec-icon').className='ti '+rec.icon;
+  document.getElementById('rec-title').textContent=rec.title;
+  document.getElementById('rec-body').textContent=rec.body;
+}
+</script>
+</body>
+</html>

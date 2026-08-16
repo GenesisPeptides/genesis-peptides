@@ -177,6 +177,10 @@
   <button class="home-btn-secondary" onclick="showView('view-guided')"><i class="ti ti-clipboard-list"></i> <span data-t="btn_guided">Armar mi protocolo personalizado</span></button>
   <button class="home-btn-glp" onclick="showView('view-glp')"><i class="ti ti-salad"></i> <span data-t="btn_glp">Estoy en GLP — ¿cómo cuido mi músculo?</span></button>
   <p class="home-helper" data-t="home_helper">Calculadora de proteína, hidratación y ejercicio para usuarios de Tirzepatide y Retatrutide.</p>
+  <a href="reconstitution.html" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:380px;padding:14px 20px;background:#f0fdf4;color:#166534;border:1.5px solid #bbf7d0;border-radius:12px;font-size:14px;font-weight:600;font-family:var(--font-sans);margin-top:10px;text-decoration:none;transition:all .15s;" onmouseover="this.style.background='#dcfce7'" onmouseout="this.style.background='#f0fdf4'">
+    <i class="ti ti-needle" aria-hidden="true"></i> <span data-t="btn_reconst">Calculadora de reconstitución de péptidos</span>
+  </a>
+  <p class="home-helper" data-t="home_helper_reconst" style="margin-top:4px;">Calcula agua BAC, concentración y unidades en jeringa para cualquier vial.</p>
 </div>
 
 <!-- CATÁLOGO -->
@@ -311,7 +315,7 @@
         <div class="row3" style="margin-top:10px;"><div><p class="lbl" data-t="lbl_weight">Peso (kg)</p><input type="number" id="glp-weight" placeholder="Ej: 54"></div><div><p class="lbl" data-t="lbl_height">Altura (cm)</p><input type="number" id="glp-height" placeholder="Ej: 160"></div><div><p class="lbl" data-t="lbl_sex">Sexo biológico</p><select id="glp-sex"><option value="">—</option><option value="M" data-t="female">Mujer</option><option value="H" data-t="male">Hombre</option></select></div></div>
       </div>
       <div class="card"><p class="sec-title" data-t="glp_and_dose">Tu GLP y dosis</p>
-        <div class="row2" style="margin-top:0;"><div><p class="lbl" data-t="which_glp">¿Cuál GLP te aplicas?</p><select id="glp-med" onchange="updateDoseHint()"><option value="">—</option><option value="tirz30">Tirzepatide 30mg</option><option value="tirz40">Tirzepatide 40mg</option><option value="reta">Retatrutide 20mg</option></select></div><div><p class="lbl" data-t="current_dose">Dosis actual</p><select id="glp-dose"><option value="minima" data-t="dose_min">Mínima (inicio)</option><option value="media" data-t="dose_med">Media</option><option value="alta" data-t="dose_high">Alta (máxima)</option></select></div></div>
+        <div class="row2" style="margin-top:0;"><div><p class="lbl" data-t="which_glp">¿Cuál GLP te aplicas?</p><select id="glp-med" onchange="updateDoseHint()"><option value="">—</option><option value="tirz30">Tirzepatide</option><option value="sema">Semaglutide</option><option value="reta">Retatrutide</option></select></div><div><p class="lbl" data-t="current_dose">Dosis actual</p><select id="glp-dose"><option value="minima" data-t="dose_min">Mínima (inicio / mantenimiento)</option><option value="media" data-t="dose_med">Media (dosis avanzada)</option><option value="alta" data-t="dose_high">Alta (máxima tolerada)</option></select></div></div>
         <div id="glp-dose-hint" style="font-size:11px;color:var(--text-muted);margin-top:8px;line-height:1.5;"></div>
       </div>
       <div class="card"><p class="sec-title" data-t="physical_activity">Actividad física</p>
@@ -408,7 +412,7 @@ or_package:"O elige un paquete con 20% ya aplicado",btn_see_quote:"Ver mi cotiza
 your_plan:"Tu plan personalizado",suggested_protocol:"Protocolo sugerido",modify_selection:"Modificar selección",
 glp_header_title:"Guía de Soporte en GLP",glp_header_sub:"Proteína, hidratación, electrolitos y ejercicio adaptados a ti.",
 tell_us:"Cuéntanos sobre ti",glp_and_dose:"Tu GLP y dosis",which_glp:"¿Cuál GLP te aplicas?",current_dose:"Dosis actual",
-dose_min:"Mínima (inicio)",dose_med:"Media (mantenimiento)",dose_high:"Alta (máxima)",
+dose_min:"Mínima (inicio / mantenimiento)",dose_med:"Media (dosis avanzada)",dose_high:"Alta (máxima tolerada)",
 physical_activity:"Actividad física",exercise_freq:"¿Cuántas veces por semana haces ejercicio de fuerza?",
 ex_none:"No hago ejercicio",ex_low:"1-2 veces/sem",ex_med:"3-4 veces/sem",ex_high:"5+ veces/sem",
 supplements_q:"¿Tomas alguno de estos suplementos?",supp_creatine:"Creatina",supp_protein:"Proteína en polvo",supp_collagen:"Colágeno",supp_none:"Ninguno",
@@ -491,7 +495,7 @@ or_package:"Or choose a bundle with 20% already applied",btn_see_quote:"View my 
 your_plan:"Your personalized plan",suggested_protocol:"Suggested protocol",modify_selection:"Modify selection",
 glp_header_title:"GLP Support Guide",glp_header_sub:"Protein, hydration, electrolytes and exercise tailored to you.",
 tell_us:"Tell us about yourself",glp_and_dose:"Your GLP & dose",which_glp:"Which GLP are you using?",current_dose:"Current dose",
-dose_min:"Minimum (starter)",dose_med:"Medium (maintenance)",dose_high:"High (maximum)",
+dose_min:"Minimum (starter / maintenance)",dose_med:"Medium (advanced dose)",dose_high:"High (maximum tolerated)",
 physical_activity:"Physical activity",exercise_freq:"How many times per week do you do strength training?",
 ex_none:"I don't exercise",ex_low:"1-2 times/week",ex_med:"3-4 times/week",ex_high:"5+ times/week",
 supplements_q:"Do you take any of these supplements?",supp_creatine:"Creatine",supp_protein:"Protein powder",supp_collagen:"Collagen",supp_none:"None right now",
@@ -534,6 +538,8 @@ food_desc:{pollo:"Grilled chicken breast (100g)",carne:"Beef steak (100g)",salmo
 wa_cat:"Hi! I just built my order at Génesis Peptides 🧬\n\n*My selection:*\n",
 wa_guided:"Hi! I just built my personalized protocol at Génesis Peptides 🧬\n\n*My profile:*\n",
 wa_end:"I'd like to confirm my order and receive my application guide! 🙌",
+    btn_reconst:"Peptide reconstitution calculator",
+    home_helper_reconst:"Calculate BAC water, concentration and syringe units for any vial.",
 disc_info:"<i class='ti ti-tag'></i> <strong>Volume discounts:</strong> 1 vial → 10% OFF · 2 → 15% OFF · 3–9 → 20% OFF · 10+ → 30% OFF · <i class='ti ti-truck'></i> Free shipping"
 }
 };
@@ -916,7 +922,7 @@ function calcGLP(){
   if(!age||!w||!h||!sex||!med){alert(lang==='en'?'Please fill in all required fields.':'Por favor completa todos los campos principales.');return;}
   let lbm=sex==='H'?(0.407*w+0.267*h-19.2):(0.252*w+0.473*h-48.3);lbm=Math.max(lbm,w*0.60);
   let aM=ex===0?1.2:ex===1?1.4:ex===3?1.6:1.8;
-  let gF=med==='reta'?1.15:med==='tirz40'?1.10:1.05;
+  let gF=med==='reta'?1.15:med==='sema'?1.08:1.05;
   let dF=dose==='alta'?1.10:dose==='media'?1.05:1.0;
   let pMin=Math.max(Math.round(lbm*1.2*gF*dF),Math.round(w*1.0));
   let pIdeal=Math.max(Math.round(lbm*aM*gF*dF),Math.round(w*1.2));
@@ -927,7 +933,7 @@ function calcGLP(){
   let equiv=porc+' '+tFD(mF);
   let aMin=Math.round(w*30);let aIdeal=Math.round(w*35+(ex>0?500:0));let vasos=Math.ceil(aIdeal/250);
   let gw=lang==='en'?'glasses of 250ml':'vasos de 250ml';
-  let elec=(med==='reta'||dose==='alta')?t('electrolytes_reta'):t('electrolytes_normal');
+  let elec=(med==='reta'&&dose==='alta')?t('electrolytes_reta'):t('electrolytes_normal');
   document.getElementById('res-prot-min').textContent=pMin+'g '+(lang==='en'?'per day':'por día');
   document.getElementById('res-prot-ideal').textContent=pIdeal+'g '+(lang==='en'?'per day':'por día');
   document.getElementById('res-prot-equiv').textContent='≈ '+equiv;
