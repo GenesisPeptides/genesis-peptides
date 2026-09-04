@@ -6,28 +6,28 @@
   <title>Génesis Peptides</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
   <style>
-  :root{--font-sans:'Inter',system-ui,-apple-system,sans-serif;--text-primary:#111827;--text-secondary:#4b5563;--text-muted:#9ca3af;--text-accent:#0f766e;--text-success:#166534;--text-warning:#9a3412;--bg-accent:#f0fdfa;--bg-success:#f0fdf4;--bg-warning:#fff7ed;--border:#e5e7eb;--border-accent:#0f766e;--border-strong:#9ca3af;--border-warning:#ffedd5;--surface-1:#f9fafb;--surface-2:#ffffff;--fill-accent:#0f766e;--on-accent:#ffffff;--radius:8px;}
+  :root{--font-sans:'Inter',system-ui,-apple-system,sans-serif;--text-primary:#111827;--text-secondary:#4b5563;--text-muted:#9ca3af;--text-accent:#0f766e;--text-success:#166534;--text-warning:#9a3412;--bg-accent:#f2f2f2;--bg-success:#f0fdf4;--bg-warning:#fff7ed;--border:#e5e7eb;--border-accent:#0f766e;--border-strong:#9ca3af;--border-warning:#ffedd5;--surface-1:#f9fafb;--surface-2:#ffffff;--fill-accent:#0f766e;--on-accent:#ffffff;--radius:8px;}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:#f3f4f6;font-family:var(--font-sans);color:var(--text-primary);}
+  body{background:#f8f8f8;font-family:var(--font-sans);color:var(--text-primary);}
   .wrap{padding:1.5rem;max-width:680px;margin:0 auto;}
   .hidden{display:none!important}
   .lang-bar{position:fixed;top:12px;right:12px;z-index:999;display:flex;gap:4px;background:var(--surface-2);border:1px solid var(--border);border-radius:20px;padding:3px;}
   .lang-btn{padding:4px 12px;border:none;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font-sans);background:transparent;color:var(--text-muted);transition:all .15s;}
   .lang-btn.act{background:var(--fill-accent);color:#fff;}
-  .home-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;text-align:center;}
+  .home-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;text-align:center;background:#ffffff;}
   .home-logo{width:150px;height:150px;object-fit:contain;margin-bottom:1.25rem;}
   .home-title{font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;}
   .home-sub{font-size:14px;color:var(--text-secondary);margin-bottom:1.75rem;line-height:1.6;max-width:400px;}
   .home-badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:1.75rem;}
   .badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--text-secondary);background:var(--surface-2);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-weight:500;}
-  .badge.coa-badge{color:var(--text-accent);border-color:var(--border-accent);background:var(--bg-accent);cursor:pointer;text-decoration:none;}
-  .badge.coa-badge:hover{background:#d1fae5;}
-  .home-btn-primary{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:380px;padding:15px 20px;background:var(--fill-accent);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--font-sans);margin-bottom:10px;transition:background .15s;}
-  .home-btn-primary:hover{background:#0d645d}
-  .home-btn-secondary{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:380px;padding:14px 20px;background:var(--surface-2);color:var(--text-accent);border:1.5px solid var(--border-accent);border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font-sans);margin-bottom:10px;transition:all .15s;}
-  .home-btn-secondary:hover{background:var(--bg-accent)}
-  .home-btn-glp{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:380px;padding:14px 20px;background:#fdf4ff;color:#7c3aed;border:1.5px solid #e9d5ff;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font-sans);margin-bottom:6px;transition:all .15s;}
-  .home-btn-glp:hover{background:#f5e8ff}
+  .badge.coa-badge{color:#374151;border-color:#9ca3af;background:#ffffff;cursor:pointer;text-decoration:none;font-weight:600;}
+  .badge.coa-badge:hover{background:#f3f4f6;border-color:#374151;}
+  .home-btn-primary{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:380px;padding:15px 20px;background:#111827;color:#ffffff;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--font-sans);margin-bottom:10px;transition:all .15s;letter-spacing:.3px;}
+  .home-btn-primary:hover{background:#1f2937;}
+  .home-btn-secondary{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:380px;padding:14px 20px;background:#ffffff;color:#111827;border:1.5px solid #374151;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font-sans);margin-bottom:10px;transition:all .15s;}
+  .home-btn-secondary:hover{background:#f9fafb;border-color:#111827;}
+  .home-btn-glp{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:380px;padding:14px 20px;background:#ffffff;color:#374151;border:1.5px solid #9ca3af;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font-sans);margin-bottom:6px;transition:all .15s;}
+  .home-btn-glp:hover{background:#f3f4f6;border-color:#374151;color:#111827;}
   .home-helper{font-size:11px;color:var(--text-muted);max-width:380px;line-height:1.5;margin-top:4px;}
   .page-header{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;padding-top:.5rem;}
   .page-header img{width:40px;height:40px;object-fit:contain;}
@@ -122,8 +122,8 @@
   .gb.sel .gb-ic{color:#2563eb;}
   .gb-t{font-size:13px;font-weight:600;margin-bottom:4px;}
   .gb-d{font-size:11px;color:var(--text-secondary);line-height:1.4;}
-  .rec-section{background:var(--bg-accent);border:1px solid #99f6e4;border-radius:10px;padding:12px;margin-bottom:14px;}
-  .rcat-label{color:var(--text-accent);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding-bottom:6px;border-bottom:1px solid #99f6e4;margin-bottom:10px;}
+  .rec-section{background:#f5f5f5;border:1px solid #e0e0e0;border-radius:10px;padding:12px;margin-bottom:14px;}
+  .rcat-label{color:#0f766e;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding-bottom:6px;border-bottom:1px solid #d0d0d0;margin-bottom:10px;}
   .otros-label{font-size:12px;font-weight:600;color:var(--text-muted);margin:16px 0 8px;padding:6px 0;border-top:1px solid var(--border);text-transform:uppercase;letter-spacing:.5px;}
   .pc.rec::before{content:"★";position:absolute;top:10px;right:10px;font-size:11px;color:var(--text-success);}
   .glp-o{padding:6px 14px;border:1px solid var(--border);border-radius:20px;font-size:12px;cursor:pointer;background:var(--surface-2);transition:all .15s;}
@@ -168,7 +168,7 @@
   <p class="home-sub" data-t="home_sub">Explora nuestro catálogo, arma tu protocolo o usa nuestras herramientas de soporte.</p>
   <div class="home-badges">
     <span class="badge"><i class="ti ti-truck"></i> <span data-t="badge_ship">Envío gratis</span></span>
-    <span class="badge"><i class="ti ti-tag"></i> <span data-t="badge_disc">Hasta 20% OFF</span></span>
+    
     <a class="badge coa-badge" href="https://drive.google.com/drive/folders/1qtMDUrRN36uMjkS61sISSwlgRHaXZvy5?usp=sharing" target="_blank">
       <i class="ti ti-certificate"></i> <span data-t="badge_coa">Ver COAs — Certificados de pureza</span>
     </a>
@@ -176,8 +176,8 @@
   <button class="home-btn-primary" onclick="showView('view-catalog')"><i class="ti ti-layout-grid"></i> <span data-t="btn_catalog">Ver catálogo completo</span></button>
   <button class="home-btn-secondary" onclick="showView('view-guided')"><i class="ti ti-clipboard-list"></i> <span data-t="btn_guided">Armar mi protocolo personalizado</span></button>
   <button class="home-btn-glp" onclick="showView('view-glp')"><i class="ti ti-salad"></i> <span data-t="btn_glp">Estoy en GLP — ¿cómo cuido mi músculo?</span></button>
-  <p class="home-helper" data-t="home_helper">Calculadora de proteína, hidratación y ejercicio para usuarios de Tirzepatide y Retatrutide.</p>
-  <a href="reconstitution.html" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:380px;padding:14px 20px;background:#f0fdf4;color:#166534;border:1.5px solid #bbf7d0;border-radius:12px;font-size:14px;font-weight:600;font-family:var(--font-sans);margin-top:10px;text-decoration:none;transition:all .15s;" onmouseover="this.style.background='#dcfce7'" onmouseout="this.style.background='#f0fdf4'">
+  <p class="home-helper" data-t="home_helper">Calculadora de proteína, hidratación y ejercicio para usuarios de Tirzepatide, Semaglutide y Retatrutide.</p>
+  <a href="reconstitution.html" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:380px;padding:14px 20px;background:#4b5563;color:#ffffff;border:none;border-radius:12px;font-size:14px;font-weight:600;font-family:var(--font-sans);margin-top:10px;text-decoration:none;transition:all .15s;" onmouseover="this.style.background='#374151'" onmouseout="this.style.background='#4b5563'">
     <i class="ti ti-needle" aria-hidden="true"></i> <span data-t="btn_reconst">Calculadora de reconstitución de péptidos</span>
   </a>
   <p class="home-helper" data-t="home_helper_reconst" style="margin-top:4px;">Calcula agua BAC, concentración y unidades en jeringa para cualquier vial.</p>
@@ -195,7 +195,7 @@
       <div id="cat-pep-container"></div>
     </div>
     <div class="card">
-      <p class="sec-title" data-t="pkg_title">Paquetes con 20% ya aplicado</p>
+      <p class="sec-title" data-t="pkg_title">Paquetes con precio especial</p>
       <p style="font-size:12px;color:var(--text-secondary);margin-bottom:10px;" data-t="pkg_sub">Opciones prearmadas con el mayor ahorro.</p>
       <div class="pkg-grid" id="cat-pkg-grid"></div>
     </div>
@@ -281,7 +281,7 @@
         <div id="syn-box" class="syn hidden" style="margin-top:10px;"><p style="font-size:11px;font-weight:500;color:var(--text-success);margin-bottom:3px;"><i class="ti ti-sparkles"></i> <span data-t="synergy">Sinergia recomendada</span></p><p id="syn-txt" style="font-size:11px;color:var(--text-success);"></p></div>
         <p class="ctr"><span data-t="selected">Seleccionados:</span> <strong id="sel-count">0</strong> <span data-t="vials">viales</span> · <span data-t="discount">Descuento:</span> <strong id="disc-pct">—</strong></p>
       </div>
-      <div class="card"><p class="sec-title" data-t="or_package">O elige un paquete con 20% ya aplicado</p><div class="pkg-grid" id="pkg-grid"></div></div>
+      <div class="card"><p class="sec-title" data-t="or_package">O elige un paquete con precio especial</p><div class="pkg-grid" id="pkg-grid"></div></div>
       <div class="btn-row"><button class="secondary" onclick="goStep(2)" data-t="btn_back">Atrás</button><button class="primary" onclick="goStep(4)" data-t="btn_see_quote">Ver mi cotización</button></div>
     </div>
     <!-- paso 4 -->
@@ -376,11 +376,11 @@
 const TR={
 es:{
 home_tagline:"Biología Molecular · Péptidos de Alta Precisión",home_sub:"Explora nuestro catálogo, arma tu protocolo o usa nuestras herramientas de soporte.",
-badge_ship:"Envío gratis",badge_disc:"Hasta 20% OFF",badge_coa:"Ver COAs — Certificados de pureza",
+badge_ship:"Envío gratis",badge_coa:"Ver COAs — Certificados de pureza",
 btn_catalog:"Ver catálogo completo",btn_guided:"Armar mi protocolo personalizado",btn_glp:"Estoy en GLP — ¿cómo cuido mi músculo?",
-home_helper:"Calculadora de proteína, hidratación y ejercicio para usuarios de Tirzepatide y Retatrutide.",
+home_helper:"Calculadora de proteína, hidratación y ejercicio para usuarios de Tirzepatide, Semaglutide y Retatrutide.",
 back_home:"Inicio",back_catalog:"Catálogo",cat_title:"Catálogo de Péptidos",cat_sub:"Selecciona la cantidad de viales que necesitas",
-price_in:"Precios en:",vials:"viales",pkg_title:"Paquetes con 20% ya aplicado",pkg_sub:"Opciones prearmadas con el mayor ahorro.",
+price_in:"Precios en:",vials:"viales",pkg_title:"Paquetes con precio especial",pkg_sub:"Opciones prearmadas con el mayor ahorro.",
 btn_quote:"Ver cotización →",quote_title:"Tu cotización",quote_sub:"Resumen de tu selección",your_selection:"Tu selección",
 total_disc:"Total con descuento",ship_note:"Envío gratis + guía de aplicación incluida",protocol_detail:"Detalle del protocolo",
 coa_link:"Ver certificados de análisis (COAs)",disclaimer:"⚠️ Uso experimental/investigacional. Todo protocolo debe ser revisado por un médico especialista.",
@@ -408,7 +408,7 @@ q_perfil:"¿Qué describe mejor tu situación?",q_perfil_1:"Ansiedad por comer",
 btn_see_peps:"Ver péptidos recomendados",
 build_protocol:"Arma tu protocolo",build_protocol_sub:"Los recomendados para tu objetivo aparecen primero.",
 synergy:"Sinergia recomendada",selected:"Seleccionados:",discount:"Descuento:",
-or_package:"O elige un paquete con 20% ya aplicado",btn_see_quote:"Ver mi cotización",
+or_package:"O elige un paquete con precio especial",btn_see_quote:"Ver mi cotización",
 your_plan:"Tu plan personalizado",suggested_protocol:"Protocolo sugerido",modify_selection:"Modificar selección",
 glp_header_title:"Guía de Soporte en GLP",glp_header_sub:"Proteína, hidratación, electrolitos y ejercicio adaptados a ti.",
 tell_us:"Cuéntanos sobre ti",glp_and_dose:"Tu GLP y dosis",which_glp:"¿Cuál GLP te aplicas?",current_dose:"Dosis actual",
@@ -429,7 +429,7 @@ exercise_title:"💪 Ejercicios de fuerza recomendados",exercise_sub:"Los más e
 glp_disclaimer:"ℹ️ Información de referencia. No sustituye la consulta con un médico, nutriólogo o especialista en salud.",
 boost_title:"¿Quieres potenciar tus resultados?",boost_sub:"Combinando tu GLP con los péptidos correctos puedes preservar más músculo y optimizar tu composición corporal.",
 boost_btn:"Ver péptidos que potencian tu protocolo GLP",btn_recalc:"Recalcular",
-pkg_badge:"20% OFF aplicado",vial_lbl:"viales",
+pkg_badge:"Paquete especial",vial_lbl:"viales",
 breakfast:"🌅 Desayuno",lunch:"☀️ Comida",dinner:"🌙 Cena",snack:"🥛 Snack proteico",
 meal_goal:"meta ~",meal_prot:"g proteína",creatine_note:"Tómala con esta comida (3-5g con agua)",
 ex_squat:"Sentadilla (Squat)",ex_squat_d:"Glúteos, cuádriceps y cadena posterior. 3 series de 10-12 reps.",
@@ -455,15 +455,15 @@ food_desc:{pollo:"Pechuga de pollo a la plancha (100g)",carne:"Filete de res (10
 wa_cat:"¡Hola! Acabo de armar mi pedido en Génesis Peptides 🧬\n\n*Mi selección:*\n",
 wa_guided:"¡Hola! Acabo de armar mi protocolo en Génesis Peptides 🧬\n\n*Mi perfil:*\n",
 wa_end:"¡Quiero confirmar mi pedido y recibir mi guía de aplicación! 🙌",
-disc_info:"<i class='ti ti-tag'></i> <strong>Descuentos automáticos:</strong> 1 vial → 10% OFF · 2 → 15% OFF · 3–9 → 20% OFF · 10+ → 30% OFF · <i class='ti ti-truck'></i> Envío gratis"
+disc_info:"<i class='ti ti-tag'></i> <strong>Descuento especial:</strong> Compra 3 viales o más y obtén un 10% adicional · <i class='ti ti-truck'></i> Envío gratis"
 },
 en:{
 home_tagline:"Molecular Biology · High-Precision Peptides",home_sub:"Explore our catalog, build your personalized protocol or use our support tools.",
-badge_ship:"Free shipping",badge_disc:"Up to 20% OFF",badge_coa:"View COAs — Purity Certificates",
+badge_ship:"Free shipping",badge_coa:"View COAs — Purity Certificates",
 btn_catalog:"View full catalog",btn_guided:"Build my personalized protocol",btn_glp:"I'm on GLP — how do I protect my muscle?",
-home_helper:"Protein, hydration and exercise calculator for Tirzepatide and Retatrutide users.",
+home_helper:"Protein, hydration and exercise calculator for Tirzepatide, Semaglutide and Retatrutide users.",
 back_home:"Home",back_catalog:"Catalog",cat_title:"Peptide Catalog",cat_sub:"Select the quantity of each vial you need",
-price_in:"Prices in:",vials:"vials",pkg_title:"Bundles with 20% already applied",pkg_sub:"Pre-built options with the best savings.",
+price_in:"Prices in:",vials:"vials",pkg_title:"Bundles — special price",pkg_sub:"Pre-built options with the best savings.",
 btn_quote:"View quote →",quote_title:"Your quote",quote_sub:"Summary of your selection",your_selection:"Your selection",
 total_disc:"Total with discount",ship_note:"Free shipping + application guide included",protocol_detail:"Protocol details",
 coa_link:"View certificates of analysis (COAs)",disclaimer:"⚠️ Experimental/investigational use. All protocols must be reviewed by a licensed medical professional.",
@@ -512,7 +512,7 @@ exercise_title:"💪 Recommended strength exercises",exercise_sub:"Most effectiv
 glp_disclaimer:"ℹ️ Reference information. This tool provides general guidance and does not replace consultation with a doctor or nutritionist.",
 boost_title:"Want to boost your results?",boost_sub:"Combining your GLP with the right peptides can help preserve more muscle and optimize your body composition.",
 boost_btn:"View peptides that enhance your GLP protocol",btn_recalc:"Recalculate",
-pkg_badge:"20% OFF applied",vial_lbl:"vials",
+pkg_badge:"Special bundle",vial_lbl:"vials",
 breakfast:"🌅 Breakfast",lunch:"☀️ Lunch",dinner:"🌙 Dinner",snack:"🥛 Protein snack",
 meal_goal:"target ~",meal_prot:"g protein",creatine_note:"Take it with this meal (3-5g with water)",
 ex_squat:"Squat",ex_squat_d:"Glutes, quads and posterior chain. 3 sets of 10-12 reps.",
@@ -540,37 +540,37 @@ wa_guided:"Hi! I just built my personalized protocol at Génesis Peptides 🧬\n
 wa_end:"I'd like to confirm my order and receive my application guide! 🙌",
     btn_reconst:"Peptide reconstitution calculator",
     home_helper_reconst:"Calculate BAC water, concentration and syringe units for any vial.",
-disc_info:"<i class='ti ti-tag'></i> <strong>Volume discounts:</strong> 1 vial → 10% OFF · 2 → 15% OFF · 3–9 → 20% OFF · 10+ → 30% OFF · <i class='ti ti-truck'></i> Free shipping"
+disc_info:"<i class='ti ti-tag'></i> <strong>Special discount:</strong> Buy 3 or more vials and get an extra 10% off · <i class='ti ti-truck'></i> Free shipping"
 }
 };
 
 const P={
-tirz30:{name:"Tirzepatide 30mg",catES:"Optimización Metabólica (GLP)",catEN:"Metabolic Optimization (GLP)",mxn:3900,usd:200,goals:["peso"],descES:"Doble agonista GIP/GLP-1. Controla apetito y optimiza metabolismo.",descEN:"Dual agonist GIP/GLP-1. Controls appetite and optimizes metabolism.",cycle:"Cont.",freq:"1x/sem · 1x/week",rec:["peso"]},
-tirz40:{name:"Tirzepatide 40mg",catES:"Optimización Metabólica (GLP)",catEN:"Metabolic Optimization (GLP)",mxn:5000,usd:260,goals:["peso"],descES:"Dosis avanzada para mayor eficiencia metabólica.",descEN:"Advanced dose for greater metabolic efficiency.",cycle:"Cont.",freq:"1x/sem · 1x/week",rec:["peso"]},
-reta:{name:"Retatrutide 20mg",catES:"Optimización Metabólica (GLP)",catEN:"Metabolic Optimization (GLP)",mxn:5700,usd:300,goals:["peso"],descES:"Triple agonista GLP-1/GIP/Glucagón. Máxima potencia para pérdida de grasa.",descEN:"Triple agonist GLP-1/GIP/Glucagon. Maximum power for fat loss.",cycle:"Cont.",freq:"1x/sem · 1x/week",rec:["peso"]},
-igf1:{name:"IGF-1 LR3 10mg",catES:"Masa Muscular y Rendimiento",catEN:"Muscle Mass & Performance",mxn:3000,usd:135,goals:["musculo","recuperacion"],descES:"Estimula crecimiento muscular y recuperación celular.",descEN:"Stimulates muscle growth and cellular recovery.",cycle:"4-6 sem / wk rest",freq:"Diario / Daily",rec:["musculo"]},
-muscle:{name:"Muscle Stack (Ipa + CJC)",catES:"Masa Muscular y Rendimiento",catEN:"Muscle Mass & Performance",mxn:3000,usd:135,goals:["musculo","longevidad","sueno"],descES:"Ipamorelin + CJC-1295: estimula GH de forma pulsátil natural.",descEN:"Ipamorelin + CJC-1295: stimulates GH in natural pulsatile manner.",cycle:"3 mo / 1 rest",freq:"Noche / Night",rec:["musculo"]},
-sermo:{name:"Sermorelin 10mg",catES:"Masa Muscular y Rendimiento",catEN:"Muscle Mass & Performance",mxn:2700,usd:120,goals:["musculo","longevidad","sueno","peso"],descES:"Estimula tu propia hormona de crecimiento. Mejora sueño y composición corporal.",descEN:"Stimulates your own growth hormone. Improves sleep and body composition.",cycle:"3 mo / 1 rest",freq:"Noche / Night",rec:["musculo","longevidad"]},
-tesa:{name:"Tesamorelin 25mg",catES:"Masa Muscular y Rendimiento",catEN:"Muscle Mass & Performance",mxn:4500,usd:250,goals:["musculo","peso","longevidad"],descES:"GHRH de alta potencia. Reduce grasa visceral y mejora composición corporal.",descEN:"High-potency GHRH. Reduces visceral fat and improves body composition.",cycle:"3 mo / 1 rest",freq:"Noche / Night",rec:["musculo","peso"]},
-motsc:{name:"MOTS-C 40mg",catES:"Masa Muscular y Rendimiento",catEN:"Muscle Mass & Performance",mxn:5000,usd:260,goals:["musculo","peso","longevidad"],descES:"Péptido mitocondrial. Mejora sensibilidad a insulina y energía celular.",descEN:"Mitochondrial peptide. Improves insulin sensitivity and cellular energy.",cycle:"4-8 sem / wks",freq:"3-5x/sem · 3-5x/week",rec:["musculo","peso"]},
-ghkcu:{name:"GHK-Cu 50mg",catES:"Bioreparación y Colágeno",catEN:"Biorepair & Collagen",mxn:2000,usd:100,goals:["estetica","recuperacion","longevidad"],descES:"El péptido de la juventud. Estimula colágeno, elastina y propiedades antiinflamatorias.",descEN:"The youth peptide. Stimulates collagen, elastin and anti-inflammatory properties.",cycle:"3 mo / 1 rest",freq:"2-5x/sem · 2-5x/week",rec:["estetica"]},
-bpc:{name:"BPC-157 10mg",catES:"Bioreparación y Colágeno",catEN:"Biorepair & Collagen",mxn:2800,usd:140,goals:["recuperacion","estetica"],descES:"Potente agente cicatrizante. Acelera reparación de tejidos y tendones.",descEN:"Potent healing agent. Accelerates soft tissue and tendon repair.",cycle:"4-6 sem / wks",freq:"Diario / 3x sem",rec:["recuperacion"]},
-tb500:{name:"TB-500 10mg",catES:"Bioreparación y Colágeno",catEN:"Biorepair & Collagen",mxn:2500,usd:110,goals:["recuperacion","estetica","musculo"],descES:"Promueve migración celular y flexibilidad tisular. Reduce rigidez.",descEN:"Promotes cell migration and tissue flexibility. Reduces stiffness.",cycle:"4-6 sem / wks",freq:"2-3x/sem · 2-3x/week",rec:["recuperacion"]},
-glow:{name:"GLOW Blend (GHK-Cu+BPC-157+TB-500)",catES:"Bioreparación y Colágeno",catEN:"Biorepair & Collagen",mxn:3800,usd:210,goals:["estetica","recuperacion","longevidad"],descES:"Triple sinergia: colágeno + cicatrización + regeneración tisular.",descEN:"Triple synergy: collagen + healing + tissue regeneration.",cycle:"12 sem estét / 4-6 recup",freq:"2-5x/sem · 2-5x/week",rec:["estetica","recuperacion"]},
-kpv:{name:"KPV",catES:"Bioreparación y Colágeno",catEN:"Biorepair & Collagen",mxn:2500,usd:110,goals:["recuperacion","estetica","sueno"],descES:"Tripéptido antiinflamatorio. Ideal para intestino, tejidos y recuperación.",descEN:"Anti-inflammatory tripeptide. Ideal for gut, tissues and systemic recovery.",cycle:"4-8 sem / wks",freq:"Diario / Daily",rec:["recuperacion"]},
-epi:{name:"Epithalon 50mg",catES:"Longevidad",catEN:"Longevity",mxn:5000,usd:260,goals:["longevidad","sueno","estetica"],descES:"Activa la telomerasa. Protege el ADN celular y mejora longevidad.",descEN:"Activates telomerase. Protects cellular DNA and improves longevity.",cycle:"1-2 ciclos/año · cycles/yr",freq:"1 diaria / 1 daily",rec:["longevidad"]},
-nad:{name:"NAD+ 500mg",catES:"Longevidad",catEN:"Longevity",mxn:4300,usd:200,goals:["longevidad","cognitivo","musculo"],descES:"Coenzima esencial para energía celular ATP. Función mitocondrial.",descEN:"Essential coenzyme for cellular energy (ATP). Mitochondrial function.",cycle:"2-3 meses / months",freq:"Según protocolo / Per protocol",rec:["longevidad"]},
-selank:{name:"Selank 10mg",catES:"Cognición y Neuroprotección",catEN:"Cognition & Neuroprotection",mxn:2400,usd:115,goals:["cognitivo","sueno"],descES:"Ansiolítico y nootrópico. Reduce ansiedad y mejora concentración.",descEN:"Anxiolytic and nootropic. Reduces anxiety and improves focus.",cycle:"3-4 sem / wks",freq:"Diario / Daily",rec:["cognitivo"]},
-semax:{name:"Semax 10mg",catES:"Cognición y Neuroprotección",catEN:"Cognition & Neuroprotection",mxn:3500,usd:150,goals:["cognitivo","sueno"],descES:"Nootrópico de alta potencia. Neuroprotección y mejora cognitiva.",descEN:"High-potency nootropic. Neuroprotection and cognitive enhancement.",cycle:"4-6 sem / wks",freq:"Diario / Daily",rec:["cognitivo"]},
+tirz30:{name:"Tirzepatide 30mg",catES:"Optimización Metabólica (GLP)",catEN:"Metabolic Optimization (GLP)",mxn:2000,usd:120,goals:["peso"],descES:"Doble agonista GIP/GLP-1. Controla apetito y optimiza metabolismo.",descEN:"Dual agonist GIP/GLP-1. Controls appetite and optimizes metabolism.",cycle:"Cont.",freq:"1x/sem · 1x/week",rec:["peso"]},
+tirz40:{name:"Tirzepatide 40mg",catES:"Optimización Metabólica (GLP)",catEN:"Metabolic Optimization (GLP)",mxn:2700,usd:160,goals:["peso"],descES:"Dosis avanzada para mayor eficiencia metabólica.",descEN:"Advanced dose for greater metabolic efficiency.",cycle:"Cont.",freq:"1x/sem · 1x/week",rec:["peso"]},
+reta:{name:"Retatrutide 20mg",catES:"Optimización Metabólica (GLP)",catEN:"Metabolic Optimization (GLP)",mxn:3000,usd:180,goals:["peso"],descES:"Triple agonista GLP-1/GIP/Glucagón. Máxima potencia para pérdida de grasa.",descEN:"Triple agonist GLP-1/GIP/Glucagon. Maximum power for fat loss.",cycle:"Cont.",freq:"1x/sem · 1x/week",rec:["peso"]},
+igf1:{name:"IGF-1 LR3 10mg",catES:"Masa Muscular y Rendimiento",catEN:"Muscle Mass & Performance",mxn:1300,usd:80,goals:["musculo","recuperacion"],descES:"Estimula crecimiento muscular y recuperación celular.",descEN:"Stimulates muscle growth and cellular recovery.",cycle:"4-6 sem / wk rest",freq:"Diario / Daily",rec:["musculo"]},
+muscle:{name:"Muscle Stack (Ipa + CJC)",catES:"Masa Muscular y Rendimiento",catEN:"Muscle Mass & Performance",mxn:1300,usd:80,goals:["musculo","longevidad","sueno"],descES:"Ipamorelin + CJC-1295: estimula GH de forma pulsátil natural.",descEN:"Ipamorelin + CJC-1295: stimulates GH in natural pulsatile manner.",cycle:"3 mo / 1 rest",freq:"Noche / Night",rec:["musculo"]},
+sermo:{name:"Sermorelin 10mg",catES:"Masa Muscular y Rendimiento",catEN:"Muscle Mass & Performance",mxn:1300,usd:80,goals:["musculo","longevidad","sueno","peso"],descES:"Estimula tu propia hormona de crecimiento. Mejora sueño y composición corporal.",descEN:"Stimulates your own growth hormone. Improves sleep and body composition.",cycle:"3 mo / 1 rest",freq:"Noche / Night",rec:["musculo","longevidad"]},
+tesa:{name:"Tesamorelin 25mg",catES:"Masa Muscular y Rendimiento",catEN:"Muscle Mass & Performance",mxn:3000,usd:180,goals:["musculo","peso","longevidad"],descES:"GHRH de alta potencia. Reduce grasa visceral y mejora composición corporal.",descEN:"High-potency GHRH. Reduces visceral fat and improves body composition.",cycle:"3 mo / 1 rest",freq:"Noche / Night",rec:["musculo","peso"]},
+motsc:{name:"MOTS-C 40mg",catES:"Masa Muscular y Rendimiento",catEN:"Muscle Mass & Performance",mxn:2700,usd:160,goals:["musculo","peso","longevidad"],descES:"Péptido mitocondrial. Mejora sensibilidad a insulina y energía celular.",descEN:"Mitochondrial peptide. Improves insulin sensitivity and cellular energy.",cycle:"4-8 sem / wks",freq:"3-5x/sem · 3-5x/week",rec:["musculo","peso"]},
+ghkcu:{name:"GHK-Cu 50mg",catES:"Bioreparación y Colágeno",catEN:"Biorepair & Collagen",mxn:1000,usd:60,goals:["estetica","recuperacion","longevidad"],descES:"El péptido de la juventud. Estimula colágeno, elastina y propiedades antiinflamatorias.",descEN:"The youth peptide. Stimulates collagen, elastin and anti-inflammatory properties.",cycle:"3 mo / 1 rest",freq:"2-5x/sem · 2-5x/week",rec:["estetica"]},
+bpc:{name:"BPC-157 10mg",catES:"Bioreparación y Colágeno",catEN:"Biorepair & Collagen",mxn:1400,usd:85,goals:["recuperacion","estetica"],descES:"Potente agente cicatrizante. Acelera reparación de tejidos y tendones.",descEN:"Potent healing agent. Accelerates soft tissue and tendon repair.",cycle:"4-6 sem / wks",freq:"Diario / 3x sem",rec:["recuperacion"]},
+tb500:{name:"TB-500 10mg",catES:"Bioreparación y Colágeno",catEN:"Biorepair & Collagen",mxn:1200,usd:70,goals:["recuperacion","estetica","musculo"],descES:"Promueve migración celular y flexibilidad tisular. Reduce rigidez.",descEN:"Promotes cell migration and tissue flexibility. Reduces stiffness.",cycle:"4-6 sem / wks",freq:"2-3x/sem · 2-3x/week",rec:["recuperacion"]},
+glow:{name:"GLOW Blend (GHK-Cu+BPC-157+TB-500)",catES:"Bioreparación y Colágeno",catEN:"Biorepair & Collagen",mxn:2100,usd:120,goals:["estetica","recuperacion","longevidad"],descES:"Triple sinergia: colágeno + cicatrización + regeneración tisular.",descEN:"Triple synergy: collagen + healing + tissue regeneration.",cycle:"12 sem estét / 4-6 recup",freq:"2-5x/sem · 2-5x/week",rec:["estetica","recuperacion"]},
+kpv:{name:"KPV",catES:"Bioreparación y Colágeno",catEN:"Biorepair & Collagen",mxn:1200,usd:70,goals:["recuperacion","estetica","sueno"],descES:"Tripéptido antiinflamatorio. Ideal para intestino, tejidos y recuperación.",descEN:"Anti-inflammatory tripeptide. Ideal for gut, tissues and systemic recovery.",cycle:"4-8 sem / wks",freq:"Diario / Daily",rec:["recuperacion"]},
+epi:{name:"Epithalon 50mg",catES:"Longevidad",catEN:"Longevity",mxn:2700,usd:160,goals:["longevidad","sueno","estetica"],descES:"Activa la telomerasa. Protege el ADN celular y mejora longevidad.",descEN:"Activates telomerase. Protects cellular DNA and improves longevity.",cycle:"1-2 ciclos/año · cycles/yr",freq:"1 diaria / 1 daily",rec:["longevidad"]},
+nad:{name:"NAD+ 500mg",catES:"Longevidad",catEN:"Longevity",mxn:2000,usd:120,goals:["longevidad","cognitivo","musculo"],descES:"Coenzima esencial para energía celular ATP. Función mitocondrial.",descEN:"Essential coenzyme for cellular energy (ATP). Mitochondrial function.",cycle:"2-3 meses / months",freq:"Según protocolo / Per protocol",rec:["longevidad"]},
+selank:{name:"Selank 10mg",catES:"Cognición y Neuroprotección",catEN:"Cognition & Neuroprotection",mxn:1200,usd:70,goals:["cognitivo","sueno"],descES:"Ansiolítico y nootrópico. Reduce ansiedad y mejora concentración.",descEN:"Anxiolytic and nootropic. Reduces anxiety and improves focus.",cycle:"3-4 sem / wks",freq:"Diario / Daily",rec:["cognitivo"]},
+semax:{name:"Semax 10mg",catES:"Cognición y Neuroprotección",catEN:"Cognition & Neuroprotection",mxn:1500,usd:90,goals:["cognitivo","sueno"],descES:"Nootrópico de alta potencia. Neuroprotección y mejora cognitiva.",descEN:"High-potency nootropic. Neuroprotection and cognitive enhancement.",cycle:"4-6 sem / wks",freq:"Diario / Daily",rec:["cognitivo"]},
 dsip:{name:"DSIP 5mg",catES:"Sueño y Bienestar",catEN:"Sleep & Wellness",mxn:2300,usd:115,goals:["sueno","recuperacion"],descES:"Induce sueño delta natural. Regula cortisol y ritmo circadiano.",descEN:"Naturally induces delta sleep. Regulates cortisol and circadian rhythm.",cycle:"4-8 sem / 2 descanso",freq:"Noche / Night",rec:["sueno"]},
-pt141:{name:"PT-141 10mg",catES:"Bienestar Íntimo",catEN:"Intimate Wellness",mxn:2800,usd:130,goals:["libido"],descES:"Activa el deseo sexual desde el sistema nervioso central.",descEN:"Activates sexual desire from the central nervous system.",cycle:"Máx 3x/sem · Max 3x/week",freq:"30-60 min antes / before",rec:["libido"]},
-mt2:{name:"Melanotan II 10mg",catES:"Bienestar Íntimo",catEN:"Intimate Wellness",mxn:2300,usd:110,goals:["estetica","libido"],descES:"Aumenta pigmentación natural y fotoprotección biológica.",descEN:"Increases natural pigmentation and biological photoprotection.",cycle:"Carga + mant / Load + maint",freq:"2-4x/sem · 2-4x/week",rec:["estetica","libido"]}
+pt141:{name:"PT-141 10mg",catES:"Bienestar Íntimo",catEN:"Intimate Wellness",mxn:1300,usd:80,goals:["libido"],descES:"Activa el deseo sexual desde el sistema nervioso central.",descEN:"Activates sexual desire from the central nervous system.",cycle:"Máx 3x/sem · Max 3x/week",freq:"30-60 min antes / before",rec:["libido"]},
+mt2:{name:"Melanotan II 10mg",catES:"Bienestar Íntimo",catEN:"Intimate Wellness",mxn:1200,usd:70,goals:["estetica","libido"],descES:"Aumenta pigmentación natural y fotoprotección biológica.",descEN:"Increases natural pigmentation and biological photoprotection.",cycle:"Carga + mant / Load + maint",freq:"2-4x/sem · 2-4x/week",rec:["estetica","libido"]}
 };
 
 const PKGS={
-control:{nameES:"Control Metabólico",nameEN:"Metabolic Control",items:["reta","motsc","muscle"],orig:13700,precio:11200,usd:610,descES:"Control de apetito, sensibilidad a insulina y activación metabólica",descEN:"Appetite control, insulin sensitivity and metabolic activation"},
-wolverine:{nameES:"Wolverine Pro",nameEN:"Wolverine Pro",items:["ghkcu","bpc","tb500"],orig:7300,precio:6000,usd:290,descES:"Regeneración de tejidos, colágeno y recuperación celular",descEN:"Tissue regeneration, collagen and cellular recovery"},
-performance:{nameES:"Performance",nameEN:"Performance",items:["muscle","motsc","tesa"],orig:10900,precio:8720,usd:470,descES:"Optimización de GH, energía celular y masa muscular",descEN:"GH optimization, cellular energy and muscle development"}
+control:{nameES:"Control Metabólico",nameEN:"Metabolic Control",items:["reta","motsc","muscle"],orig:7000,precio:6300,usd:370,descES:"Control de apetito, sensibilidad a insulina y activación metabólica",descEN:"Appetite control, insulin sensitivity and metabolic activation"},
+wolverine:{nameES:"Wolverine Pro",nameEN:"Wolverine Pro",items:["ghkcu","bpc","tb500"],orig:6000,precio:6000,usd:180,descES:"Regeneración de tejidos, colágeno y recuperación celular",descEN:"Tissue regeneration, collagen and cellular recovery"},
+performance:{nameES:"Performance",nameEN:"Performance",items:["muscle","motsc","tesa"],orig:5300,precio:4800,usd:280,descES:"Optimización de GH, energía celular y masa muscular",descEN:"GH optimization, cellular energy and muscle development"}
 };
 
 const CATS_ES=["Optimización Metabólica (GLP)","Masa Muscular y Rendimiento","Bioreparación y Colágeno","Longevidad","Cognición y Neuroprotección","Sueño y Bienestar","Bienestar Íntimo"];
@@ -621,8 +621,8 @@ function showView(v){
   setLang(lang);
 }
 
-function getDisc(n){if(n>=10)return.30;if(n>=3)return.20;if(n===2)return.15;if(n>=1)return.10;return 0;}
-function getDiscLbl(n){if(n>=10)return'30% OFF';if(n>=3)return'20% OFF';if(n===2)return'15% OFF';if(n>=1)return'10% OFF';return'';}
+function getDisc(n){if(n>=3)return.10;return 0;}
+function getDiscLbl(n){if(n>=3)return'10% OFF adicional';return'';}
 
 function getCats(){return lang==='en'?CATS_EN:CATS_ES;}
 function getCLbl(){return lang==='en'?CLBL_EN:CLBL_ES;}
@@ -700,7 +700,7 @@ function buildCatPkgs(){
     let orig=catCur==='MXN'?'$'+pkg.orig.toLocaleString()+' MXN':'';
     let div=document.createElement('div');div.className='pkg'+(isSel?' sel':'');div.onclick=()=>catTogPkg(key,div);
     div.innerHTML='<span class="pkg-chk">'+(isSel?'<i class="ti ti-check" style="font-size:10px;color:white"></i>':'')+'</span>'
-      +'<div class="pkg-badge">'+t('pkg_badge')+'</div>'
+      +(pkg.pct?'<div class="pkg-badge">'+pkg.pct+'</div>':'')
       +'<div class="pkg-name">'+pkgName(pkg)+'</div>'
       +'<div class="pkg-items">'+pkg.items.map(pid=>P[pid]?P[pid].name.split(' ')[0]:'').join(' + ')+'</div>'
       +'<div class="pkg-orig">'+orig+'</div><div class="pkg-price">'+main+'</div>'
@@ -759,7 +759,7 @@ function catGoCotizar(){
 
 function catSendWA(){
   let n=catTotal(),totMXN=0,totUSD=0,list='';
-  if(catSelPkg){let pkg=PKGS[catSelPkg];totMXN=pkg.precio;totUSD=pkg.usd;list='• '+pkgName(pkg)+' (20% OFF) — $'+pkg.precio.toLocaleString()+' MXN / $'+pkg.usd+' USD';}
+  if(catSelPkg){let pkg=PKGS[catSelPkg];totMXN=pkg.precio;totUSD=pkg.usd;list='• '+pkgName(pkg)+' (precio especial) — $'+pkg.precio.toLocaleString()+' MXN / $'+pkg.usd+' USD';}
   else{let disc=getDisc(n);Object.entries(catQtys).forEach(([key,qty])=>{if(!qty)return;let p=P[key];let fM=Math.round(p.mxn*(1-disc))*qty;let fU=Math.round(p.usd*(1-disc))*qty;totMXN+=fM;totUSD+=fU;list+='• '+p.name+' ×'+qty+' — $'+fM.toLocaleString()+' MXN ($'+fU+' USD)\n';});}
   let discTxt=catSelPkg?t('pkg_badge'):(getDiscLbl(n)+' applied');
   let msg=t('wa_cat')+list+'\n*'+discTxt+'*\n*Total: $'+totMXN.toLocaleString()+' MXN / $'+totUSD+' USD*\n\n'+t('wa_end');
@@ -889,7 +889,7 @@ function sendWA(){
   const GL={es:{peso:"Pérdida de peso",musculo:"Masa muscular",longevidad:"Longevidad",recuperacion:"Recuperación",estetica:"Estética",sueno:"Sueño",cognitivo:"Cognición",libido:"Función sexual"},en:{peso:"Weight loss",musculo:"Muscle mass",longevidad:"Longevity",recuperacion:"Recovery",estetica:"Aesthetics",sueno:"Sleep",cognitivo:"Cognition",libido:"Sexual function"}};
   let g=GL[lang]||GL.es;let sxLbl=sx==='H'?(lang==='en'?'Male':'Hombre'):(lang==='en'?'Female':'Mujer');
   let disc=getDisc(selPeps.size),totMXN=0,totUSD=0,list='';
-  if(selPkg){let pkg=PKGS[selPkg];totMXN=pkg.precio;totUSD=pkg.usd;list='• '+pkgName(pkg)+' (20% OFF) — $'+pkg.precio.toLocaleString()+' MXN / $'+pkg.usd+' USD';}
+  if(selPkg){let pkg=PKGS[selPkg];totMXN=pkg.precio;totUSD=pkg.usd;list='• '+pkgName(pkg)+' (precio especial) — $'+pkg.precio.toLocaleString()+' MXN / $'+pkg.usd+' USD';}
   else{selPeps.forEach(key=>{let p=P[key];let fM=Math.round(p.mxn*(1-disc));let fU=Math.round(p.usd*(1-disc));totMXN+=fM;totUSD+=fU;list+='• '+p.name+' — $'+fM.toLocaleString()+' MXN ($'+fU+' USD)\n';});}
   let discTxt=selPkg?t('pkg_badge'):(Math.round(disc*100)+'% OFF');
   let msg=t('wa_guided')+sxLbl+' · '+age+(lang==='en'?' yrs':' años')+' · '+w+'kg · '+h+'cm\n'+(lang==='en'?'Goal: ':'Objetivo: ')+(g[goal]||goal)+'\n\n'+(lang==='en'?'*My selection:*':'*Mi selección:*')+'\n'+list+'\n*'+discTxt+'*\n*Total: $'+totMXN.toLocaleString()+' MXN / $'+totUSD+' USD*\n\n'+t('wa_end');
