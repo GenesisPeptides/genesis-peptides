@@ -167,7 +167,7 @@
   <p class="home-title" data-t="home_tagline">Biología Molecular · Péptidos de Alta Precisión</p>
   <p class="home-sub" data-t="home_sub">Explora nuestro catálogo, arma tu protocolo o usa nuestras herramientas de soporte.</p>
   <div class="home-badges">
-    <span class="badge"><i class="ti ti-truck"></i> <span data-t="badge_ship">Envío gratis</span></span>
+    
     
     <a class="badge coa-badge" href="https://drive.google.com/drive/folders/1qtMDUrRN36uMjkS61sISSwlgRHaXZvy5?usp=sharing" target="_blank">
       <i class="ti ti-certificate"></i> <span data-t="badge_coa">Ver COAs — Certificados de pureza</span>
@@ -376,13 +376,13 @@
 const TR={
 es:{
 home_tagline:"Biología Molecular · Péptidos de Alta Precisión",home_sub:"Explora nuestro catálogo, arma tu protocolo o usa nuestras herramientas de soporte.",
-badge_ship:"Envío gratis",badge_coa:"Ver COAs — Certificados de pureza",
+badge_coa:"Ver COAs — Certificados de pureza",
 btn_catalog:"Ver catálogo completo",btn_guided:"Armar mi protocolo personalizado",btn_glp:"Estoy en GLP — ¿cómo cuido mi músculo?",
 home_helper:"Calculadora de proteína, hidratación y ejercicio para usuarios de Tirzepatide, Semaglutide y Retatrutide.",
 back_home:"Inicio",back_catalog:"Catálogo",cat_title:"Catálogo de Péptidos",cat_sub:"Selecciona la cantidad de viales que necesitas",
 price_in:"Precios en:",vials:"viales",pkg_title:"Paquetes con precio especial",pkg_sub:"Opciones prearmadas con el mayor ahorro.",
 btn_quote:"Ver cotización →",quote_title:"Tu cotización",quote_sub:"Resumen de tu selección",your_selection:"Tu selección",
-total_disc:"Total con descuento",ship_note:"Envío gratis + guía de aplicación incluida",protocol_detail:"Detalle del protocolo",
+total_disc:"Total con descuento",ship_note:"Envío gratis en compras de 3+ viales · Pedidos menores: +$300 MXN envío",protocol_detail:"Detalle del protocolo",
 coa_link:"Ver certificados de análisis (COAs)",disclaimer:"⚠️ Uso experimental/investigacional. Todo protocolo debe ser revisado por un médico especialista.",
 ready_title:"¿Listo para comenzar?",ready_sub:"Tu cotización está lista. Escríbenos y un asesor confirma tu pedido.",
 wa_btn:"Quiero este protocolo — Escribir ahora",modify:"Modificar",
@@ -455,17 +455,17 @@ food_desc:{pollo:"Pechuga de pollo a la plancha (100g)",carne:"Filete de res (10
 wa_cat:"¡Hola! Acabo de armar mi pedido en Génesis Peptides 🧬\n\n*Mi selección:*\n",
 wa_guided:"¡Hola! Acabo de armar mi protocolo en Génesis Peptides 🧬\n\n*Mi perfil:*\n",
 wa_end:"¡Quiero confirmar mi pedido y recibir mi guía de aplicación! 🙌",
-disc_info:"<i class='ti ti-tag'></i> <strong>Descuento especial:</strong> Compra 3 viales o más y obtén un 10% adicional · <i class='ti ti-truck'></i> Envío gratis"
+disc_info:"<i class='ti ti-gift'></i> <strong>Beneficio especial 3+ viales:</strong> Envío gratis + 10% de descuento adicional sobre tu pedido"
 },
 en:{
 home_tagline:"Molecular Biology · High-Precision Peptides",home_sub:"Explore our catalog, build your personalized protocol or use our support tools.",
-badge_ship:"Free shipping",badge_coa:"View COAs — Purity Certificates",
+badge_coa:"View COAs — Purity Certificates",
 btn_catalog:"View full catalog",btn_guided:"Build my personalized protocol",btn_glp:"I'm on GLP — how do I protect my muscle?",
 home_helper:"Protein, hydration and exercise calculator for Tirzepatide, Semaglutide and Retatrutide users.",
 back_home:"Home",back_catalog:"Catalog",cat_title:"Peptide Catalog",cat_sub:"Select the quantity of each vial you need",
 price_in:"Prices in:",vials:"vials",pkg_title:"Bundles — special price",pkg_sub:"Pre-built options with the best savings.",
 btn_quote:"View quote →",quote_title:"Your quote",quote_sub:"Summary of your selection",your_selection:"Your selection",
-total_disc:"Total with discount",ship_note:"Free shipping + application guide included",protocol_detail:"Protocol details",
+total_disc:"Total with discount",ship_note:"Free shipping on orders of 3+ vials · Smaller orders: +$300 MXN shipping",protocol_detail:"Protocol details",
 coa_link:"View certificates of analysis (COAs)",disclaimer:"⚠️ Experimental/investigational use. All protocols must be reviewed by a licensed medical professional.",
 ready_title:"Ready to start?",ready_sub:"Your quote is ready. Message us and an advisor will confirm your order.",
 wa_btn:"I want this protocol — Message us now",modify:"Modify",
@@ -540,7 +540,7 @@ wa_guided:"Hi! I just built my personalized protocol at Génesis Peptides 🧬\n
 wa_end:"I'd like to confirm my order and receive my application guide! 🙌",
     btn_reconst:"Peptide reconstitution calculator",
     home_helper_reconst:"Calculate BAC water, concentration and syringe units for any vial.",
-disc_info:"<i class='ti ti-tag'></i> <strong>Special discount:</strong> Buy 3 or more vials and get an extra 10% off · <i class='ti ti-truck'></i> Free shipping"
+disc_info:"<i class='ti ti-gift'></i> <strong>3+ vials special benefit:</strong> Free shipping + extra 10% off your order"
 }
 };
 
@@ -763,7 +763,7 @@ function catSendWA(){
   else{let disc=getDisc(n);Object.entries(catQtys).forEach(([key,qty])=>{if(!qty)return;let p=P[key];let fM=Math.round(p.mxn*(1-disc))*qty;let fU=Math.round(p.usd*(1-disc))*qty;totMXN+=fM;totUSD+=fU;list+='• '+p.name+' ×'+qty+' — $'+fM.toLocaleString()+' MXN ($'+fU+' USD)\n';});}
   let discTxt=catSelPkg?t('pkg_badge'):(getDiscLbl(n)+' applied');
   let msg=t('wa_cat')+list+'\n*'+discTxt+'*\n*Total: $'+totMXN.toLocaleString()+' MXN / $'+totUSD+' USD*\n\n'+t('wa_end');
-  window.open('https://wa.me/529983028826?text='+encodeURIComponent(msg),'_blank');
+  if(window.genesisAffiliate&&window.genesisAffiliate!=='DIRECTO'){msg+='\n\n📌 Referido: '+window.genesisAffiliate;}window.open('https://wa.me/529983028826?text='+encodeURIComponent(msg),'_blank');
 }
 
 /* GUIADO */
@@ -893,7 +893,7 @@ function sendWA(){
   else{selPeps.forEach(key=>{let p=P[key];let fM=Math.round(p.mxn*(1-disc));let fU=Math.round(p.usd*(1-disc));totMXN+=fM;totUSD+=fU;list+='• '+p.name+' — $'+fM.toLocaleString()+' MXN ($'+fU+' USD)\n';});}
   let discTxt=selPkg?t('pkg_badge'):(Math.round(disc*100)+'% OFF');
   let msg=t('wa_guided')+sxLbl+' · '+age+(lang==='en'?' yrs':' años')+' · '+w+'kg · '+h+'cm\n'+(lang==='en'?'Goal: ':'Objetivo: ')+(g[goal]||goal)+'\n\n'+(lang==='en'?'*My selection:*':'*Mi selección:*')+'\n'+list+'\n*'+discTxt+'*\n*Total: $'+totMXN.toLocaleString()+' MXN / $'+totUSD+' USD*\n\n'+t('wa_end');
-  window.open('https://wa.me/529983028826?text='+encodeURIComponent(msg),'_blank');
+  if(window.genesisAffiliate&&window.genesisAffiliate!=='DIRECTO'){msg+='\n\n📌 Referido: '+window.genesisAffiliate;}window.open('https://wa.me/529983028826?text='+encodeURIComponent(msg),'_blank');
 }
 
 /* GLP TOOL */
@@ -985,5 +985,63 @@ document.addEventListener('DOMContentLoaded',()=>{
   setLang('es');
 });
 </script>
+
+<script>
+/* ════════ SISTEMA DE AFILIADOS ════════ */
+(function(){
+  // Leer parámetro ?ref= de la URL
+  var params = new URLSearchParams(window.location.search);
+  var ref = params.get('ref');
+  if(ref){
+    // Si viene con ref, guardar en mayúsculas siempre (sobrescribir)
+    localStorage.setItem('genesis_affiliate', ref.toUpperCase());
+  } else {
+    // Sin ref: solo asignar DIRECTO si no hay nada previo
+    if(!localStorage.getItem('genesis_affiliate')){
+      localStorage.setItem('genesis_affiliate', 'DIRECTO');
+    }
+  }
+})();
+
+/* ════════ WA DINÁMICO POR AFILIADO ════════ */
+document.addEventListener('DOMContentLoaded', function(){
+  var affiliate = localStorage.getItem('genesis_affiliate') || 'DIRECTO';
+
+  function buildWAUrl(customMsg){
+    var base = 'https://wa.me/529983028826?text=';
+    var msg;
+    if(customMsg){
+      msg = customMsg;
+    } else if(affiliate === 'DIRECTO'){
+      msg = '¡Hola! Me interesa conocer los protocolos de Génesis Peptides y recibir una cotización personalizada. 🧬';
+    } else {
+      msg = '¡Hola! 🌟 ' + affiliate + ' me compartió un beneficio exclusivo en Génesis Peptides y quiero aprovecharlo. Tengo un 10% de descuento especial en mi primera compra. Me gustaría conocer los protocolos disponibles y recibir mi cotización. Mi código de descuento es: ' + affiliate + ' 🎁';
+    }
+    return base + encodeURIComponent(msg);
+  }
+
+  // Actualizar todos los botones de WhatsApp con href o onclick que usen wa.me
+  // Los botones con onclick usan window.open — los interceptamos vía delegación
+  // Los que son <a href="https://wa.me/..."> los actualizamos directamente
+  document.querySelectorAll('a[href*="wa.me/529983028826"]').forEach(function(el){
+    // Preservar mensaje personalizado si lo tiene (cotizaciones)
+    var currentHref = el.getAttribute('href');
+    var hasCustomMsg = currentHref.includes('text=') && currentHref.includes('protocolo');
+    if(!hasCustomMsg){
+      el.setAttribute('href', buildWAUrl(null));
+    } else if(affiliate !== 'DIRECTO'){
+      // Añadir código de afiliado al final del mensaje existente
+      var decoded = decodeURIComponent(currentHref.split('text=')[1] || '');
+      var newMsg = decoded + ' | Ref: ' + affiliate;
+      el.setAttribute('href', 'https://wa.me/529983028826?text=' + encodeURIComponent(newMsg));
+    }
+  });
+
+  // Para botones con onclick que llaman a sendWA(), catSendWA() etc.
+  // Inyectamos el afiliado en window para que las funciones lo lean
+  window.genesisAffiliate = affiliate;
+});
+</script>
+
 </body>
 </html>
