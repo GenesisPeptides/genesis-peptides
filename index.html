@@ -570,7 +570,7 @@ mt2:{name:"Melanotan II 10mg",catES:"Bienestar Íntimo",catEN:"Intimate Wellness
 const PKGS={
 control:{nameES:"Control Metabólico",nameEN:"Metabolic Control",items:["reta","motsc","muscle"],orig:7000,precio:6300,usd:370,descES:"Control de apetito, sensibilidad a insulina y activación metabólica",descEN:"Appetite control, insulin sensitivity and metabolic activation"},
 wolverine:{nameES:"Wolverine Pro",nameEN:"Wolverine Pro",items:["ghkcu","bpc","tb500"],orig:6000,precio:6000,usd:180,descES:"Regeneración de tejidos, colágeno y recuperación celular",descEN:"Tissue regeneration, collagen and cellular recovery"},
-performance:{nameES:"Performance",nameEN:"Performance",items:["muscle","motsc","tesa"],orig:5300,precio:4800,usd:280,descES:"Optimización de GH, energía celular y masa muscular",descEN:"GH optimization, cellular energy and muscle development"}
+performance:{nameES:"Performance",nameEN:"Performance",items:["muscle","motsc","glow"],orig:6100,precio:5100,usd:300,pct:"16% OFF",descES:"Optimización de GH, energía celular, desarrollo muscular y regeneración de tejidos",descEN:"GH optimization, cellular energy, muscle development and tissue regeneration"}
 };
 
 const CATS_ES=["Optimización Metabólica (GLP)","Masa Muscular y Rendimiento","Bioreparación y Colágeno","Longevidad","Cognición y Neuroprotección","Sueño y Bienestar","Bienestar Íntimo"];
@@ -752,8 +752,13 @@ function catGoCotizar(){
     let dp=Math.round(disc*100);
     document.getElementById('cat-disc-b').innerHTML=dp?'<span class="disc-badge">'+dp+'% OFF</span>':'';
   }
-  document.getElementById('cat-tot-mxn').textContent='$'+totMXN.toLocaleString()+' MXN';
-  document.getElementById('cat-tot-usd').textContent='$'+totUSD+' USD';
+  // Costo de envío
+  var catNVials = catSelPkg ? 3 : catTotal();
+  var envioMXN = catNVials >= 3 ? 0 : 300;
+  var totalConEnvio = totMXN + envioMXN;
+  var envioNote = envioMXN > 0 ? ' + $300 MXN envío' : ' ✓ Envío gratis incluido';
+  document.getElementById('cat-tot-mxn').textContent='$'+totalConEnvio.toLocaleString()+' MXN';
+  document.getElementById('cat-tot-usd').textContent='$'+totUSD+' USD'+envioNote;
   showView('view-cat-quote');
 }
 
@@ -762,7 +767,9 @@ function catSendWA(){
   if(catSelPkg){let pkg=PKGS[catSelPkg];totMXN=pkg.precio;totUSD=pkg.usd;list='• '+pkgName(pkg)+' (precio especial) — $'+pkg.precio.toLocaleString()+' MXN / $'+pkg.usd+' USD';}
   else{let disc=getDisc(n);Object.entries(catQtys).forEach(([key,qty])=>{if(!qty)return;let p=P[key];let fM=Math.round(p.mxn*(1-disc))*qty;let fU=Math.round(p.usd*(1-disc))*qty;totMXN+=fM;totUSD+=fU;list+='• '+p.name+' ×'+qty+' — $'+fM.toLocaleString()+' MXN ($'+fU+' USD)\n';});}
   let discTxt=catSelPkg?t('pkg_badge'):(getDiscLbl(n)+' applied');
-  let msg=t('wa_cat')+list+'\n*'+discTxt+'*\n*Total: $'+totMXN.toLocaleString()+' MXN / $'+totUSD+' USD*\n\n'+t('wa_end');
+  let catNV=catSelPkg?3:catTotal();let envioWA=catNV>=3?'✓ Envío gratis incluido':'+$300 MXN envío';
+  let totalFinal=totMXN+(catNV>=3?0:300);
+  let msg=t('wa_cat')+list+'\n*'+discTxt+'*\n*Subtotal: $'+totMXN.toLocaleString()+' MXN*\n*'+envioWA+'*\n*TOTAL: $'+totalFinal.toLocaleString()+' MXN / $'+totUSD+' USD*\n\n'+t('wa_end');
   if(window.genesisAffiliate&&window.genesisAffiliate!=='DIRECTO'){msg+='\n\n📌 Referido: '+window.genesisAffiliate;}window.open('https://wa.me/529983028826?text='+encodeURIComponent(msg),'_blank');
 }
 
@@ -880,8 +887,13 @@ function buildSummary(){
     });
     let dp=Math.round(disc*100);document.getElementById('disc-b').innerHTML=dp?'<span class="disc-badge">'+dp+'% OFF</span>':'';
   }
-  document.getElementById('tot-mxn').textContent='$'+totMXN.toLocaleString()+' MXN';
-  document.getElementById('tot-usd').textContent='$'+totUSD+' USD';
+  // Costo de envío en flujo guiado
+  var gNVials = selPkg ? 3 : selPeps.size;
+  var gEnvio = gNVials >= 3 ? 0 : 300;
+  var gTotal = totMXN + gEnvio;
+  var gEnvioNote = gEnvio > 0 ? ' + $300 MXN envío' : ' ✓ Envío gratis incluido';
+  document.getElementById('tot-mxn').textContent='$'+gTotal.toLocaleString()+' MXN';
+  document.getElementById('tot-usd').textContent='$'+totUSD+' USD'+gEnvioNote;
 }
 
 function sendWA(){
@@ -892,6 +904,8 @@ function sendWA(){
   if(selPkg){let pkg=PKGS[selPkg];totMXN=pkg.precio;totUSD=pkg.usd;list='• '+pkgName(pkg)+' (precio especial) — $'+pkg.precio.toLocaleString()+' MXN / $'+pkg.usd+' USD';}
   else{selPeps.forEach(key=>{let p=P[key];let fM=Math.round(p.mxn*(1-disc));let fU=Math.round(p.usd*(1-disc));totMXN+=fM;totUSD+=fU;list+='• '+p.name+' — $'+fM.toLocaleString()+' MXN ($'+fU+' USD)\n';});}
   let discTxt=selPkg?t('pkg_badge'):(Math.round(disc*100)+'% OFF');
+  let gNV2=selPkg?3:selPeps.size;let envioWA2=gNV2>=3?'✓ Envío gratis incluido':'+$300 MXN envío';
+  let totalFinal2=totMXN+(gNV2>=3?0:300);
   let msg=t('wa_guided')+sxLbl+' · '+age+(lang==='en'?' yrs':' años')+' · '+w+'kg · '+h+'cm\n'+(lang==='en'?'Goal: ':'Objetivo: ')+(g[goal]||goal)+'\n\n'+(lang==='en'?'*My selection:*':'*Mi selección:*')+'\n'+list+'\n*'+discTxt+'*\n*Total: $'+totMXN.toLocaleString()+' MXN / $'+totUSD+' USD*\n\n'+t('wa_end');
   if(window.genesisAffiliate&&window.genesisAffiliate!=='DIRECTO'){msg+='\n\n📌 Referido: '+window.genesisAffiliate;}window.open('https://wa.me/529983028826?text='+encodeURIComponent(msg),'_blank');
 }
