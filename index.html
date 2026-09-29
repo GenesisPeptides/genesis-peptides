@@ -681,6 +681,15 @@ function showView(v){
   setLang(lang);
 }
 
+function breakdownLines(origMXN, finalMXN, label){
+  var row='display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e5e7eb;';
+  var sub='<div style="'+row+'"><span style="font-size:12px;color:#4b5563;">Subtotal péptidos</span><span style="font-size:13px;font-weight:600;color:#111827;">$'+origMXN.toLocaleString()+' MXN</span></div>';
+  var saved=origMXN-finalMXN;
+  var dsc=saved>0?'<div style="'+row+'"><span style="font-size:12px;color:#166534;">🎁 '+label+'</span><span style="font-size:13px;font-weight:600;color:#166534;">-$'+saved.toLocaleString()+' MXN</span></div>':'';
+  return sub+dsc;
+}
+function getAffiliate(){var a=window.genesisAffiliate;return(a&&a!=='DIRECTO')?a:null;}
+/* Descuento automático: solo 10% por 3+ viales. El código de afiliado NO descuenta (se aplica manualmente); solo se usa para rastrear la referencia. */
 function getDisc(n){if(n>=3)return.10;return 0;}
 function getDiscLbl(n){if(n>=3)return'10% OFF adicional';return'';}
 
@@ -816,15 +825,13 @@ function catGoCotizar(){
   var catNVials = catSelPkg ? 3 : catTotal();
   var envioMXN = catNVials >= 3 ? 0 : 300;
   var affiliate = (typeof window.genesisAffiliate !== 'undefined' && window.genesisAffiliate && window.genesisAffiliate !== 'DIRECTO') ? window.genesisAffiliate : null;
-  var afiliadoDisc = affiliate ? 0.10 : 0;
-  var totalFinal = Math.round((totMXN * (1 - afiliadoDisc)) + envioMXN);
-  var totalMXNBase = totMXN;
-  totMXN = Math.round(totMXN * (1 - afiliadoDisc));
+  var totalFinal = totMXN + envioMXN;
   var envioLine = envioMXN > 0
     ? '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e5e7eb;"><span style="font-size:12px;color:#4b5563;">🚚 Costo de envío</span><span style="font-size:13px;font-weight:600;color:#111827;">$300 MXN</span></div>'
     : '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e5e7eb;"><span style="font-size:12px;color:#4b5563;">🚚 Envío</span><span style="font-size:13px;font-weight:600;color:#166534;">✓ Gratis</span></div>';
-  var subtotalLine = '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e5e7eb;"><span style="font-size:12px;color:#4b5563;">Subtotal péptidos</span><span style="font-size:13px;font-weight:600;color:#0f766e;">$'+totMXN.toLocaleString()+' MXN</span></div>';
-  var afiliadoLine = affiliate ? '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e5e7eb;"><span style="font-size:12px;color:#166534;">🎁 Descuento código '+affiliate+'</span><span style="font-size:13px;font-weight:600;color:#166534;">-10%</span></div>' : '';
+  var catOrigMXN = catSelPkg ? PKGS[catSelPkg].orig : Object.entries(catQtys).reduce(function(a,e){return a+(e[1]?P[e[0]].mxn*e[1]:0);},0);
+  var subtotalLine = breakdownLines(catOrigMXN, totMXN, catSelPkg ? 'Descuento paquete' : 'Descuento 3+ viales (10%)');
+  var afiliadoLine = '';
   var cd=document.getElementById('cat-desglose');if(cd)cd.innerHTML=subtotalLine+afiliadoLine+envioLine;
   var envioUSD = envioMXN > 0 ? 18 : 0;
   var totalUSD = totUSD + envioUSD;
@@ -962,14 +969,13 @@ function buildSummary(){
   var gNVials = selPkg ? 3 : selPeps.size;
   var gEnvio = gNVials >= 3 ? 0 : 300;
   var gAffiliate = (typeof window.genesisAffiliate !== 'undefined' && window.genesisAffiliate && window.genesisAffiliate !== 'DIRECTO') ? window.genesisAffiliate : null;
-  var gAfiliadoDisc = gAffiliate ? 0.10 : 0;
-  totMXN = Math.round(totMXN * (1 - gAfiliadoDisc));
   var gTotal = totMXN + gEnvio;
   var gEnvioLine = gEnvio > 0
     ? '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e5e7eb;"><span style="font-size:12px;color:#4b5563;">🚚 Costo de envío</span><span style="font-size:13px;font-weight:600;color:#111827;">$300 MXN</span></div>'
     : '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e5e7eb;"><span style="font-size:12px;color:#4b5563;">🚚 Envío</span><span style="font-size:13px;font-weight:600;color:#166534;">✓ Gratis</span></div>';
-  var gSubLine = '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e5e7eb;"><span style="font-size:12px;color:#4b5563;">Subtotal péptidos</span><span style="font-size:13px;font-weight:600;color:#0f766e;">$'+totMXN.toLocaleString()+' MXN</span></div>';
-  var gAfiliadoLine = gAffiliate ? '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #e5e7eb;"><span style="font-size:12px;color:#166534;">🎁 Descuento código '+gAffiliate+'</span><span style="font-size:13px;font-weight:600;color:#166534;">-10%</span></div>' : '';
+  var gOrigMXN = selPkg ? PKGS[selPkg].orig : Array.from(selPeps).reduce(function(a,k){return a+P[k].mxn;},0);
+  var gSubLine = breakdownLines(gOrigMXN, totMXN, selPkg ? 'Descuento paquete' : 'Descuento 3+ viales (10%)');
+  var gAfiliadoLine = '';
   var gd=document.getElementById('g-desglose');if(gd)gd.innerHTML=gSubLine+gAfiliadoLine+gEnvioLine;
   var gEnvioUSD = gEnvio > 0 ? 18 : 0;
   var gTotalUSD = totUSD + gEnvioUSD;
@@ -1087,22 +1093,17 @@ document.addEventListener('DOMContentLoaded',()=>{
 /* ════════ SISTEMA DE AFILIADOS ════════ */
 (function(){
   // Leer parámetro ?ref= de la URL
+  // El código SOLO existe si la URL trae ?ref=CODIGO. El link general (sin ref) siempre es DIRECTO.
   var params = new URLSearchParams(window.location.search);
-  var ref = params.get('ref');
-  if(ref){
-    // Si viene con ref, guardar en mayúsculas siempre (sobrescribir)
-    localStorage.setItem('genesis_affiliate', ref.toUpperCase());
-  } else {
-    // Sin ref: solo asignar DIRECTO si no hay nada previo
-    if(!localStorage.getItem('genesis_affiliate')){
-      localStorage.setItem('genesis_affiliate', 'DIRECTO');
-    }
-  }
+  var ref = (params.get('ref') || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g,'').slice(0,30);
+  // Limpiar códigos guardados antes (ya no se persisten)
+  try{ localStorage.removeItem('genesis_affiliate'); }catch(e){}
+  window.genesisAffiliate = ref || 'DIRECTO';
 })();
 
 /* ════════ WA DINÁMICO POR AFILIADO ════════ */
 document.addEventListener('DOMContentLoaded', function(){
-  var affiliate = localStorage.getItem('genesis_affiliate') || 'DIRECTO';
+  var affiliate = window.genesisAffiliate || 'DIRECTO';
 
   function buildWAUrl(customMsg){
     var base = 'https://wa.me/529983028826?text=';
